@@ -12,7 +12,7 @@
 <script type="text/javascript">
 	function goSearch(){
 		mem.method="post";
-		mem.action="/web_servlet_basic/MemberList";
+		mem.action="/web_servlet_basic/Member";
 		mem.submit();
 	}
 	
@@ -91,7 +91,8 @@
 			</tbody>
 		</table>
 		<div class="paging">
-			<a href="/web_servlet_basic/MemberWrite" class="write">회원등록</a>
+<!--  		<a href="/web_servlet_basic/MemberWrite" class="write">회원등록</a> -->
+			<a href="/web_servlet_basic/Member?t_gubun=writeForm" class="write">회원등록</a>
 		</div>
 	</div>
  </body>
