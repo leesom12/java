@@ -25,9 +25,10 @@
 			}
 			
 			mem.method="post"; 		// post(눈에 보이지 않게 넘김), get(url 주소에 보여주면서 넘김) 두 가지만 존재
-			mem.action="DbMemberSave";
+			mem.action="Member";
 			mem.submit();
 		};
+
 	</script>
 
 </head>
@@ -39,6 +40,7 @@
 		</div>		
 		<div class="write_wrap">
 			<form name="mem">
+			<input type="hidden" name="t_gubun" value="memberSave">
 			<div class="board_list">
 				<table class="board_table">
 					<colgroup>
@@ -76,7 +78,7 @@
 			</form>
 			<div class="btn_wrap">
 				<input type="button" value="등록" onclick="goSave()" class="btn_ok">&nbsp;&nbsp;
-				<input type="button" value="목록" onclick="location.href='/web_servlet_basic/MemberList'" class="btn_list">
+				<input type="button" value="목록" onclick="location.href='Member'" class="btn_list">
 			</div>
 		</div>
 	</div>

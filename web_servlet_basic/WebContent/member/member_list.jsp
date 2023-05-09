@@ -17,15 +17,24 @@
 	}
 	
 	function goView(id){
-		id_box.t_id.value=id;
-		id_box.method="post";
-		id_box.action="MemberView";
-		id_box.submit();
+		Form.t_id.value=id;
+		Form.t_gubun.value="view";
+		Form.method="post";
+		Form.action="Member";
+		Form.submit();
+	}
+	
+	function goWirte(){
+		Form.t_gubun.value="writeForm";
+		Form.method="post";
+		Form.action="/web_servlet_basic/Member";
+		Form.submit();
 	}
 </script>
 
-<form name="id_box">
+<form name="Form">
 	<input type="hidden" name="t_id">
+	<input type="hidden" name="t_gubun">
 </form>
 
 <html> 
@@ -36,7 +45,7 @@
 		title : 풀스텍 홍길동
 	******************************************** 
  -->	
-	<title>TRACK11 홍길동</title>
+	<title>TRACK11 이소민</title>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">	
 	<link href="/web_servlet_basic/css/common.css" rel="stylesheet">
 	<link href="/web_servlet_basic/css/layout.css" rel="stylesheet" >	
@@ -45,7 +54,7 @@
 	<div class="container">
 
 		<div class="leftmargin">
-			<img src="/web_servlet_basic/images/jsl_logo.png"><h1>TRACK11 홍길동 회원관리</h1>
+			<img src="/web_servlet_basic/images/jsl_logo.png"><h1>TRACK11 이소민 회원관리</h1>
 		</div>		
 		<div class="search_wrap">
 			<div class="record_group">
@@ -82,7 +91,7 @@
 			<tbody>
 			<%for(MemberDto dto: arr) {%>
 				<tr>
-					<td><a href="MemberView?t_id=<%=dto.getId() %>"><%=dto.getId() %></a></td>
+					<td><a href="javascript:goView('<%=dto.getId() %>')"><%=dto.getId() %></a></td>
 					<td><a href="javascript:goView('<%=dto.getId() %>')"><%=dto.getName() %></a></td>
 					<td><%=dto.getAge() %></td>
 					<td><%=dto.getReg_Date() %></td>
@@ -92,7 +101,7 @@
 		</table>
 		<div class="paging">
 <!--  		<a href="/web_servlet_basic/MemberWrite" class="write">회원등록</a> -->
-			<a href="/web_servlet_basic/Member?t_gubun=writeForm" class="write">회원등록</a>
+			<a href="javascript:goWirte()" class="write">회원등록</a>
 		</div>
 	</div>
  </body>

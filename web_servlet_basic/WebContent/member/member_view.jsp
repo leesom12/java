@@ -14,16 +14,25 @@
 		function goDelete(){
 			var yn= confirm("정말 삭제하시겠습니까?");
 			if(yn){
+				mem.t_gubun.value="delete";
 				mem.method="post";
-				mem.action="DbMemberDelete";
+				mem.action="Member";
 				mem.submit();
 			}
+		}
+		
+		function goUpdate(){
+			mem.t_gubun.value="updateForm";
+			mem.method="post";
+			mem.action="Member";
+			mem.submit();
 		}
 	</script>
 </head>
 <body>
 <form name="mem">
 	<input type="hidden" name="t_id" value="<%=dto.getId() %>">
+	<input type="hidden" name="t_gubun">
 </form>
 	<div class="container">
 	
@@ -67,8 +76,8 @@
 				</table>
 			</div>
 			<div class="btn_wrap">
-				<input type="button" onClick="location.href='MemberList'" value="목록" class="btn_list">
-				<input type="button" onClick="location.href='MemberUpdate?t_id=<%=dto.getId() %>'" value="수정" class="btn_list">
+				<input type="button" onClick="location.href='Member'" value="목록" class="btn_list">
+				<input type="button" onClick="goUpdate()" value="수정" class="btn_list">
 				<input type="button" onClick="goDelete()" value="삭제" class="btn_list">
 			</div>
 		</div>
