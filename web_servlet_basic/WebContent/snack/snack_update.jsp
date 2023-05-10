@@ -31,7 +31,7 @@
 			}
 			
 			snack.method="post";
-			snack.action="DbSnackUpdate";
+			snack.action="Snack";
 			snack.submit();
 		}
 	</script>
@@ -44,6 +44,7 @@
 		<div class="write_wrap">
 		<form name="snack">
 		<input type="hidden" name="t_p_code" value="<%=dto.getP_code() %>">
+		<input type="hidden" name="t_gubun" value="updateSave">
 			<div class="board_list">
 				<table class="board_table">
 					<colgroup>
@@ -91,7 +92,7 @@
 			</div>
 			</form>
 			<div class="btn_wrap">
-				<input type="button" onClick="location.href='SnackList'" value="목록" class="btn_list">
+				<input type="button" onClick="location.href='Snack'" value="목록" class="btn_list">
 				<input type="button" onClick="goUpdate()" value="수정저장" class="btn_ok">&nbsp;&nbsp;
 			</div>
 		</div>

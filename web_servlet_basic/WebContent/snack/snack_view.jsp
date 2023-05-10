@@ -15,10 +15,18 @@
 		function goDelete(){
 			var yn= confirm("정말 삭제하시겠습니까?");
 			if(yn){
+				snack.t_gubun.value="delete";
 				snack.method="post";
-				snack.action="DbSnackDelete";
+				snack.action="Snack";
 				snack.submit();
 			}
+		}
+		
+		function goUpdate(){
+			snack.t_gubun.value="updateForm";
+			snack.method="post";
+			snack.action="Snack"
+			snack.submit();
 		}
 	</script>
 	
@@ -27,6 +35,7 @@
 <body>
 	<form name="snack">
 		<input type="hidden" name="t_p_code" value="<%=dto.getP_code() %>">
+		<input type="hidden" name="t_gubun">
 	</form>
 	<div class="container">
 	
@@ -70,8 +79,8 @@
 				</table>
 			</div>
 			<div class="btn_wrap">
-				<input type="button" onClick="location.href='SnackList'" value="목록" class="btn_list">
-				<input type="button" onClick="location.href='SnackUpdate?t_p_code=<%=dto.getP_code() %>'" value="수정" class="btn_list">
+				<input type="button" onClick="location.href='Snack'" value="목록" class="btn_list">
+				<input type="button" onClick="goUpdate()" value="수정" class="btn_list">
 				<input type="button" onClick="goDelete()" value="삭제" class="btn_list">
 			</div>
 		</div>

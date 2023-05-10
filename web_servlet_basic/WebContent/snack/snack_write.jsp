@@ -32,7 +32,7 @@
 			}
 			
 			snack.method="post";
-			snack.action="DbSnackWrite";
+			snack.action="Snack";
 			snack.submit();
 		}
 	</script>
@@ -45,6 +45,7 @@
 		</div>		
 		<div class="write_wrap">
 			<form name="snack">
+			<input type="hidden" name="t_gubun" value="save">
 			<div class="board_list">
 				<table class="board_table">
 					<colgroup>

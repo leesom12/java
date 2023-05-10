@@ -16,19 +16,28 @@
 <script type="text/javascript">
 	function goSearch(){
 		snack.method="post";
-		snack.action="SnackList";
+		snack.action="Snack";
 		snack.submit();
 	}
 	
 	function goView(p_code){
-		viewBox.t_p_code.value=p_code;
-		viewBox.method="post";
-		viewBox.action="SnackView";
-		viewBox.submit();
+		Box.t_p_code.value=p_code;
+		Box.t_gubun.value="view";
+		Box.method="post";
+		Box.action="Snack";
+		Box.submit();
+	}
+	
+	function goWrite(){
+		Box.t_gubun.value="write";
+		Box.method="post";
+		Box.action="Snack";
+		Box.submit();
 	}
 </script>
-<form name="viewBox">
+<form name="Box">
 	<input type="hidden" name="t_p_code">
+	<input type= "hidden" name="t_gubun">
 </form>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -93,7 +102,7 @@
 			</tbody>
 		</table>
 		<div class="paging">
-			<a href="SnackWrite" class="write">제품등록</a>
+			<a href="javascript:goWrite()" class="write">제품등록</a>
 		</div>
 	</div>
  </body>
