@@ -88,7 +88,7 @@
 			</form>
 			<div class="btn_wrap">
 				<input type="button" value="등록" class="btn_ok" onclick="goSave()">&nbsp;&nbsp;
-				<input type="button" value="목록" onclick="location.href='SnackList'" class="btn_list">
+				<input type="button" value="목록" onclick="location.href='Snack'" class="btn_list">
 			</div>
 		</div>
 	</div>

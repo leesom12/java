@@ -7,6 +7,9 @@
 	String select= (String)request.getAttribute("t_select");
 	String search= (String)request.getAttribute("t_search");
 	
+	ArrayList<SnackDto> com = (ArrayList<SnackDto>)request.getAttribute("t_company");
+	String company = (String)request.getAttribute("t_companyRadio");
+	
 %>
 <!DOCTYPE html>
 
@@ -61,16 +64,31 @@
 		<div class="search_wrap">
 			<div class="record_group">
 				<p>총게시글 : <span><%=arr.size() %></span>건</p>
-			</div>
+			</div>			
+			
 			<div class="search_group">
 				<select class="select" name="t_select">
-					<option value="h.p_name"  >제품명</option>
-					<option value="c.m_name" <%if(select.equals("c.m_name")) out.print("selected"); %>>제조사명</option>
+					<option value="h.p_code" >제품번호</option>
+					<option value="h.p_name"  <%if(select.equals("h.p_name")) out.print("selected"); %>>제품명</option>
 				</select>
 				<input type="text" class="search_word" value="<%=search%>" name="t_search">
 				<button onclick="goSearch()" class="btn_search"><i class="fa fa-search"></i><span class="sr-only">검색버튼</span></button>
+				<div style="height:10px;"></div>
+				<div >
+					<label><input type="radio" name="t_company" value="" OnClick="goSearch()" checked>전체</label>&nbsp;
+					<%for(SnackDto dto : com){%>
+					<label><input type="radio" name="t_company" value="<%=dto.getM_code()%>" OnClick="goSearch()" 
+						<%if(company.equals(dto.getM_code())) out.print("checked"); %>>
+						<%=dto.getM_name()%>
+					</label>
+					&nbsp;
+					<%} %>
+				</div>
+				
 			</div>
+				
 		</div>
+			
 		</form>
 	</div>
 	<div class="board_list">

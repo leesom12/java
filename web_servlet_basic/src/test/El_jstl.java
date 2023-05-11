@@ -1,4 +1,4 @@
-package snack;
+package test;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,20 +10,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.SnackDao;
-import dto.SnackDto;
-
 /**
- * Servlet implementation class SnackList
+ * Servlet implementation class El_jstl
  */
-@WebServlet("/SnackList")
-public class SnackList extends HttpServlet {
+@WebServlet("/El_jstl")
+public class El_jstl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SnackList() {
+    public El_jstl() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,22 +29,19 @@ public class SnackList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		SnackDao dao= new SnackDao();
+		String name= "홍길동";
+		int age= 25;
+		ArrayList<String> arr= new ArrayList<String>();
+		arr.add("대전");
+		arr.add("서울");
+		arr.add("대구");
+		arr.add("부산");
 		
-		String select = request.getParameter("t_select");
-		String search= request.getParameter("t_search");
-		if(select == null) {
-			select="h.p_name";
-			search="";
-		}
-		
-		ArrayList<SnackDto> arr= dao.getSnackList(select, search, "");
+		request.setAttribute("t_name", name);
+		request.setAttribute("t_age", age);
 		request.setAttribute("t_arr", arr);
-		request.setAttribute("t_select", select);
-		request.setAttribute("t_search", search);
 		
-		RequestDispatcher rd= request.getRequestDispatcher("snack/snack_list.jsp");
+		RequestDispatcher rd= request.getRequestDispatcher("el_jstl.jsp");
 		rd.forward(request, response);
 	}
 
