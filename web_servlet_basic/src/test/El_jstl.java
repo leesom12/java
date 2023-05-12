@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.Tdto;
+
 /**
  * Servlet implementation class El_jstl
  */
@@ -37,9 +39,15 @@ public class El_jstl extends HttpServlet {
 		arr.add("대구");
 		arr.add("부산");
 		
+		ArrayList<Tdto> dtos= new ArrayList<Tdto>();
+		dtos.add(new Tdto("홍길동","대전",25));
+		dtos.add(new Tdto("이상민","서울",44));
+		dtos.add(new Tdto("박명수","춘천",55));
+		
 		request.setAttribute("t_name", name);
 		request.setAttribute("t_age", age);
 		request.setAttribute("t_arr", arr);
+		request.setAttribute("t_dtos", dtos);
 		
 		RequestDispatcher rd= request.getRequestDispatcher("el_jstl.jsp");
 		rd.forward(request, response);

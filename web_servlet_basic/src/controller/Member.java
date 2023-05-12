@@ -45,7 +45,8 @@ public class Member extends HttpServlet {
 		if(gubun.equals("list")) {  //목록
 			MemberList memberList = new MemberList();
 			memberList.execute(request);
-			viewPage="member/member_list.jsp";
+		//	viewPage="member/member_list.jsp";
+			viewPage="member/member_list_jstl.jsp";
 		}else if(gubun.equals("writeForm")) {  //등록폼으로 이동
 			viewPage="member/member_wirte.jsp";
 		}else if(gubun.equals("memberSave")) {  //저장
@@ -55,11 +56,13 @@ public class Member extends HttpServlet {
 		}else if(gubun.equals("view")) {  //상세보기
 			CommonExecute view= new MemberView();
 			view.execute(request);
-			viewPage="member/member_view.jsp";
+		//	viewPage="member/member_view.jsp";
+			viewPage="member/member_view_jstl.jsp";
 		}else if(gubun.equals("updateForm")) {  //수정폼 이동
 			CommonExecute view= new MemberView();
 			view.execute(request);
-			viewPage="member/member_update.jsp";
+		//	viewPage="member/member_update.jsp";
+			viewPage="member/member_update_jstl.jsp";
 		}else if(gubun.equals("update")) {  //수정 저장
 			CommonExecute update= new MemberUpdate();
 			update.execute(request);

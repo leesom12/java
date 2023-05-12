@@ -78,7 +78,7 @@
 					<label><input type="radio" name="t_company" value="" OnClick="goSearch()" checked>전체</label>&nbsp;
 					<%for(SnackDto dto : com){%>
 					<label><input type="radio" name="t_company" value="<%=dto.getM_code()%>" OnClick="goSearch()" 
-						<%if(company.equals(dto.getM_code())) out.print("checked"); %>>
+					<%if(company.equals(dto.getM_code())) out.print("checked"); %>>
 						<%=dto.getM_name()%>
 					</label>
 					&nbsp;
