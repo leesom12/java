@@ -1,0 +1,77 @@
+package controller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import command.member.MemberJoin;
+import command.member.MemberLogin;
+import common.CommonExecute;
+
+/**
+ * Servlet implementation class Member
+ */
+@WebServlet("/Member")
+public class Member extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Member() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		String gubun = request.getParameter("t_gubun");
+		if(gubun == null) gubun="memberLogin";
+		String viewPage="";
+		
+		//회원가입 페이지 이동
+		if(gubun.equals("memberJoin")) {
+			viewPage="member/member_join.jsp";
+		}
+		//로그인 페이지 이동
+		else if(gubun.equals("memberLogin")) {
+			viewPage="member/member_login.jsp";
+		}
+		//회원가입 저장
+		else if(gubun.equals("memberSave")) {
+			CommonExecute ce = new MemberJoin();
+			ce.execute(request);
+			viewPage="common_alert.jsp";
+		}
+		//로그인
+		else if(gubun.equals("login")) {
+			CommonExecute ce= new MemberLogin();
+			ce.execute(request);
+			viewPage="common_alert.jsp";
+		}
+		//ID 중복 체크
+		else if(gubun.equals("checkId")) {
+			
+		}
+		
+		RequestDispatcher rd= request.getRequestDispatcher(viewPage);
+		rd.forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
