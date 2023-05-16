@@ -61,7 +61,7 @@
 		
 		$.ajax({
 			type : "POST",
-			url : "Member",
+			url : "CheckId",
 			data: "t_id="+mem.t_id.value,
 			dataType : "text",
 			error : function(){
@@ -70,7 +70,7 @@
 			success : function(data){
 				var result= $.trim(data);
 				mem.t_idCheck.value= result;
-				if(result == "사용 가능한 ID"){
+				if(result == "사용 가능"){
 					mem.t_idCheckValue.value = mem.t_id.value;
 				} else{
 					mem.t_idCheckValue.value ="";
@@ -106,8 +106,8 @@
 				  <td>
 					<input name="t_id" type="text" size="10" id="id" title="id입력하세요">
 					<input type="button" onclick="checkId()" value="ID중복검사" class="checkB">
-					<input type="text" name="t_idCheck" readonly style="border:none">
-					<input type="hidden" name="t_idCheckValue">
+					<input type="text" name="t_idCheck" readonly size="5">
+					<input type="text" name="t_idCheckValue" readonly size="5">
 				  </td>
 				</tr>
 				<tr>

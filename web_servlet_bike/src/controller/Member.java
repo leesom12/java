@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import command.member.MemberJoin;
 import command.member.MemberLogin;
+import command.member.MemberLogout;
 import common.CommonExecute;
 
 /**
@@ -57,10 +58,13 @@ public class Member extends HttpServlet {
 			ce.execute(request);
 			viewPage="common_alert.jsp";
 		}
-		//ID 중복 체크
-		else if(gubun.equals("checkId")) {
-			
+		//로그아웃
+		else if(gubun.equals("memberLogout")) {
+			CommonExecute ce= new MemberLogout();
+			ce.execute(request);
+			viewPage="common_alert.jsp";
 		}
+		
 		
 		RequestDispatcher rd= request.getRequestDispatcher(viewPage);
 		rd.forward(request, response);
