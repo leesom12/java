@@ -48,7 +48,7 @@ public class MemberJoin implements CommonExecute {
 		MemberDto dto = new MemberDto(id, name, pw, area, address, mo1, mo2, mo3, gender, travel, reading, sports, reg_date, pass_len);
 		
 		int result= dao.saveMember(dto);
-		String msg= "등록 성공";
+		String msg= "가입 완료";
 		String url= "Member";
 		if(result != 1) {
 			int count = dao.checkId(id);

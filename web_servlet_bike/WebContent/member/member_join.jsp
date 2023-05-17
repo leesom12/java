@@ -44,6 +44,17 @@
 		
 		if(checkValue(mem.t_gender,"성별을 선택하세요"))return;
 		
+		if(checkValue(mem.t_idCheckValue,"ID 중복검사 실행"))return;
+		if(mem.t_idCheck.value == "이미 존재하는 ID"){
+			alert("이미 존재하는 ID입니다");
+			mem.t_id.focus();
+			return;
+		}
+		if(mem.t_id.value != mem.t_idCheckValue.value){
+			alert("ID 중복검사 실행");
+			return;
+		}
+		
 		mem.t_gubun.value= "memberSave";
 		mem.method="post";
 		mem.action="Member";
@@ -53,11 +64,6 @@
 	function checkId(){
 		if(checkValue(mem.t_id, "ID를 입력하세요"))return;
 		var idLength= mem.t_id.value.length;
-		if(idLength<3 || idLength>10){
-			alert("3자리 이상 20자리 이내의 아이디로 입력하세요");
-			mem.t_id.focus();
-			return;
-		}
 		
 		$.ajax({
 			type : "POST",
@@ -69,15 +75,20 @@
 			},
 			success : function(data){
 				var result= $.trim(data);
-				mem.t_idCheck.value= result;
-				if(result == "사용 가능"){
-					mem.t_idCheckValue.value = mem.t_id.value;
-				} else{
-					mem.t_idCheckValue.value ="";
+				if(idLength<3 || idLength>20){
+					mem.t_idCheck.value= "3~20자리로 입력";	
+				}else{
+					mem.t_idCheck.value= result;
+					if(result == "사용 가능"){
+						mem.t_idCheckValue.value = mem.t_id.value;
+					} else{
+						mem.t_idCheckValue.value ="";
+					}
 				}
 			}
 		});				
 	}
+
 </script>
 		
 		<div id="b_left">
@@ -106,8 +117,8 @@
 				  <td>
 					<input name="t_id" type="text" size="10" id="id" title="id입력하세요">
 					<input type="button" onclick="checkId()" value="ID중복검사" class="checkB">
-					<input type="text" name="t_idCheck" readonly size="5">
-					<input type="text" name="t_idCheckValue" readonly size="5">
+					<input type="text" name="t_idCheck" readonly size="15" style="border:none;font-size:11px;">
+					<input type="hidden" name="t_idCheckValue">
 				  </td>
 				</tr>
 				<tr>

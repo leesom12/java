@@ -38,7 +38,7 @@ public class CheckId extends HttpServlet {
 		String msg= "";
 		if(count == 0) msg="사용 가능";
 		else if(count == 1) msg="이미 존재하는 ID";
-		else msg="서버 오류! 관리자에 문의 요망";
+		else msg="서버 오류";
 		PrintWriter out = response.getWriter();
 		out.print(msg);
 	}

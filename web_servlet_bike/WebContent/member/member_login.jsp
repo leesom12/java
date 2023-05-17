@@ -14,14 +14,14 @@
 		var keyValue= event.keyCode;
 		if(keyValue==13){
 		if(checkValue(frmLogin.t_id, "아이디를 입력하세요")) return;
-			frmLogin.t_password.focus();
+			frmLogin.t_pw.focus();
 		}
 	}
 	                    	
 	function pwCheck(){
 		var keyValue= event.keyCode;
 		if(keyValue==13){
-		if(checkValue(frmLogin.t_pw, "비밀번호를 입력하세요"))return;
+			if(checkValue(frmLogin.t_pw, "비밀번호를 입력하세요"))return;
 			frmLogin.method="post";
 			frmLogin.action="Member";
 			frmLogin.submit();
@@ -48,7 +48,7 @@
 					<div class="login_form">
 						<form name="frmLogin">
 							<input type="hidden" name="t_gubun" value="login">
-							<div class="fl_clear"><label for="mbrId">아이디</label><input name="t_id" id="mbrId" type="text" autofocus onkeypress="idCheck"></div>
+							<div class="fl_clear"><label for="mbrId">아이디</label><input name="t_id" id="mbrId" type="text" autofocus onkeypress="idCheck()"></div>
 							<div class="fl_clear"><label for="scrtNo">비밀번호</label><input name="t_pw" id="scrtNo" type="password" onkeypress="pwCheck()"></div>
 							<a class="btn_login btn_Blue" href="javascript:memberLogin()">로그인</a>
 						</form>
