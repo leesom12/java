@@ -1,0 +1,41 @@
+@charset "utf-8";	
+		* {margin:0; padding:0;}
+		ul,ol {list-style:none;}
+		a {text-decoration:none;}
+		header {background:#4a4ba5; padding:30px 0;}
+		h1 {color:#fff; text-align:center;}
+		nav {background:#88f;
+			height:30px;
+			padding:10px 0;
+		}
+		nav ul{
+			//border:1px solid red;
+			margin:0 auto;
+			width:1000px;
+			height:30px;
+		}
+		nav ul li a {color:#fff; font-size:20px;}
+		nav ul li {width:200px; text-align:center; float:left; padding:5px 0;}
+		
+		section {
+			//background:#ccc; 
+			height:500px;}
+		section h3 {text-align:center; padding:30px 0; color:#3e4092}
+		section p{padding:15px 0;padding-left:10px;}		
+
+		
+		footer {background:#4a4ba5; color:#fff; text-align:center; padding:30px 0;}
+		
+		
+		/* sub1.html*/
+		table,th,td {border:1px solid #000;}
+		td{padding:5px 0;}
+		input{height:20px;}
+		.col2 input{padding:0px 15px; height:30px; margin-right:10px;}
+		table {width:1000px; margin:0 auto;}
+		table th{color:#6a6cb2}
+		table td{text-align:center;}
+		table td.text_left{text-align:left; padding-left:20px;}
+		
+		.col2 {text-align:center;padding-top:10px;}		
+		tr th{border-bottom:1px solid gray;}

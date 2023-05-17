@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+	<head>
+		<link href="index.css" rel="stylesheet">	
+		<title>(과정평가형정보처리산업기사)도서대여 프로그램</title>
+		<script>
+			function check(){
+				alert("정보를 지우고 처음부터 다시 입력 합니다");
+			}
+		</script>
+	</head>
+
+	<body>
+		<header>
+			<h1>(과정평가형정보처리산업기사)도서대여 프로그램</h1>
+		</header>
+		<nav>
+			<ul>
+				<li><a href="sub1.html">회원조회</a></li>
+				<li><a href="sub2.html">도서대여등록</a></li>
+				<li><a href="sub3.html">대여이력조회</a></li>
+				<li><a href="sub4.html">도서대여건수</a></li>
+				<li><a href="index.html">홈으로</a></li>
+			</ul>
+		</nav>
+		<section>
+			<h3>도서 대여 등록</h3>
+	
+			<form name="member" >
+				<table>
+				<colgroup>
+					<col style="width:40%;">
+					<col style="width:70%;">
+				</colgroup>
+					<tr>
+						<th>대여번호 (자동발생)</th>
+						<td class="text_left"><input type="text" name="bun" value="20200011"> 예)20200011</td>
+					</tr>
+					<tr>
+						<th>회원번호</th>
+						<td class="text_left"><input type="text" value="" name="name"></td>
+					</tr>
+					<tr>
+						<th>도서코드</th>
+						<td class="text_left"><input type="text" value="" name="name"></td>
+					</tr>
+					<tr>
+						<th>도서대여일자</th>
+						<td class="text_left"><input type="text" value="" name="name"></td>
+					</tr>	
+					<tr>
+						<td colspan="2" class="col2">
+							<input type="button" onclick="check()" value="등록">
+							<input type="button" onclick="goCancel()" value="다시쓰기">
+						</td>
+					</tr>					
+				</table>
+			</form>
+		
+		</section>
+		<footer>
+			<p>HRDKOREA Copyright &copy; All rights Reserved. Human Resources Developement Service of Korea.</p>
+		</footer>
+	</body>
+</html>
