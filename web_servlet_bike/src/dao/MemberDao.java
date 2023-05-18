@@ -73,24 +73,27 @@ public class MemberDao {
     }
     
     //로그인
-    public String memberLogin(String id, String pw) {
-    	String name="";
-    	int count=0;
-    	String query="select name from bike_이소민_member\r\n" + 
+    public MemberDto memberLogin(String id, String pw) {
+    	MemberDto dto = null;
+    	String query="select name, mem_level from bike_이소민_member\r\n" + 
     				 "where id ='"+id+"'\r\n" + 
     				 "and password = '"+pw+"'";
     	try {
     		con= DBConnection.getConnection();
     		ps= con.prepareStatement(query);
     		rs= ps.executeQuery();
-    		if(rs.next()) name=rs.getString("name");
+    		if(rs.next()) {
+    			String name=rs.getString("name");
+    			String level = rs.getString("mem_level");
+    			dto= new MemberDto(name, level);
+    		}
     	}catch(Exception e) {
     		System.out.println("memberLogin() 오류: "+query);
     		e.printStackTrace();
     	}finally {
     		DBConnection.closeDB(con, ps, rs);
     	}
-    	return name;
+    	return dto;
     }
     
     //로그인 시간 업데이트

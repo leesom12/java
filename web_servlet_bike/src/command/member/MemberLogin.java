@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import common.CommonExecute;
 import dao.MemberDao;
+import dto.MemberDto;
 
 public class MemberLogin implements CommonExecute {
 
@@ -22,20 +23,23 @@ public class MemberLogin implements CommonExecute {
 			e.printStackTrace();
 		}
 		
-		String name= dao.memberLogin(id, pw);
+		MemberDto dto = dao.memberLogin(id, pw);
 		String msg="";
 		String url="";
 		
-		if(name.equals("")) {
-			msg="존재하지 않는 정보입니다. ID, PASSWORD 확인하세요";
+		if(dto == null) {
+			msg="정확하지 않은 아이디 혹은 패스워드입니다";
 			url="Member";
 		}else {
-			msg=name+"님 환영합니다!";
+			msg= dto.getName()+"님 환영합니다!";
+			
 			HttpSession session = request.getSession();
-			session.setAttribute("sessionName", name);
+			session.setAttribute("sessionName", dto.getName());
 			session.setAttribute("sessionId", id);
+			session.setAttribute("sessionLevel", dto.getLevel());
+			
 			dao.updateLoginTime(id);
-			session.setMaxInactiveInterval(60*60);
+			session.setMaxInactiveInterval(60*60*3);
 			url="Index";
 		}
 		

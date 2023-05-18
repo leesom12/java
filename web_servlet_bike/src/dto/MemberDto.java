@@ -2,10 +2,17 @@ package dto;
 
 public class MemberDto {
 	private String id, name, password, area, address, mobile_1, mobile_2, mobile_3, gender, 
-				   travel, reading, sports, reg_date, update_date, login_time, exit_date;
+				   travel, reading, sports, reg_date, update_date, login_time, exit_date, level;
 	private int pass_len;
 	
-	
+
+	//로그인
+	public MemberDto(String name, String level) {
+		super();
+		this.name = name;
+		this.level = level;
+	}
+
 	//회원가입
 	public MemberDto(String id, String name, String password, String area, String address, String mobile_1,
 			String mobile_2, String mobile_3, String gender, String travel, String reading, String sports,
@@ -27,6 +34,9 @@ public class MemberDto {
 		this.pass_len = pass_len;
 	}
 	
+	public String getLevel() {
+		return level;
+	}
 	public String getId() {
 		return id;
 	}

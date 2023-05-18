@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	String sessionName= (String)session.getAttribute("sessionName");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <html>
 <head>
 <link href="css/index_c.css" rel="stylesheet">
@@ -91,13 +90,14 @@
 			<div id="b_top_menu">
 				<ul class="top_menu">
 					<li><a href="" class="allclick"><i class="fas fa-bars"></i></a></li>
-					<%if(sessionName != null) { %>
-						<li><a href=""><%=sessionName %>님</a></li> 
-						<li><a href="javascript:goWork('memberLogout')">Logout</a></li>
-					<%} else{%>
+					<c:if test="${not empty sessionId }">
+						<li><a href="">${sessionName }님</a></li> 
+						<li><a href="javascript:goWork('memberLogout')">Logout </a></li>
+					</c:if>
+					<c:if test="${empty sessionId }">
 						<li><a href="javascript:goWork('memberJoin')">Join</a></li>
 						<li><a href="javascript:goWork('memberLogin')">Login</a></li>
-					<%} %>
+					</c:if>
 					<li><a href="Index"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
 				</ul>
 			</div>	
