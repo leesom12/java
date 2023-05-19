@@ -106,8 +106,8 @@ public class MemberDao {
     		con= DBConnection.getConnection();
     		ps= con.prepareStatement(query);
     		int result= ps.executeUpdate();
-			if(result == 0) {
-				System.out.println("updateLoginTime() 오류: "+query);
+			if(result != 1) {
+				System.out.println("updateLoginTime() 오류!: "+query);
 			}
     	}catch(Exception e) {
     		System.out.println("updateLoginTime() 오류: "+query );
@@ -116,6 +116,69 @@ public class MemberDao {
     		DBConnection.closeDB(con, ps, rs);
     	}
     }
+    
+    //회원 정보 조회
+    public MemberDto memberInfo(String id) {
+    	MemberDto dto = null;
+    	String query="select id, name, pass_length, area, address, mobile_1, mobile_2, mobile_3, \r\n" + 
+    				 "gender, hobby_travel as travel, hobby_reading as reading, hobby_sports as sports, \r\n" + 
+    				 "to_char(reg_date, 'yyyy-MM-dd hh24:mi:ss') as reg_date, \r\n" + 
+    				 "to_char(update_date, 'yyyy-MM-dd hh24:mi:ss') as update_date, \r\n" + 
+    				 "to_char(login_time, 'yyyy-MM-dd hh24:mi:ss') as login_time, \r\n" + 
+    				 "to_char(exit_date, 'yyyy-MM-dd hh24:mi:ss') as exit_date, \r\n" + 
+    				 "mem_level\r\n"+
+    				 "from bike_이소민_member\r\n" + 
+    				 "where id = '"+id+"'";
+    	try {
+    		con= DBConnection.getConnection();
+    		ps= con.prepareStatement(query);
+    		rs= ps.executeQuery();
+    		if(rs.next()) {
+    			String name= rs.getString("name");
+    			int pass_length= rs.getInt("pass_length");
+    			String area= rs.getString("area");
+    			String address= rs.getString("address");
+    			String mobile_1=rs.getString("mobile_1");
+    			String mobile_2=rs.getString("mobile_2");
+    			String mobile_3= rs.getString("mobile_3");
+    			String gender=rs.getString("gender");
+    			if(gender.equals("F")) {
+    				gender="여성";
+    			}else {
+    				gender="남성";
+    			}
+    			String travel= rs.getString("travel");
+    			String reading = rs.getString("reading");
+    			String sports= rs.getString("sports");
+    			String reg_date= rs.getString("reg_date");
+    			String update_date= rs.getString("update_date");
+    			String login_time= rs.getString("login_time");
+    			String exit_date= rs.getString("exit_date");
+    			String level= rs.getString("mem_level");
+    			
+    			dto= new MemberDto(id, name, area, address, mobile_1, mobile_2, mobile_3, gender, travel, reading, sports, reg_date, update_date,
+    					login_time, exit_date, level, pass_length);
+    		}
+    	}catch(Exception e) {
+    		System.out.println("memberInfo() 오류: "+query);
+    		e.printStackTrace();
+    	}finally {
+    		DBConnection.closeDB(con, ps, rs);
+    	}
+    	return dto;
+    }
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 }

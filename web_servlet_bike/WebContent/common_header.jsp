@@ -43,9 +43,9 @@
 
 		<div id="b_top_menu">
 			<ul class="top_menu">
-					<c:if test="${not empty sessionId }">
-						<li><a href="">${sessionName }님</a></li> 
-						<li><a href="javascript:goWork('memberLogout')">Logout </a></li>
+					<c:if test="${not empty sessionId }"> 
+						<li><a href="javascript:goWork('myPage')">My info</a></li>
+						<li><a href="javascript:goWork('memberLogout')">Logout</a></li>
 					</c:if>
 					<c:if test="${empty sessionId }">
 						<li><a href="javascript:goWork('memberJoin')">Join</a></li>

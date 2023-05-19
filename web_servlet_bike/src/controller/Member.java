@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import command.member.MemberInfo;
 import command.member.MemberJoin;
 import command.member.MemberLogin;
 import command.member.MemberLogout;
@@ -64,6 +66,25 @@ public class Member extends HttpServlet {
 			ce.execute(request);
 			viewPage="common_alert.jsp";
 		}
+		//마이 페이지
+		else if(gubun.equals("myPage")) {
+			CommonExecute ce= new MemberInfo();
+			ce.execute(request);
+			
+			String session = (String)request.getAttribute("t_session");
+			
+			if(session.equals("null")) {
+				viewPage= "common_alert.jsp";
+			}else {
+				viewPage="member/member_info.jsp";
+			}
+		}
+		//업데이트 폼 이동
+		else if(gubun.equals("udpateForm")) {
+			viewPage="member/member_update.jsp";
+		}
+		
+		
 		
 		
 		RequestDispatcher rd= request.getRequestDispatcher(viewPage);
