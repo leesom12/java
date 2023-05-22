@@ -6,6 +6,7 @@
 
 <script type="text/javascript">
 	function goUpdateForm(){
+		mem.t_gubun.value="udpateForm";
 		mem.method="post";
 		mem.action="Member";
 		mem.submit();
@@ -23,7 +24,7 @@
 			<ul>
 				<li><a href="javascript:goWork('memberLogin')">LOGIN</a></li>
 				<li><a href="">ID / PASSWORD</a></li>
-				<li><a href="javascript:goWork('memberJoin')"><span class="fnt"><i class="fas fa-apple-alt"></i></span> JOIN</a></li>
+				<li><a><span class="fnt"><i class="fas fa-apple-alt"></i></span> MEMBER</a></li>
 			</ul>
 		</div>
 		
@@ -32,7 +33,7 @@
 				MEMBER INFORMATION
 			</p>
 		<form name="mem">
-		<input type="hidden" name="t_gubun" value="udpateForm">
+		<input type="hidden" name="t_gubun">
 		<input type="hidden" name="t_id" value="${t_dto.getId()}">
 			<table class="boardForm">
 			  <colgroup>

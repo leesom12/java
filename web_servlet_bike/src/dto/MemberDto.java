@@ -6,7 +6,24 @@ public class MemberDto {
 	private int pass_len;
 	
 
-	
+	//회원정보 수정
+	public MemberDto(String id, String name, String area, String address, String mobile_1, String mobile_2,
+			String mobile_3, String gender, String travel, String reading, String sports, String update_date) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.area = area;
+		this.address = address;
+		this.mobile_1 = mobile_1;
+		this.mobile_2 = mobile_2;
+		this.mobile_3 = mobile_3;
+		this.gender = gender;
+		this.travel = travel;
+		this.reading = reading;
+		this.sports = sports;
+		this.update_date = update_date;
+	}
+
 	//상세조회
 	public MemberDto(String id, String name, String area, String address, String mobile_1, String mobile_2,
 			String mobile_3, String gender, String travel, String reading, String sports, String reg_date,

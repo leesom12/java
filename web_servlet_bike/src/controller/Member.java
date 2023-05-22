@@ -14,6 +14,7 @@ import command.member.MemberInfo;
 import command.member.MemberJoin;
 import command.member.MemberLogin;
 import command.member.MemberLogout;
+import command.member.MemberUpdate;
 import common.CommonExecute;
 
 /**
@@ -81,7 +82,22 @@ public class Member extends HttpServlet {
 		}
 		//업데이트 폼 이동
 		else if(gubun.equals("udpateForm")) {
-			viewPage="member/member_update.jsp";
+			CommonExecute ce= new MemberInfo();
+			ce.execute(request);
+			
+			String session = (String)request.getAttribute("t_session");
+			
+			if(session.equals("null")) {
+				viewPage= "common_alert.jsp";
+			}else {
+				viewPage="member/member_update.jsp";
+			}
+		}
+		//멤버 업데이트
+		else if(gubun.equals("memberUpdate")) {
+			CommonExecute ce = new MemberUpdate();
+			ce.execute(request);
+			viewPage="common_alert.jsp";
 		}
 		
 		
