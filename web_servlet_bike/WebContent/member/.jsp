@@ -48,9 +48,11 @@
 					<div class="login_form">
 						<form name="frmLogin">
 							<input type="hidden" name="t_gubun" value="login">
-							<div class="fl_clear"><label for="mbrId">아이디</label><input class="t_id" name="t_id" id="mbrId" type="text" autofocus onkeypress="idCheck()"></div>
-							<div class="fl_clear"><label for="scrtNo">비밀번호</label><input class="t_id" name="t_pw" id="scrtNo" type="password" onkeypress="pwCheck()"></div>
+							<div class="fl_clear"><label for="mbrId">아이디</label><input name="t_id" id="mbrId" type="text" autofocus onkeypress="idCheck()"></div>
+							<div class="fl_clear"><label for="scrtNo">비밀번호</label><input name="t_pw" id="scrtNo" type="password" onkeypress="pwCheck()"></div>
 							<a class="btn_login btn_Blue" href="javascript:memberLogin()">로그인</a>
+							<div style="height:10px;width:300px"></div>
+							<div style="font-size:13px;">아이디 입력</div>
 						</form>
 					</div>
 				   

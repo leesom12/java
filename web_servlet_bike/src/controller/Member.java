@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import command.member.MemberDelete;
 import command.member.MemberInfo;
 import command.member.MemberJoin;
 import command.member.MemberLogin;
 import command.member.MemberLogout;
+import command.member.MemberPasswordSend;
 import command.member.MemberUpdate;
 import common.CommonExecute;
 
@@ -96,6 +98,22 @@ public class Member extends HttpServlet {
 		//멤버 업데이트
 		else if(gubun.equals("memberUpdate")) {
 			CommonExecute ce = new MemberUpdate();
+			ce.execute(request);
+			viewPage="common_alert.jsp";
+		}
+		//멤버 탈퇴
+		else if(gubun.equals("memberDelete")) {
+			CommonExecute ce = new MemberDelete();
+			ce.execute(request);
+			viewPage="common_alert.jsp";
+		}
+		//비밀번호 찾기 폼 이동
+		else if(gubun.equals("memberPasswordFind")) {
+			viewPage="member/member_passwordFind.jsp";
+		}
+		//비밀번호 찾기
+		else if(gubun.equals("memberPasswordSend")) {
+			CommonExecute ce = new MemberPasswordSend();
 			ce.execute(request);
 			viewPage="common_alert.jsp";
 		}

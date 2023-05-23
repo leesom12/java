@@ -191,7 +191,68 @@ public class MemberDao {
 		return result;
 	}
     
+	//회원 탈퇴
+	public int memberDelete(String id) {
+		int result=0;
+		String date= CommonUtil.getTodayTime();
+		String query="update bike_이소민_member\r\n" + 
+					 "set exit_date=to_date('"+date+"', 'yyyy-MM-dd hh24:mi:ss')\r\n" + 
+					 "where id = '"+id+"'";
+		try {
+			con= DBConnection.getConnection();
+			ps= con.prepareStatement(query);
+			result= ps.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("memberDelete() 오류: "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return result;
+	}
+	
+	//탈퇴한 사람인지 체크
+	public String checkExit(String id) {
+		String exit_date="";
+		String query="select to_char(exit_date, 'yyyy-MM-dd hh24:mi:ss') as exit_date\r\n" + 
+					 "from bike_이소민_member\r\n" + 
+					 "where id ='"+id+"'";
+		try {
+			con= DBConnection.getConnection();
+			ps= con.prepareStatement(query);
+			rs= ps.executeQuery();
+			if(rs.next()) exit_date=rs.getString("exit_date");
+		}catch(Exception e) {
+			System.out.println("checkExit() 오류: "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return exit_date;
+	}
 
+	//비밀번호 찾기
+	public String findPassword(String id, String mobile_1, String mobile_2, String mobile_3) {
+		String name="";
+		String query="select name, to_char(exit_date, 'yyyy-MM-dd hh24:mi:ss') as exit_date \r\n"+
+					 "from bike_이소민_member\r\n" + 
+					 "where id = '"+id+"'\r\n" + 
+					 "and mobile_1='"+mobile_1+"' and mobile_2='"+mobile_2+"' and mobile_3='"+mobile_3+"'";
+		try {
+			con= DBConnection.getConnection();
+			ps= con.prepareStatement(query);
+			rs= ps.executeQuery();
+			if(rs.next()) {
+				name = rs.getString("name");
+			}
+		}catch(Exception e) {
+			System.out.println("findPassword() 오류: "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return name;
+	}
     
     
     

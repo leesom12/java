@@ -70,7 +70,7 @@
 			<P>MEMBER</P>
 			<ul>
 				<li><a href="javascript:goWork('memberLogin')">LOGIN</a></li>
-				<li><a href="">ID / PASSWORD</a></li>
+				<li><a href="javascript:goWork('memberPasswordFind')">ID / PASSWORD</a></li>
 				<li><a><span class="fnt"><i class="fas fa-apple-alt"></i></span> MEMBER</a></li>
 			</ul>
 		</div>
@@ -160,6 +160,7 @@
 		
 			<div class="buttonGroup_center">
 				<a href="javascript:goUpdate()" class="butt">UPDATE</a>
+				
 			</div>	
 		</div>	
 	</div>

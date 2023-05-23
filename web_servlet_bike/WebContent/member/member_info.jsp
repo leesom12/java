@@ -11,6 +11,16 @@
 		mem.action="Member";
 		mem.submit();
 	}
+	
+	function goDelete(){
+		var tf= confirm("정말 탈퇴하시겠습니까?");
+		if(tf){
+			mem.t_gubun.value="memberDelete";
+			mem.method="post";
+			mem.action="Member";
+			mem.submit();			
+		}
+	}
 </script>
 
 <style type="text/css">
@@ -23,7 +33,7 @@
 			<P>MEMBER</P>
 			<ul>
 				<li><a href="javascript:goWork('memberLogin')">LOGIN</a></li>
-				<li><a href="">ID / PASSWORD</a></li>
+				<li><a href="javascript:goWork('memberPasswordFind')">ID / PASSWORD</a></li>
 				<li><a><span class="fnt"><i class="fas fa-apple-alt"></i></span> MEMBER</a></li>
 			</ul>
 		</div>
@@ -107,6 +117,7 @@
 			<div class="buttonGroup_center">
 				<a href="Index" class="butt">HOME</a>
 				<a href="javascript:goUpdateForm()" class="butt">수정</a>
+				<a href="javascript:goDelete()" class="butt">삭제</a>
 			</div>	
 		</div>	
 	</div>
