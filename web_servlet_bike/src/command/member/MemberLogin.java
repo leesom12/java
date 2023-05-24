@@ -29,7 +29,7 @@ public class MemberLogin implements CommonExecute {
 		
 		String exit = dao.checkExit(id);
 		
-		if(dto == null || !exit.equals("")) {
+		if(dto == null || exit != null) {
 			msg="정확하지 않은 아이디 혹은 패스워드입니다";
 			url="Member";
 		}else {
