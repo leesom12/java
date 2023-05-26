@@ -10,24 +10,28 @@ public class MemberDelete implements CommonExecute {
 
 	@Override
 	public void execute(HttpServletRequest request) {
-		String id = request.getParameter("t_id");
-		
-		MemberDao dao = new MemberDao();
-		int result = dao.memberDelete(id);
+		HttpSession session= request.getSession();
+		String id = (String)session.getAttribute("sessionId");
+		String name = (String)session.getAttribute("sessionName");
 		
 		String msg="";
 		
-		if(result != 1) {
-			msg="탈퇴 실패. 문의 요망";
+		if(id == null) {
+			msg="세션이 만료되었습니다. 다시 로그인 해 주세요";
 		}else {
-			msg="탈퇴가 완료되었습니다.";
-			HttpSession session= request.getSession();
-			session.invalidate();
+			MemberDao dao = new MemberDao();
+			int result = dao.memberDelete(id);
+			
+			if(result == 1) {
+				msg= name+"님 탈퇴가 완료되었습니다.";
+				session.invalidate();
+			}else {
+				msg="탈퇴 실패. 문의 요망";
+			}
 		}
 		
 		request.setAttribute("t_msg", msg);
 		request.setAttribute("t_url", "Index");
-		
 		
 	}
 

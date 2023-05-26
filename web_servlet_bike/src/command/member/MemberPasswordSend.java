@@ -22,10 +22,13 @@ public class MemberPasswordSend implements CommonExecute {
 		String name = dao.findPassword(id, mobile_1, mobile_2, mobile_3);
 		String msg="";
 		
-		if(name.equals("")) {
+		String exit = dao.checkExit(id);
+		
+		if(name.equals("") || exit != null) {
 			msg="아이디나 전화번호가 정확하지 않습니다.";
 		}else {
-			String pw= dao.getNewPassword(8);
+			String pw= dao.getNewPassword(6);
+			int pw_length = pw.length();
 			String Updatepassword = pw;
 			
 			try {
@@ -35,7 +38,7 @@ public class MemberPasswordSend implements CommonExecute {
 				e.printStackTrace();
 			}
 			
-			int result = dao.setMemberPassword(id, Updatepassword);
+			int result = dao.setMemberPassword(id, Updatepassword, pw_length);
 			
 			if(result == 1) {
 				String mailSet_Server="smtp.naver.com"; // 보내는 메일 server

@@ -15,6 +15,7 @@ import command.member.MemberInfo;
 import command.member.MemberJoin;
 import command.member.MemberLogin;
 import command.member.MemberLogout;
+import command.member.MemberPasswordChange;
 import command.member.MemberPasswordSend;
 import command.member.MemberUpdate;
 import common.CommonExecute;
@@ -114,6 +115,16 @@ public class Member extends HttpServlet {
 		//비밀번호 찾기
 		else if(gubun.equals("memberPasswordSend")) {
 			CommonExecute ce = new MemberPasswordSend();
+			ce.execute(request);
+			viewPage="common_alert.jsp";
+		}
+		//비밀번호 변경폼 이동
+		else if(gubun.equals("passwordUpdate")) {
+			viewPage="member/member_passwordUpdate.jsp";
+		}
+		//비밀번호 변경
+		else if(gubun.equals("memberPasswordUpdate")) {
+			CommonExecute ce = new MemberPasswordChange();
 			ce.execute(request);
 			viewPage="common_alert.jsp";
 		}

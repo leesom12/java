@@ -21,6 +21,13 @@
 			mem.submit();			
 		}
 	}
+	
+	function passwordUpdate(){
+		mem.t_gubun.value="passwordUpdate";
+		mem.method="post";
+		mem.action="Member";
+		mem.submit();	
+	}
 </script>
 
 <style type="text/css">
@@ -115,9 +122,9 @@
 		</form>
 		
 			<div class="buttonGroup_center">
-				<a href="Index" class="butt">HOME</a>
 				<a href="javascript:goUpdateForm()" class="butt">수정</a>
-				<a href="javascript:goDelete()" class="butt">삭제</a>
+				<a href="javascript:passwordUpdate()" class="butt">비밀번호 변경</a>
+				<a href="javascript:goDelete()" class="butt">탈퇴</a>
 			</div>	
 		</div>	
 	</div>

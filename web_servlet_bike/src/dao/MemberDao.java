@@ -284,26 +284,26 @@ public class MemberDao {
          
         return encryptData;
     }    
-    
-   //새 비밀번호로 업데이트
-    public int setMemberPassword(String id, String pw) {
-    	int result=0;
-    	String query="update bike_이소민_member\r\n" + 
-    				 "set password='"+pw+"'\r\n" + 
-    				 "where id = '"+id+"'";
-    	try {
-    		con= DBConnection.getConnection();
-    		ps= con.prepareStatement(query);
-    		result= ps.executeUpdate();
-    	}catch(Exception e) {
-    		System.out.println("setMemberPassword() 오류: "+query);
-    		e.printStackTrace();
-    	}finally {
-    		DBConnection.closeDB(con, ps, rs);
-    	}
-    	return result;
-    }
-    
+
+    //비밀번호 업데이트 (메일 발송, 마이 인포)
+	public int setMemberPassword(String id, String new_pw, int pass_length) {
+		int result = 0;
+		String query="update bike_이소민_member\r\n" + 
+					 "set password='"+new_pw+"', pass_length='"+pass_length+"'\r\n" + 
+					 "where id = '"+id+"'";
+		try {
+			con = DBConnection.getConnection();
+			ps = con.prepareStatement(query);
+			result= ps.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("updateMemberPassword() 오류: "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return result;
+	}
+
     
     
     
