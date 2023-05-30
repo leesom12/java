@@ -122,14 +122,14 @@
 						</ul>
 					</div>					
 				</li>
-				<li><a href="../notice/notice_list.html">Notice & News</a>
+				<li><a href="Notice">Notice & News</a>
 					<div class="div7">
 						<ul>
-							<li><a href="../notice/notice_list.html">NOTICE</a></li>
-							<li><a href="">NEWS</a></li>
-							<li><a href="">Q AND A</a></li>
-							<li><a href="">FREE BOARD</a></li>
-							<li><a href="">ETC</a></li>
+							<li><a href="Notice">NOTICE</a></li>
+							<li><a href="News">NEWS</a></li>
+							<li><a href="Qna">Q AND A</a></li>
+							<li><a href="FreeBoard">FREE BOARD</a></li>
+							<li><a href="Etc">ETC</a></li>
 						</ul>
 					</div>					
 				</li>
