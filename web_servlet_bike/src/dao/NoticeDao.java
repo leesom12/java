@@ -19,7 +19,7 @@ public class NoticeDao {
 		ArrayList<NoticeDto> arr= new ArrayList<NoticeDto>();
 		String query=" select * from(\r\n" + 
 					 "     select rownum as rnum, tbl.* from (\r\n" + 
-					 "         select n.no, n.title, n.attach, m.name,\r\n" + 
+					 "         select n.no, n.title, n.content, n.attach, m.name,\r\n" + 
 					 "         to_char(n.reg_date, 'yy-MM-dd')as reg_date, n.hit\r\n" + 
 					 "         from home_이소민_notice n,\r\n" + 
 					 "         home_이소민_member m\r\n" + 
@@ -35,11 +35,12 @@ public class NoticeDao {
 			while(rs.next()) {
 				String no= rs.getString("no");
 				String title= rs.getString("title");
+				String content= rs.getString("content");
 				String attach= rs.getString("attach");
 				String name= rs.getString("name");
 				String reg_date= rs.getString("reg_date");
 				int hit= rs.getInt("hit");
-				NoticeDto dto = new NoticeDto(no, title, attach, name, reg_date, hit);
+				NoticeDto dto = new NoticeDto(no, title, content, attach, name, reg_date, hit);
 				arr.add(dto);
 			}
 		}catch(Exception e) {
@@ -117,38 +118,38 @@ public class NoticeDao {
 		return result;
 	}
 	
-	//조회
-	public ArrayList<NoticeDto> noticeList(String gubun, String search) {
-		ArrayList<NoticeDto> arr= new ArrayList<NoticeDto>();
-		String query=" select n.no, n.title, n.attach, m.name,\r\n" + 
-					 " to_char(n.reg_date, 'yy-MM-dd')as reg_date, n.hit\r\n" + 
-					 " from home_이소민_notice n,\r\n" + 
-					 " home_이소민_member m\r\n" + 
-					 " where n.reg_id= m.id\r\n" + 
-					 " and "+gubun+" like '%"+search+"%'\r\n" + 
-					 " order by no desc";
-		try {
-			con= DBConnection.getConnection();
-			ps= con.prepareStatement(query);
-			rs= ps.executeQuery();
-			while(rs.next()) {
-				String no= rs.getString("no");
-				String title= rs.getString("title");
-				String attach= rs.getString("attach");
-				String name= rs.getString("name");
-				String reg_date= rs.getString("reg_date");
-				int hit= rs.getInt("hit");
-				NoticeDto dto = new NoticeDto(no, title, attach, name, reg_date, hit);
-				arr.add(dto);
-			}
-		}catch(Exception e) {
-			System.out.println("noticeList() 오류: "+query);
-			e.printStackTrace();
-		}finally {
-			DBConnection.closeDB(con, ps, rs);
-		}
-		return arr;
-	}
+//	//조회
+//	public ArrayList<NoticeDto> noticeList(String gubun, String search) {
+//		ArrayList<NoticeDto> arr= new ArrayList<NoticeDto>();
+//		String query=" select n.no, n.title, n.attach, m.name,\r\n" + 
+//					 " to_char(n.reg_date, 'yy-MM-dd')as reg_date, n.hit\r\n" + 
+//					 " from home_이소민_notice n,\r\n" + 
+//					 " home_이소민_member m\r\n" + 
+//					 " where n.reg_id= m.id\r\n" + 
+//					 " and "+gubun+" like '%"+search+"%'\r\n" + 
+//					 " order by no desc";
+//		try {
+//			con= DBConnection.getConnection();
+//			ps= con.prepareStatement(query);
+//			rs= ps.executeQuery();
+//			while(rs.next()) {
+//				String no= rs.getString("no");
+//				String title= rs.getString("title");
+//				String attach= rs.getString("attach");
+//				String name= rs.getString("name");
+//				String reg_date= rs.getString("reg_date");
+//				int hit= rs.getInt("hit");
+//				NoticeDto dto = new NoticeDto(no, title, attach, name, reg_date, hit);
+//				arr.add(dto);
+//			}
+//		}catch(Exception e) {
+//			System.out.println("noticeList() 오류: "+query);
+//			e.printStackTrace();
+//		}finally {
+//			DBConnection.closeDB(con, ps, rs);
+//		}
+//		return arr;
+//	}
 	
 	//상세보기
 	public NoticeDto noticeView(String no) {

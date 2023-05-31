@@ -4,7 +4,7 @@ public class NoticeDto {
 	private String no, title, content, attach, reg_id, reg_name, reg_date;
 	private int hit;
 	
-	//notice_view
+	//notice_view, notice_list
 	public NoticeDto(String no, String title, String content, String attach, String reg_name, String reg_date, int hit) {
 		super();
 		this.no = no;
@@ -27,16 +27,6 @@ public class NoticeDto {
 		this.reg_date = reg_date;
 	}
 
-	//notice_list
-	public NoticeDto(String no, String title, String attach, String reg_name, String reg_date, int hit) {
-		super();
-		this.no = no;
-		this.title = title;
-		this.attach = attach;
-		this.reg_name = reg_name;
-		this.reg_date = reg_date;
-		this.hit = hit;
-	}
 
 	//이전글, 다음글
 	public NoticeDto(String no, String title) {

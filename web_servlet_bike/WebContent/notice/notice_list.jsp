@@ -2,28 +2,46 @@
     pageEncoding="UTF-8"%>
 <%@include file="../common_header.jsp" %>
 <%@include file="../common_menu.jsp" %>	
+<script type="text/javascript">
+	function goSearch(){
+		noti.method="post";
+		noti.action="Notice";
+		noti.submit();
+	}
+	
+	function goPage(pageNum){
+		noti.t_nowPage.value= pageNum;
+		noti.method="post";
+		noti.action="Notice";
+		noti.submit();
+	}
+</script>
 
 		<div id="b_right">
 			<p class="n_title">
 				NOTICE
 			</p>
 			<div class="record_group record_group_left">
-				<p><i class="fa-solid fa-bell"></i> 총게시글<span> 4 </span>건</p>
+				<p><i class="fa-solid fa-bell"></i> 총게시글<span> ${t_totalCount} </span>건</p>
 			</div>			
+			
+			<form name="noti">
+			<input type="hidden" name="t_nowPage">
 			<p class="select_box select_box_right">
 				<select name="t_select" class="sel_box">
-					<option value="" selected >Title</option>
-					<option value=""  >Content</option>
+					<option value="n.title">Title</option>
+					<option value="n.content" <c:if test="${t_select eq 'n.content'}">selected</c:if> >Content</option>
 				</select>
-				<input type="text" name="" value="" class="sel_text">
+				<input type="text" name="t_search" class="sel_text" value="${t_search}">
 
-				<button type="button"  class="sel_button"><i class="fa fa-search"></i> SEARCH</button>
-			</p>			
+				<button type="button" onclick="goSearch()"  class="sel_button"><i class="fa fa-search"></i> SEARCH</button>
+			</p>
+			</form>			
 			
 			<table class="boardList">
 				<colgroup>
-					<col width="5%">
-					<col width="60%">
+					<col width="10%">
+					<col width="55%">
 					<col width="5%">
 					<col width="10%">
 					<col width="14%">
@@ -40,99 +58,40 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>9</td>
-						<td class="t_left"><a href="notice_view.html">구매 절차 과정 안내 드립니다.</a></td>
-						<td><img src="../images/clip.png"></td>
-						<td>관리자</td>
-						<td>2020-07-28</td>
-						<td>412</td>
-					</tr>	
-					<tr>
-						<td>8</td>
-						<td class="t_center">구매 절차 과정 안내 드립니다.</td>
-						<td></td>
-						<td>관리자</td>
-						<td>2020-07-28</td>
-						<td>412</td>
-					</tr>	
-					<tr>
-						<td>7</td>
-						<td class="t_center">구매 절차 과정 안내 드립니다.</td>
-						<td><img src="../images/clip.png"></td>
-						<td>관리자</td>
-						<td>2020-07-28</td>
-						<td>412</td>
-					</tr>	
-					<tr>
-						<td>6</td>
-						<td class="t_center">구매 절차 과정 안내 드립니다.</td>
-						<td><img src="../images/clip.png"></td>
-						<td>관리자</td>
-						<td>2020-07-28</td>
-						<td>412</td>
-					</tr>	
-					<tr>
-						<td>5</td>
-						<td class="t_center">구매 절차 과정 안내 드립니다.</td>
-						<td></td>
-						<td>관리자</td>
-						<td>2020-07-28</td>
-						<td>412</td>
-					</tr>	
-					<tr>
-						<td>4</td>
-						<td class="t_center">구매 절차 과정 안내 드립니다.</td>
-						<td></td>
-						<td>관리자</td>
-						<td>2020-07-28</td>
-						<td>412</td>
-					</tr>	
-					<tr>
-						<td>3</td>
-						<td class="t_center">구매 절차 과정 안내 드립니다.</td>
-						<td></td>
-						<td>관리자</td>
-						<td>2020-07-28</td>
-						<td>412</td>
-					</tr>	
-					<tr>
-						<td>2</td>
-						<td class="t_center">구매 절차 과정 안내 드립니다.</td>
-						<td></td>
-						<td>관리자</td>
-						<td>2020-07-28</td>
-						<td>412</td>
-					</tr>	
-					<tr>
-						<td>1</td>
-						<td class="t_center">구매 절차 과정 안내 드립니다.</td>
-						<td></td>
-						<td>관리자</td>
-						<td>2020-07-28</td>
-						<td>412</td>
-					</tr>	
-					<tr>
-						<td>0</td>
-						<td class="t_center">구매 절차 과정 안내 드립니다.</td>
-						<td></td>
-						<td>관리자</td>
-						<td>2020-07-28</td>
-						<td>412</td>
-					</tr>	
+					<c:set var="num" value="${t_order}"></c:set>
+					<c:forEach items="${t_arr}" var="arr">
+						<tr>
+							<td>
+								${num}
+								<c:set var="num" value="${num-1}"></c:set>
+							</td>
+							<td class="t_left"><a href="notice_view.html">${arr.getTitle() }</a></td>
+							<td>
+								<c:if test="${not empty arr.getAttach()}">
+									<img src="images/clip.png">
+								</c:if>
+							</td>
+							<td>${arr.getReg_name() }</td>
+							<td>${arr.getReg_date() }</td>
+							<td>${arr.getHit() }</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 			
 			<div class="paging">
-				<a href=""><i class="fa fa-angle-double-left"></i></a>
-				<a href=""><i class="fa fa-angle-left"></i></a>
-				<a href="" class="active">1</a>
-				<a href="">2</a>
-				<a href="">3</a>
-				<a href="">4</a>
-				<a href="">5</a>
-				<a href=""><i class="fa fa-angle-right"></i></a>
-				<a href=""><i class="fa fa-angle-double-right"></i></a>
+			${t_paging}
+<!--  
+			<a href=""><i class="fa  fa-angle-double-left"></i></a>
+			<a href=""><i class="fa fa-angle-left"></i></a>
+			<a href="" class="active">1</a>
+			<a href="">2</a>
+			<a href="">3</a>
+			<a href="">4</a>
+			<a href="">5</a>
+			<a href=""><i class="fa fa-angle-right"></i></a>
+			<a href=""><i class="fa  fa-angle-double-right"></i></a>
+-->
 				<a href="notice_write.html" class="write">글쓰기</a>
 			</div>
 		</div>	
