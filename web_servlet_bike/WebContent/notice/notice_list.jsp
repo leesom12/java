@@ -15,7 +15,26 @@
 		noti.action="Notice";
 		noti.submit();
 	}
+	
+	function goView(no){
+		goNotice.t_gubun.value="view";
+		goNotice.t_no.value=no;
+		goNotice.method="post";
+		goNotice.action="Notice";
+		goNotice.submit();
+	}
+	
+	function goWriteForm(){
+		goNotice.t_gubun.value="writeForm";
+		goNotice.method="post";
+		goNotice.action="Notice";
+		goNotice.submit();
+	}
 </script>
+<form name="goNotice">
+	<input type="hidden" name="t_gubun">
+	<input type="hidden" name="t_no">
+</form>
 
 		<div id="b_right">
 			<p class="n_title">
@@ -65,7 +84,7 @@
 								${num}
 								<c:set var="num" value="${num-1}"></c:set>
 							</td>
-							<td class="t_left"><a href="notice_view.html">${arr.getTitle() }</a></td>
+							<td class="t_left"><a href="javascript:goView('${arr.getNo()}')">${arr.getTitle() }</a></td>
 							<td>
 								<c:if test="${not empty arr.getAttach()}">
 									<img src="images/clip.png">
@@ -92,7 +111,9 @@
 			<a href=""><i class="fa fa-angle-right"></i></a>
 			<a href=""><i class="fa  fa-angle-double-right"></i></a>
 -->
-				<a href="notice_write.html" class="write">글쓰기</a>
+			<c:if test="${sessionLevel eq 'admin'}">
+				<a href="javascript:goWriteForm()" class="write">글쓰기</a>
+			</c:if>	
 			</div>
 		</div>	
 	</div>

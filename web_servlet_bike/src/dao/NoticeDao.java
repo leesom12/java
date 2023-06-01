@@ -14,7 +14,7 @@ public class NoticeDao {
 	PreparedStatement ps= null;
 	ResultSet rs= null;
 	
-	// 페이징
+	// 페이징+리스트
 	public ArrayList<NoticeDto> noticeListPage(String select, String search, int start, int end){
 		ArrayList<NoticeDto> arr= new ArrayList<NoticeDto>();
 		String query=" select * from(\r\n" + 
