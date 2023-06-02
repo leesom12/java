@@ -4,14 +4,23 @@
 <%@include file="../common_menu.jsp" %>
 <script type="text/javascript">
 	function goView(no){
+		view.t_gubun.value="view";
 		view.t_no.value=no;
+		view.method="post";
+		view.action="Notice";
+		view.submit();
+	}
+	
+	function goUpdate(no){
+		view.t_no.value=no;
+		view.t_gubun.value="updateForm";
 		view.method="post";
 		view.action="Notice";
 		view.submit();
 	}
 </script>
 <form name="view">
-	<input type="hidden" name="t_gubun" value="view">
+	<input type="hidden" name="t_gubun">
 	<input type="hidden" name="t_no">
 </form>
 		<div id="b_right">
@@ -74,7 +83,7 @@
 			</div>			
 			<div class="buttonGroup">
 				<a href="" class="butt">Delete</a>
-				<a href="notice_update.html" class="butt">Update</a>
+				<a href="javascript:goUpdate('${t_dto.getNo()}')" class="butt">Update</a>
 				<a href="Notice" class="butt">List</a>
 			</div>	
 		</div>	

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import command.notice.NoticeList;
 import command.notice.NoticeView;
+import command.notice.NoticeWrite;
 import common.CommonExecute;
 import common.CommonToday;
 import common.CommonUtil;
@@ -35,7 +36,7 @@ public class Notice extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String gubun = request.getParameter("t_gubun");
+		String gubun = request.getParameter("t_gubun");	
 		if(gubun == null) gubun="list";
 		String viewPage="";
 		
@@ -51,7 +52,7 @@ public class Notice extends HttpServlet {
 			viewPage="notice/notice_write.jsp";
 		//저장	
 		}else if(gubun.equals("save")) {
-			CommonExecute ce = new NoticeList();
+			CommonExecute ce = new NoticeWrite();
 			ce.execute(request);
 			viewPage="common_alert.jsp";
 		//상세보기	
@@ -61,6 +62,8 @@ public class Notice extends HttpServlet {
 			viewPage="notice/notice_view.jsp";
 		//업데이트 폼	
 		}else if(gubun.equals("updateForm")) {
+			CommonExecute ce = new NoticeView();
+			ce.execute(request);
 			viewPage="notice/notice_update.jsp";
 		//업데이트	
 		}else if(gubun.equals("update")) {
