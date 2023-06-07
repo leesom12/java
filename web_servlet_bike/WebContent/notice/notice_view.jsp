@@ -11,7 +11,7 @@
 		view.submit();
 	}
 	
-	function goUpdate(no){
+	function goUpdateForm(no){
 		view.t_no.value=no;
 		view.t_gubun.value="updateForm";
 		view.method="post";
@@ -49,7 +49,7 @@
 					</tr>	
 					<tr>
 						<th>Attach</th>
-						<td colspan="3">${t_dto.getAttach()}</td>
+						<td colspan="3"><a href="common/filedown.jsp?t_fileDir=notice&t_fileName=${t_dto.getAttach()}">${t_dto.getAttach()}</a></td>
 					</tr>	
 					<tr>
 						<th>Writer</th>
@@ -65,7 +65,11 @@
 					<a href="javascript:goView('${t_preDto.getNo()}')">
 						<p class="pre"><span><i class="fa-solid fa-circle-arrow-left"></i> 이전글</span> 
 							<span class="preNextTitle">
-										${t_preDto.getTitle()}
+									<c:set var="title" value="${t_preDto.getTitle()}"></c:set>
+									<c:if test="${fn:length(t_preDto.getTitle()) > 10}"> 
+										<c:set var="title" value="${fn:substring(t_preDto.getTitle(),0,10)}..."></c:set>
+									</c:if>
+									${title}
 							</span>
 						</p>
 					</a>
@@ -74,7 +78,11 @@
 					<a href="javascript:goView('${t_nextDto.getNo()}')">
 						<p class="next"><span>다음글 <i class="fa-solid fa-circle-right"></i></span>
 							<span class="preNextTitle">
-										${t_nextDto.getTitle()}
+									<c:set var="title" value="${t_nextDto.getTitle()}"></c:set>
+									<c:if test="${fn:length(t_nextDto.getTitle()) > 10}"> 
+										<c:set var="title" value="${fn:substring(t_nextDto.getTitle(),0,10)}..."></c:set>
+									</c:if>
+									${title}
 							</span>
 						</p>
 					</a>
@@ -83,7 +91,7 @@
 			</div>			
 			<div class="buttonGroup">
 				<a href="" class="butt">Delete</a>
-				<a href="javascript:goUpdate('${t_dto.getNo()}')" class="butt">Update</a>
+				<a href="javascript:goUpdateForm('${t_dto.getNo()}')" class="butt">Update</a>
 				<a href="Notice" class="butt">List</a>
 			</div>	
 		</div>	

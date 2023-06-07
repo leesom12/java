@@ -7,7 +7,7 @@ public class CommonUtil {
 	
 	//자료실 첨부경로
 	public static String getFile_dir_pds() {
-		String pdsDir="C:/track11_lsm/work_project/web_servlet_bike/WebContent/attach/pds/";
+		String pdsDir="C:/Users/admin/git/java/web_servlet_bike/WebContent/attach/pds";
 		return pdsDir;
 	}
 	

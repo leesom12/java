@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.notice.NoticeList;
+import command.notice.NoticeUpdate;
 import command.notice.NoticeView;
 import command.notice.NoticeWrite;
 import common.CommonExecute;
@@ -67,6 +68,8 @@ public class Notice extends HttpServlet {
 			viewPage="notice/notice_update.jsp";
 		//업데이트	
 		}else if(gubun.equals("update")) {
+			CommonExecute ce = new NoticeUpdate();
+			ce.execute(request);
 			viewPage="common_alert.jsp";
 		//삭제	
 		}else if(gubun.equals("delete")) {
