@@ -18,10 +18,18 @@
 		view.action="Notice";
 		view.submit();
 	}
+	
+	function goDelete(no){
+		view.t_no.value=no;
+		view.method="post";
+		view.action="Notice?t_gubun=delete";
+		view.submit();
+	}
 </script>
 <form name="view">
 	<input type="hidden" name="t_gubun">
 	<input type="hidden" name="t_no">
+	<input type="hidden" name="t_attach" value="${t_dto.getAttach()}">
 </form>
 		<div id="b_right">
 			<p class="n_title">
@@ -91,7 +99,7 @@
 			</div>			
 			<div class="buttonGroup">
 				<c:if test="${sessionLevel eq 'admin'}">
-					<a href="" class="butt">Delete</a>
+					<a href="javascript:goDelete('${t_dto.getNo()}')" class="butt">Delete</a>
 					<a href="javascript:goUpdateForm('${t_dto.getNo()}')" class="butt">Update</a>
 				</c:if>
 				<a href="Notice" class="butt">List</a>
