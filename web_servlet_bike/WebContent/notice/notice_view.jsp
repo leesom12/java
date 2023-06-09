@@ -90,8 +90,10 @@
 				
 			</div>			
 			<div class="buttonGroup">
-				<a href="" class="butt">Delete</a>
-				<a href="javascript:goUpdateForm('${t_dto.getNo()}')" class="butt">Update</a>
+				<c:if test="${sessionLevel eq 'admin'}">
+					<a href="" class="butt">Delete</a>
+					<a href="javascript:goUpdateForm('${t_dto.getNo()}')" class="butt">Update</a>
+				</c:if>
 				<a href="Notice" class="butt">List</a>
 			</div>	
 		</div>	
