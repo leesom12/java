@@ -26,8 +26,14 @@ public class NoticeDelete implements CommonExecute {
 			if(!attach.equals("")) {
 				File file = new File(CommonUtil.getFile_dir_notice(), attach);
 				boolean tf = file.delete();
-				if(!tf) System.out.println("notice attach delete 오류 발생: "+tf);
-				else msg="삭제 성공";
+				if(!tf) {
+					System.out.println("notice attach delete 오류 발생: "+tf);
+					msg="삭제 실패";
+				}else {
+					msg="삭제 성공";
+				}
+			}else {
+				msg="삭제 성공";
 			}
 		}
 		

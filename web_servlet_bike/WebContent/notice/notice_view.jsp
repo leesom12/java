@@ -20,10 +20,13 @@
 	}
 	
 	function goDelete(no){
-		view.t_no.value=no;
-		view.method="post";
-		view.action="Notice?t_gubun=delete";
-		view.submit();
+		var yn= confirm("정말 삭제하시겠습니까?");
+		if(yn){
+			view.t_no.value=no;
+			view.method="post";
+			view.action="Notice?t_gubun=delete";
+			view.submit();
+		}
 	}
 </script>
 <form name="view">
@@ -57,7 +60,7 @@
 					</tr>	
 					<tr>
 						<th>Attach</th>
-						<td colspan="3"><a href="common/filedown.jsp?t_fileDir=notice&t_fileName=${t_dto.getAttach()}">${t_dto.getAttach()}</a></td>
+						<td colspan="3"><a href="FileDown?t_fileDir=notice&t_fileName=${t_dto.getAttach()}">${t_dto.getAttach()}</a></td>
 					</tr>	
 					<tr>
 						<th>Writer</th>

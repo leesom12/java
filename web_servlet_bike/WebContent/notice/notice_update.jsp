@@ -86,7 +86,7 @@
 					<tr>
 						<th>Attach</th>
 						<td colspan="3">
-							<c:if test="${t_dto.getAttach() ne ''}">
+							<c:if test="${not empty t_dto.getAttach()}">
 								${t_dto.getAttach()} &nbsp; 삭제<input type="checkbox" name="t_deleteAttach" value=""><br>
 								<input type="hidden" name="t_oriAttach" value="${t_dto.getAttach()}">
 							</c:if>
