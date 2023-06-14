@@ -9,26 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import command.notice.NoticeDelete;
-import command.notice.NoticeList;
-import command.notice.NoticeUpdate;
-import command.notice.NoticeView;
-import command.notice.NoticeWrite;
+import command.news.NewsList;
+import command.news.NewsView;
+import command.news.NewsWrite;
 import common.CommonExecute;
 import common.CommonToday;
-import common.CommonUtil;
 
 /**
- * Servlet implementation class Notice
+ * Servlet implementation class News
  */
-@WebServlet("/Notice")
-public class Notice extends HttpServlet {
+@WebServlet("/News")
+public class News extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Notice() {
+    public News() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,46 +35,35 @@ public class Notice extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String gubun = request.getParameter("t_gubun");	
+		String gubun = request.getParameter("t_gubun");
 		if(gubun == null) gubun="list";
-		String viewPage="";
+		String viewPage= "";
 		
-		request.setAttribute("nowPage", "notice");
+		request.setAttribute("nowPage", "news");
 		
-		//리스트
 		if(gubun.equals("list")) {
-			CommonExecute ce = new NoticeList();
+			CommonExecute ce = new NewsList();
 			ce.execute(request);
-			viewPage="notice/notice_list.jsp";
-		//등록 폼
+			viewPage="news/news_list.jsp";
 		}else if(gubun.equals("writeForm")) {
 			CommonExecute ce = new CommonToday();
 			ce.execute(request);
-			viewPage="notice/notice_write.jsp";
-		//저장	
+			viewPage="news/news_write.jsp";
 		}else if(gubun.equals("save")) {
-			CommonExecute ce = new NoticeWrite();
+			CommonExecute ce = new NewsWrite();
 			ce.execute(request);
 			viewPage="common_alert.jsp";
-		//상세보기	
 		}else if(gubun.equals("view")) {
-			CommonExecute ce = new NoticeView();
+			CommonExecute ce = new NewsView();
 			ce.execute(request);
-			viewPage="notice/notice_view.jsp";
-		//업데이트 폼	
+			viewPage="news/news_view.jsp";
 		}else if(gubun.equals("updateForm")) {
-			CommonExecute ce = new NoticeView();
+			CommonExecute ce = new NewsView();
 			ce.execute(request);
-			viewPage="notice/notice_update.jsp";
-		//업데이트	
+			viewPage="news/news_update.jsp";
 		}else if(gubun.equals("update")) {
-			CommonExecute ce = new NoticeUpdate();
-			ce.execute(request);
 			viewPage="common_alert.jsp";
-		//삭제	
 		}else if(gubun.equals("delete")) {
-			CommonExecute ce = new NoticeDelete();
-			ce.execute(request);
 			viewPage="common_alert.jsp";
 		}
 		

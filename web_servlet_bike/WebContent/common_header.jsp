@@ -7,7 +7,7 @@
 <html>
 <head>
 <link href="css/sub_c.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/17da812ad5.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript">
