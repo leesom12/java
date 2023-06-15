@@ -223,7 +223,7 @@ public class NewsDao {
 	public int updateNews(NewsDto dto) {
 		int result=0;
 		String query=" update home_이소민_news\r\n" + 
-					 " set title='"+dto.getTitle()+"', content='"+dto.getContent()+"', attach='"+dto.getAttach()+"'\r\n" + 
+					 " set title='"+dto.getTitle()+"', content='"+dto.getContent()+"', attach='"+dto.getAttach()+"',\r\n" + 
 					 " update_date=to_date('"+dto.getUpdate_date()+"','yyyy-MM-dd hh24:mi:ss')\r\n" + 
 					 " where no='"+dto.getNo()+"'";
 		try {

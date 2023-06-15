@@ -136,7 +136,7 @@ $(function(){
 			</form>
 			<div class="buttonGroup">
 				<a href="javascript:goSave()" class="butt">Save</a>
-				<a href="Notice" class="butt">List</a>
+				<a href="News" class="butt">List</a>
 			</div>	
 		</div>	
 	</div>

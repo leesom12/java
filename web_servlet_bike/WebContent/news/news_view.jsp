@@ -3,6 +3,15 @@
     pageEncoding="UTF-8"%>
 <%@include file="../common_header.jsp" %>
 <%@include file="../common_menu.jsp" %>
+
+<style>
+	.viewImg{
+		width:500px;
+		height:300px;
+		margin: 0 0 10px 50px;
+	}
+</style>
+
 <script type="text/javascript">
 	function goView(no){
 		view.t_gubun.value="view";
@@ -19,10 +28,27 @@
 		view.action="News";
 		view.submit();
 	}
+	
+	function goDelete(no){
+		var con = confirm("정말 삭제하시겠습니까?");
+		if(con){
+			del.t_gubun.value="delete";
+			del.t_no.value=no;
+			del.method="post";
+			del.action="News";
+			del.submit();
+		}
+	}
 </script>
 <form name="view">
 	<input type="hidden" name="t_gubun">
 	<input type="hidden" name="t_no">
+</form>
+
+<form name ="del">
+	<input type="hidden" name="t_gubun">
+	<input type="hidden" name="t_no">
+	<input type="hidden" name="t_attach" value="${t_dto.getAttach()}">
 </form>
 		<div id="b_right">
 			<p class="n_title">
@@ -46,7 +72,7 @@
 						<th>Content</th>
 						<td colspan="3">
 							<c:if test="${t_extension eq 'jpg' || t_extension eq 'png' || t_extension eq 'gif' || t_extension eq 'jpeg'}">
-								<img src="attach/news/${t_dto.getAttach()}" width="500px" height="300px">
+								<img src="attach/news/${t_dto.getAttach()}" class="viewImg">
 								<br><br>
 							</c:if>
 							<textarea class="textArea_H250_noBorder" readonly>${t_dto.getContent()}</textarea>
@@ -54,7 +80,7 @@
 					</tr>	
 					<tr>
 						<th>Attach</th>
-						<td colspan="3"><a href="">${t_dto.getAttach()}</a></td>
+						<td colspan="3"><a href="FileDown?t_fileDir=news&t_fileName=${t_dto.getAttach()}">${t_dto.getAttach()}</a></td>
 					</tr>	
 					<tr>
 						<th>Writer</th>
@@ -95,10 +121,10 @@
 			</div>			
 			<div class="buttonGroup">
 				<c:if test="${sessionLevel eq 'admin'}">
-					<a href="" class="butt">Delete</a>
+					<a href="javascript:goDelete('${t_dto.getNo()}')" class="butt">Delete</a>
 					<a href="javascript:goUpdateForm('${t_dto.getNo()}')" class="butt">Update</a>
 				</c:if>
-				<a href="Notice" class="butt">List</a>
+				<a href="News" class="butt">List</a>
 			</div>	
 		</div>	
 	</div>

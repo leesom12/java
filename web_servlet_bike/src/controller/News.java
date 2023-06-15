@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.news.NewsDelete;
 import command.news.NewsList;
+import command.news.NewsUpdate;
 import command.news.NewsView;
 import command.news.NewsWrite;
 import common.CommonExecute;
@@ -62,8 +64,12 @@ public class News extends HttpServlet {
 			ce.execute(request);
 			viewPage="news/news_update.jsp";
 		}else if(gubun.equals("update")) {
+			CommonExecute ce = new NewsUpdate();
+			ce.execute(request);
 			viewPage="common_alert.jsp";
 		}else if(gubun.equals("delete")) {
+			CommonExecute ce = new NewsDelete();
+			ce.execute(request);
 			viewPage="common_alert.jsp";
 		}
 		
