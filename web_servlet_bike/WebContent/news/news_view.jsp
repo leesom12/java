@@ -32,24 +32,20 @@
 	function goDelete(no){
 		var con = confirm("정말 삭제하시겠습니까?");
 		if(con){
-			del.t_gubun.value="delete";
-			del.t_no.value=no;
-			del.method="post";
-			del.action="News";
-			del.submit();
+			view.t_gubun.value="delete";
+			view.t_no.value=no;
+			view.method="post";
+			view.action="News";
+			view.submit();
 		}
 	}
 </script>
 <form name="view">
 	<input type="hidden" name="t_gubun">
 	<input type="hidden" name="t_no">
-</form>
-
-<form name ="del">
-	<input type="hidden" name="t_gubun">
-	<input type="hidden" name="t_no">
 	<input type="hidden" name="t_attach" value="${t_dto.getAttach()}">
 </form>
+
 		<div id="b_right">
 			<p class="n_title">
 				NEWS
