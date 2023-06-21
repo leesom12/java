@@ -17,8 +17,8 @@
 <style>
 	#preview-image{
 		border: 1px solid grey;
-		width: 500px;
-		height: 300px;
+		width: 400px;
+		height: 400px;
 		margin: 0 0 10px 50px;
 		display: none;
 	}
@@ -56,13 +56,16 @@ $(function(){
 
 <script type="text/javascript">
 	function goSave(){
-		if(checkValue(news.t_title,"제목을 입력하세요"))return;
-		if(checkValue(news.t_content,"내용을 입력하세요"))return;
-		if(checkValue(news.t_attach,"첨부 이미지를 선택하세요"))return;
+		if(checkValue(product.t_title,"상품명을 입력하세요"))return;
+		if(checkValue(product.t_content,"상세설명을 입력하세요"))return;
+		if(checkValue(product.t_size,"상품 규격을 입력하세요"))return;
+		if(checkValue(product.t_price,"상품 가격을 입력하세요"))return;
+		if(checkValue(product.t_level,"우선순위를 선택하세요"))return;
+		if(checkValue(product.t_attach,"첨부 이미지를 선택하세요"))return;
 		
 		/***  첨부파일 검사 ***/
 		// 1.확장자 검사
-		var fileName = news.t_attach.value;
+		var fileName = product.t_attach.value;
 		if(fileName != ""){ //  C:\fakepath\img_1.png
 			var pathFileName = fileName.lastIndexOf(".")+1;    //확장자 제외한 경로+파일명
 			var extension = (fileName.substr(pathFileName)).toLowerCase();	//확장자명
@@ -75,7 +78,7 @@ $(function(){
 		}
 		
 		// 2.첨부 용량 체크	
-		var file = news.t_attach;
+		var file = product.t_attach;
 		var fileMaxSize  = 5; // 첨부 최대 용량 설정
 		if(file.value !=""){
 			// 사이즈체크
@@ -98,6 +101,9 @@ $(function(){
 			}	
 		}
 
+		product.method="post";
+		product.action="Product?t_gubun=save";
+		product.submit();
 		
 
 	}
@@ -107,7 +113,7 @@ $(function(){
 			<p class="n_title">
 				PRODUCT
 			</p>
-			<form name="news" enctype="multipart/form-data">			<!-- 폼에서 첨부파일을 보내려면 enctype="multipart/form-data"을 지정해야 함 -->
+			<form name="product" enctype="multipart/form-data">			<!-- 폼에서 첨부파일을 보내려면 enctype="multipart/form-data"을 지정해야 함 -->
 			
 			<table class="boardForm">
 				<colgroup>
@@ -118,25 +124,39 @@ $(function(){
 				</colgroup>
 				<tbody>
 					<tr>
-						<th>Title</th>
+						<th>상품명</th>
 						<td colspan="3"><input type="text" name="t_title" class="input600"></td>
 					</tr>	
 					<tr>
-						<th>Content</th>
+						<th>상세설명</th>
 						<td colspan="3"><textarea name="t_content" class="textArea_H250"></textarea></td>
 					</tr>	
 					<tr>
-						<th>Attach</th>
+						<th>규격</th>
+						<td><input type="text" name="t_size" style="width:260px;height:22px;text-align:right;"></td>
+						<th>가격</th>
+						<td><input type="text" name="t_price" style="width:260px;height:22px;text-align:right;"></td>
+					</tr>
+					<tr>
+						<th>우선순위</th>
 						<td colspan="3">
-							*이미지 첨부 필수 500*300 권장 <br><br>
+							<input type="radio" name="t_level" value="1"> 보통 &nbsp;&nbsp;
+							<input type="radio" name="t_level" value="2"> 중요
+						</td>
+					</tr>
+					<tr>
+						<th>이미지</th>
+						<td colspan="3">
+							*이미지 첨부 필수 400*400 권장 <br><br>
 							<img id="preview-image">
 							<input type="file" class="input600" name="t_attach" id="input-image">
 						</td>
 					</tr>	
+
 					<tr>
-						<th>Writer</th>
+						<th>등록자</th>
 						<td>${sessionName}</td>
-						<th>RegDate</th>
+						<th>등록일</th>
 						<td>${t_todayTime}</td>
 					</tr>	
 

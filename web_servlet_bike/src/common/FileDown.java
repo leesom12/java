@@ -39,7 +39,7 @@ public class FileDown extends HttpServlet {
 
 	 	if(savePath.equals("notice")) savePath = CommonUtil.getFile_dir_notice(); 
 	 	else if(savePath.equals("news")) savePath = CommonUtil.getFile_dir_news();
-	 	else if(savePath.equals("pds")) savePath= CommonUtil.getFile_dir_pds();
+	 	else if(savePath.equals("product")) savePath= CommonUtil.getFile_dir_product();
 
 	 	
 	    String orgfilename = fileName ;

@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.product.ProductLIst;
+import command.product.ProductSave;
+import common.CommonExecute;
+import common.CommonToday;
+
 /**
  * Servlet implementation class Product
  */
@@ -34,11 +39,17 @@ public class Product extends HttpServlet {
 		String viewPage= "";
 		
 		if(gubun.equals("list")) {
+			CommonExecute ce = new ProductLIst();
+			ce.execute(request);
 			viewPage="product/product_list.jsp";
-		}else if(gubun.equals("wirteForm")) {
+		}else if(gubun.equals("writeForm")) {
+			CommonExecute ce = new CommonToday();
+			ce.execute(request);
 			viewPage="product/product_write.jsp";
 		}else if(gubun.equals("save")) {
-			viewPage="";
+			CommonExecute ce= new ProductSave();
+			ce.execute(request);
+			viewPage="common_alert.jsp";
 		}
 		
 		RequestDispatcher rd= request.getRequestDispatcher(viewPage);
