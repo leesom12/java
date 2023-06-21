@@ -23,5 +23,6 @@
 				<c:if test="${nowPage eq 'etc'}"><span class="fnt"><i class="fas fa-apple-alt"></i></span> </c:if>
 				ETC
 			</a></li>
+
 		</ul>
 	</div>

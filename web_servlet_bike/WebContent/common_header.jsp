@@ -33,7 +33,7 @@
 	}
 
 </script>
-
+<title>이소민</title>
 </head>
 <body>
 <form name="bike">
@@ -134,5 +134,15 @@
 						</ul>
 					</div>					
 				</li>
+				<c:if test="${sessionLevel eq 'admin'}">
+				<li><a href="Admin">Admin</a>
+					<div class="div7">
+						<ul>
+							<li><a href="Admin">Member</a></li>
+							<li><a href="">Product</a></li>
+						</ul>
+					</div>					
+				</li>
+				</c:if>
 			</ul>		
 		</div>

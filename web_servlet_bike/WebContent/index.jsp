@@ -165,15 +165,16 @@
 						<li>menu6 sub5</li>
 					</ul>
 				</div>
-				<div class="menu1"><a href="notice/notice_list.html"><span class="maintitle">Notice & News</span></a>
+				<div class="menu1"><a href="Notice"><span class="maintitle">Notice & News</span></a>
 					<ul>
-						<li><a href="notice/notice_list.html">Notice</a></li>
+						<li><a href="Notice">Notice</a></li>
 						<li><a href="">News</a></li>
 						<li><a href="">Q & A</a></li>
 						<li><a href="">Free Board</a></li>
 						<li><a href="">Etc</a></li>
 					</ul>
 				</div>
+
 				
 			</div>
 			<div class="menu_close"><a href="#" class="closeclick">[CLOSE]</a></div>
@@ -194,6 +195,7 @@
 				<li><a href="">Parts</a></li>
 				<li><a href="">Tires & Tubes</a></li>
 				<li><a href="Notice">Notice & News</a></li>
+				<c:if test="${sessionLevel eq 'admin'}"><li><a href="Admin">Admin</a></li></c:if>
 			</ul>
 		</div>
 		
