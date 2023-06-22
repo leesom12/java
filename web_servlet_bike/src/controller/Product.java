@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.product.ProductDelete;
 import command.product.ProductLIst;
 import command.product.ProductSave;
+import command.product.ProductUpdate;
+import command.product.ProductView;
 import common.CommonExecute;
 import common.CommonToday;
 
@@ -50,6 +53,22 @@ public class Product extends HttpServlet {
 			CommonExecute ce= new ProductSave();
 			ce.execute(request);
 			viewPage="common_alert.jsp";
+		}else if(gubun.equals("view")) {
+			CommonExecute ce = new ProductView();
+			ce.execute(request);
+			viewPage  ="product/product_view.jsp";
+		}else if(gubun.equals("updateForm")) {
+			CommonExecute ce = new ProductView();
+			ce.execute(request);
+			viewPage = "product/product_update.jsp";
+		}else if(gubun.equals("update")) {
+			CommonExecute ce = new ProductUpdate();
+			ce.execute(request);
+			viewPage = "common_alert.jsp";
+		}else if(gubun.equals("delete")) {
+			CommonExecute ce = new ProductDelete();
+			ce.execute(request);
+			viewPage = "common_alert.jsp";
 		}
 		
 		RequestDispatcher rd= request.getRequestDispatcher(viewPage);

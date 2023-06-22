@@ -6,13 +6,38 @@
 
 <style>
 	.viewImg{
-		width:500px;
-		height:300px;
+		width:400px;
+		height:400px;
 		margin: 0 0 10px 50px;
 	}
 </style>
 
 <script type="text/javascript">
+	function goView(no){
+		view.t_gubun.value="view";
+		view.t_no.value=no;
+		view.method="post";
+		view.action="Product";
+		view.submit();
+	}
+	
+	function goUpdateForm(no){
+		view.t_gubun.value="updateForm";
+		view.t_no.value=no;
+		view.method="post";
+		view.action="Product";
+		view.submit();
+	}
+	
+	function goDelete(no){
+		var yn = confirm("정말 삭제하시겠습니까?");
+		if(yn){
+			view.t_gubun.value="delete";
+			view.t_no.value= no;
+			view.method= "post";
+			view.action= "Product";
+			view.submit();
+		}
 
 	}
 </script>
@@ -44,8 +69,8 @@
 					<tr>
 						<th>Content</th>
 						<td colspan="3">
-							<c:if test="${t_extension eq 'jpg' || t_extension eq 'png' || t_extension eq 'gif' || t_extension eq 'jpeg'}">
-								<img src="attach/news/${t_dto.getAttach()}" class="viewImg">
+							<c:if test="${not empty t_dto.getAttach()}">
+								<img src="attach/product/${t_dto.getAttach()}" class="viewImg">
 								<br><br>
 							</c:if>
 							<textarea class="textArea_H250_noBorder" readonly>${t_dto.getDetail()}</textarea>
@@ -53,20 +78,24 @@
 					</tr>	
 					<tr>
 						<th>Attach</th>
-						<td colspan="3"><a href="FileDown?t_fileDir=news&t_fileName=${t_dto.getAttach()}">${t_dto.getAttach()}</a></td>
+						<td colspan="3"><a href="FileDown?t_fileDir=product&t_fileName=${t_dto.getAttach()}">${t_dto.getAttach()}</a></td>
 					</tr>
 					<tr>
 						<th>Size</th>
 						<td>${t_dto.getP_size()}</td>
 						<th>Price</th>
-						<td>${t_dto.getPrice()}</td>
+						<td>${t_dto.getStrPrice()}</td>
 					</tr>	
 					<tr>
 						<th>Writer</th>
-						<td>${t_dto.getReg_name()}</td>
+						<td colspan="3">${t_dto.getReg_name()}</td>
+					</tr>		
+					<tr>
 						<th>RegDate</th>
 						<td>${t_dto.getReg_date()}</td>
-					</tr>		
+						<th>UpdateDate</th>
+						<td>${t_dto.getUpdate_date()}</td>
+					</tr>
 
 				</tbody>
 			</table>
@@ -103,7 +132,7 @@
 					<a href="javascript:goDelete('${t_dto.getNo()}')" class="butt">Delete</a>
 					<a href="javascript:goUpdateForm('${t_dto.getNo()}')" class="butt">Update</a>
 				</c:if>
-				<a href="News" class="butt">List</a>
+				<a href="Product" class="butt">List</a>
 			</div>	
 		</div>	
 	</div>

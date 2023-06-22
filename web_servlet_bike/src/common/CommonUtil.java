@@ -7,9 +7,11 @@ public class CommonUtil {
 	
 	//product 첨부경로
 	public static String getFile_dir_product() {
-		String pdsDir="C:/Users/admin/git/java/web_servlet_bike/WebContent/attach/product";
+//		String pdsDir="C:/Users/admin/git/java/web_servlet_bike/WebContent/attach/product";
+		String pdsDir="C:/track11_lsm/work_project/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/web_servlet_bike/attach/product";
 		return pdsDir;
 	}
+	
 	
 	//뉴스 첨부경로
 	public static String getFile_dir_news() {

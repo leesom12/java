@@ -14,6 +14,158 @@ public class ProductDao {
 	PreparedStatement ps = null;
 	ResultSet rs= null;
 	
+	//삭제
+	public int deleteProduct(String no) {
+		int result =0;
+		String query="delete from bike_이소민_product\r\n" + 
+					 "where no='"+no+"'";
+		try {
+			con = DBConnection.getConnection();
+			ps= con.prepareStatement(query);
+			result = ps.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("deleteProduct() 오류: "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return result;
+	}
+	
+	//업데이트
+	public int updateProduct(ProductDto dto) {
+		int result = 0;
+		String query="update bike_이소민_product\r\n" + 
+					 "set p_name='"+dto.getP_name()+"', detail='"+dto.getDetail()+"', attach='"+dto.getAttach()+"', p_size='"+dto.getP_size()+"',\r\n" + 
+					 "p_level='"+dto.getP_level()+"', price='"+dto.getPrice()+"', update_date=to_date('"+dto.getUpdate_date()+"', 'yyyy-MM-dd hh24:mi:ss')\r\n" + 
+					 "where no='"+dto.getNo()+"'";
+		try {
+			con = DBConnection.getConnection();
+			ps= con.prepareStatement(query);
+			result = ps.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("updateProduct() 오류: "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return result;
+	}
+	
+	
+	//view-이전글
+	public ProductDto getPreDto(String no) {
+		ProductDto dto = null;
+		String query="select a.no, b.p_name from\r\n" + 
+					 "(select max(no) as no from bike_이소민_product\r\n" + 
+					 "where no < '"+no+"') a,\r\n" + 
+					 "bike_이소민_product b\r\n" + 
+					 "where a.no = b.no";
+		try {
+			con= DBConnection.getConnection();
+			ps= con.prepareStatement(query);
+			rs= ps.executeQuery();
+			if(rs.next()) {
+				String preNo = rs.getString("no");
+				String preName = rs.getString("p_name");
+				dto = new ProductDto(preNo, preName);
+			}
+		}catch(Exception e) {
+			System.out.println("getPreDto() 오류: "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return dto;
+	}
+	
+	
+	//view-다음글
+	public ProductDto getNextDto(String no) {
+		ProductDto dto = null;
+		String query="select a.no, b.p_name from\r\n" + 
+					 "(select min(no) as no from bike_이소민_product\r\n" + 
+					 "where no > '"+no+"') a,\r\n" + 
+					 "bike_이소민_product b\r\n" + 
+					 "where a.no= b.no";
+		try {
+			con= DBConnection.getConnection();
+			ps= con.prepareStatement(query);
+			rs= ps.executeQuery();
+			if(rs.next()) {
+				String nextNo = rs.getString("no");
+				String nextName = rs.getString("p_name");
+				dto = new ProductDto(nextNo, nextName);
+			}
+		}catch(Exception e) {
+			System.out.println("getNextDto() 오류: "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return dto;
+	}
+	
+	
+	//조회수 업데이트
+	public void updateHit(String no) {
+		String query="update bike_이소민_product\r\n" + 
+					 "set hit = hit+1\r\n" + 
+					 "where no='"+no+"'";
+		try {
+			con = DBConnection.getConnection();
+			ps= con.prepareStatement(query);
+			int result= ps.executeUpdate();
+			if(result != 1)System.out.println("updateHit() 오류:" +query);
+		}catch(Exception e) {
+			System.out.println("updateHit() 오류: "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+	}
+	
+	
+	//상세보기
+	public ProductDto productView(String no) {
+		ProductDto dto = null;
+		String query="select p.no, p.p_name, p.detail, p.attach, p.p_size, p.p_level, p.price,\r\n" + 
+					 "to_char(price, '999,999,999') as strPrice, p.hit, m.name as reg_name, \r\n" + 
+					 "to_char(p.reg_date, 'yyyy-MM-dd hh24:mi:ss') as reg_date,\r\n" + 
+					 "to_char(p.update_date, 'yyyy-MM-dd hh24:mi:ss') as update_date\r\n" + 
+					 "from bike_이소민_product p, bike_이소민_member m\r\n" + 
+					 "where p.reg_id=m.id\r\n" + 
+					 "and no='"+no+"'";
+		try {
+			con = DBConnection.getConnection();
+			ps= con.prepareStatement(query);
+			rs= ps.executeQuery();
+			if(rs.next()) {
+				String p_name = rs.getString("p_name");
+				String detail = rs.getString("detail");
+				String attach = rs.getString("attach");
+				String p_size = rs.getString("p_size");
+				String p_level = rs.getString("p_level");
+				String  strPrice = rs.getString("price");
+				int price = rs.getInt("price");
+				int hit = rs.getInt("hit");
+				String reg_name= rs.getString("reg_name");
+				String reg_date = rs.getString("reg_date");
+				String update_date = rs.getString("update_date");
+				
+				dto = new ProductDto(no, p_name, detail, attach, p_size, p_level, reg_name, reg_date, update_date, strPrice, hit, price);
+				
+			}
+		}catch(Exception e) {
+			System.out.println("productView() 오류: "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return dto;
+	}
+	
+	
 	//전체조회
 	public ArrayList<ProductDto> getProductList(String select, String search, int start, int end){
 		ArrayList<ProductDto> arr= new ArrayList<ProductDto>();
@@ -48,7 +200,8 @@ public class ProductDao {
 		return arr;
 	}
 	
-	//개수 불러오기
+	
+	//글 개수 불러오기
 	public int getTotalCount(String select, String search) {
 		int count=0;
 		String query=" select count(*) as count \r\n" + 
@@ -67,6 +220,7 @@ public class ProductDao {
 		}
 		return count;
 	}
+	
 	
 	//등록
 	public int saveProduct(ProductDto dto) {
@@ -88,6 +242,7 @@ public class ProductDao {
 		}
 		return result;
 	}
+	
 	
 	//상품 번호 생성
 	public String getProductNum() {

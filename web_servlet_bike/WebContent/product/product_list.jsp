@@ -34,6 +34,14 @@
 		searchForm.action="Product";
 		searchForm.submit();
 	}
+	
+	function goView(no){
+		product.t_gubun.value="view";
+		product.t_no.value=no;
+		product.method="post";
+		product.action="Product";
+		product.submit();
+	}
 </script>
 
 <form name="product">
@@ -83,9 +91,9 @@
 				<tbody>
 					<c:forEach items="${t_arr}" var="arr">
 						<tr>
-							<td><a href=""><img src="attach/product/${arr.getAttach()}" width="50px" height="50px"></a></td>
-							<td class="t_left"><a href="">${arr.getNo()}</a></td>
-							<td><a href="">${arr.getP_name()}</a></td>
+							<td><a href="javascript:goView('${arr.getNo()}')"><img src="attach/product/${arr.getAttach()}" width="50px" height="50px"></a></td>
+							<td class="t_left"><a href="javascript:goView('${arr.getNo()}')">${arr.getNo()}</a></td>
+							<td><a href="javascript:goView('${arr.getNo()}')">${arr.getP_name()}</a></td>
 							<td>${arr.getStrPrice()}</td>
 							<td>${arr.getReg_date()}</td>
 							<td>${arr.getHit()}</td>

@@ -30,6 +30,7 @@ public class ProductSave implements CommonExecute {
 			String p_size = mpr.getParameter("t_size");
 			String price1 = mpr.getParameter("t_price");
 			price1= price1.replaceAll(",", "");
+			price1 = price1.replaceAll(" ", "");
 			int price= Integer.parseInt(price1);
 			String p_level= mpr.getParameter("t_level");
 			String attach = mpr.getFilesystemName("t_attach");
