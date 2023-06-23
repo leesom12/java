@@ -2,7 +2,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../common_header.jsp" %>
-<%@include file="../common_menu.jsp" %>
+	<div id="b_left">
+		<P>Admin</P>
+		<ul>
+			<li><a href="Admin">
+				MEMBER
+			</a></li>
+			<li><a href="Product">
+				<span class="fnt"><i class="fas fa-apple-alt"></i></span>
+				PRODUCT
+			</a></li>
+		</ul>
+	</div>
 
 <style>
 	.viewImg{

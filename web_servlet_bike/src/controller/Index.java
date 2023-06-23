@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.product.ProductLIst;
+import common.CommonExecute;
+
 /**
  * Servlet implementation class index
  */
@@ -28,7 +31,19 @@ public class Index extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd= request.getRequestDispatcher("index.jsp");
+		request.setCharacterEncoding("utf-8");
+		String gubun = request.getParameter("t_gubun");
+		if(gubun == null) gubun="index";
+		String viewPage= "";
+		
+		if(gubun.equals("index")) {
+			
+			viewPage="index.jsp";
+		}else if(gubun.equals("productView")) {
+			
+		}
+		
+		RequestDispatcher rd= request.getRequestDispatcher(viewPage);
 		rd.forward(request, response);
 	}
 

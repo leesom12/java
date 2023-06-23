@@ -21,10 +21,13 @@ public class ProductLIst implements CommonExecute {
 			select = "no";
 			search="";
 		}
+		String pageList = request.getParameter("t_pageNum");
+		if(pageList == null) pageList= "5";
+		int pageList_count= Integer.parseInt(pageList);
 		
 		/* paging 설정 start*/
 		int totalCount = dao.getTotalCount(select,search);
-		int list_setup_count = 5;  //한페이지당 출력 행수 
+		int list_setup_count = pageList_count;  //한페이지당 출력 행수 
 		int pageNumber_count = 3;  //한페이지당 출력 페이지 갯수
 		
 		String setup= request.getParameter("t_setup");
@@ -54,6 +57,7 @@ public class ProductLIst implements CommonExecute {
 		request.setAttribute("t_search", search);
 		request.setAttribute("t_totalCount", totalCount);
 		request.setAttribute("t_paging", paging);
+		request.setAttribute("t_list_count", pageList_count);
 
 	}
 

@@ -45,6 +45,9 @@
 		<div id="b_top_menu">
 			<ul class="top_menu">
 					<c:if test="${not empty sessionId }"> 
+						<c:if test="${sessionLevel eq 'admin'}">
+							<li><a href="Admin">Admin</a></li>
+						</c:if>
 						<li><a href="javascript:goWork('myPage')">My info</a></li>
 						<li><a href="javascript:goWork('memberLogout')">Logout</a></li>
 					</c:if>
@@ -134,15 +137,6 @@
 						</ul>
 					</div>					
 				</li>
-				<c:if test="${sessionLevel eq 'admin'}">
-				<li><a href="Admin">Admin</a>
-					<div class="div7">
-						<ul>
-							<li><a href="Admin">Member</a></li>
-							<li><a href="">Product</a></li>
-						</ul>
-					</div>					
-				</li>
-				</c:if>
+
 			</ul>		
 		</div>

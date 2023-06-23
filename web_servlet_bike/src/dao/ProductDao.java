@@ -146,7 +146,7 @@ public class ProductDao {
 				String attach = rs.getString("attach");
 				String p_size = rs.getString("p_size");
 				String p_level = rs.getString("p_level");
-				String  strPrice = rs.getString("price");
+				String  strPrice = rs.getString("strPrice");
 				int price = rs.getInt("price");
 				int hit = rs.getInt("hit");
 				String reg_name= rs.getString("reg_name");

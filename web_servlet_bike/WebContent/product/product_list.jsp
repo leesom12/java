@@ -60,6 +60,10 @@
 			<form name="searchForm">
 			<input type="hidden" name="t_nowPage">
 			<p class="select_box select_box_right">
+				<select name="t_pageNum" class="sel_box" style="width:90px;">
+					<option value="5">5개씩정렬</option>
+					<option value="10" <c:if test="${t_list_count eq 10}">selected</c:if> >10개씩정렬</option>
+				</select>
 				<select name="t_select" class="sel_box">
 					<option value="no">제품번호</option>
 					<option value="p_name" <c:if test="${t_select eq 'p_name'}">selected</c:if>>제품명</option>

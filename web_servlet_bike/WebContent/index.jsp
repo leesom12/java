@@ -91,7 +91,9 @@
 				<ul class="top_menu">
 					<li><a href="" class="allclick"><i class="fas fa-bars"></i></a></li>
 					<c:if test="${not empty sessionId }">
-						<li style="float:right;font-weight:800;font-size:14px;color:grey;">${sessionName }님</li>
+						<c:if test="${sessionLevel eq 'admin'}">
+							<li><a href="Admin">Admin</a></li>
+						</c:if>
 						<li><a href="javascript:goWork('myPage')">My info</a></li> 
 						<li><a href="javascript:goWork('memberLogout')">Logout</a></li>
 					</c:if>
@@ -195,7 +197,6 @@
 				<li><a href="">Parts</a></li>
 				<li><a href="">Tires & Tubes</a></li>
 				<li><a href="Notice">Notice & News</a></li>
-				<c:if test="${sessionLevel eq 'admin'}"><li><a href="Admin">Admin</a></li></c:if>
 			</ul>
 		</div>
 		
@@ -231,10 +232,14 @@
 		<div id="b_center">
 			<p class="b_center_top"><img src="images/center_top.jpg"></p>
 			<p class="b_center_middle">
-				<a href=""><img src="images/center_middle_1.jpg"><a href=""><img src="images/center_middle_2.jpg"><a href=""><img src="images/center_middle_3.jpg"></a>
+				<a href=""><img src="images/center_middle_1.jpg"></a>
+				<a href=""><img src="images/center_middle_2.jpg"></a>
+				<a href=""><img src="images/center_middle_3.jpg"></a>
 			</p>
 			<p class="b_center_bottom">
-				<a href=""><img src="images/center_middle_4.jpg"><a href=""><img src="images/center_middle_5.jpg"><a href=""><img src="images/center_middle_6.jpg"></a>
+				<a href=""><img src="images/center_middle_4.jpg"></a>
+				<a href=""><img src="images/center_middle_5.jpg"></a>
+				<a href=""><img src="images/center_middle_6.jpg"></a>
 			</p>
 		</div>
 		<div id="b_right">

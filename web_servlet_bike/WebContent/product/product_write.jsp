@@ -57,7 +57,15 @@ $(function(){
 <script type="text/javascript">
 	function goSave(){
 		if(checkValue(product.t_title,"상품명을 입력하세요"))return;
+		if(product.t_title.value.length > 50){
+			alert("50자 이내의 상품명으로 입력하세요");
+			return;
+		}
 		if(checkValue(product.t_content,"상세설명을 입력하세요"))return;
+		if(product.t_content.value.length > 1000){
+			alert("1000자 이내의 상세설명으로 입력하세요");
+			return;
+		}
 		if(checkValue(product.t_size,"상품 규격을 입력하세요"))return;
 		if(checkValue(product.t_price,"상품 가격을 입력하세요"))return;
 		if(checkValue(product.t_level,"우선순위를 선택하세요"))return;
