@@ -14,6 +14,37 @@ public class ProductDao {
 	PreparedStatement ps = null;
 	ResultSet rs= null;
 	
+//	//인덱스 페이지에 뜨는 목록 조회
+//	public ArrayList<ProductDto> getIndexProductList(){
+//		ArrayList<ProductDto> arr = new ArrayList<ProductDto>();
+//		String query="select * from\r\n" + 
+//					 "(select rownum as rnum, tbl.* from\r\n" + 
+//					 "(select\r\n" + 
+//					 "no, attach, p_name, to_char(price, '999,999,999') as strprice\r\n" + 
+//					 "from bike_이소민_product\r\n" + 
+//					 "order by p_level desc, reg_date desc)\r\n" + 
+//					 "tbl) where rnum >=1 and rnum <=6";
+//		try {
+//			con = DBConnection.getConnection();
+//			ps= con.prepareStatement(query);
+//			rs= ps.executeQuery();
+//			while(rs.next()) {
+//				String no = rs.getString("no");
+//				String p_name = rs.getString("p_name");
+//				String attach = rs.getString("attach");
+//				String strPrice = rs.getString("strprice");
+//				ProductDto dto = new ProductDto(no, p_name, attach, strPrice);
+//				arr.add(dto);
+//			}
+//		}catch(Exception e) {
+//			System.out.println("getIndexProductList() 오류: "+query);
+//			e.printStackTrace();
+//		}finally {
+//			DBConnection.closeDB(con, ps, rs);
+//		}
+//		return arr;
+//	}
+	
 	//삭제
 	public int deleteProduct(String no) {
 		int result =0;

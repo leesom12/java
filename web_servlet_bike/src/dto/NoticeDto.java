@@ -4,6 +4,15 @@ public class NoticeDto {
 	private String no, title, content, attach, reg_id, reg_name, reg_date;
 	private int hit;
 	
+	
+	//인덱스 페이지
+	public NoticeDto(String no, String title, String reg_date) {
+		super();
+		this.no = no;
+		this.title = title;
+		this.reg_date = reg_date;
+	}
+
 	//notice_view, notice_list
 	public NoticeDto(String no, String title, String content, String attach, String reg_name, String reg_date, int hit) {
 		super();

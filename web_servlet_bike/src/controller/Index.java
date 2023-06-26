@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import command.product.ProductLIst;
 import common.CommonExecute;
+import dao.NoticeDao;
+import dao.ProductDao;
+import dto.NoticeDto;
+import dto.ProductDto;
 
 /**
  * Servlet implementation class index
@@ -31,19 +36,16 @@ public class Index extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		String gubun = request.getParameter("t_gubun");
-		if(gubun == null) gubun="index";
-		String viewPage= "";
+		NoticeDao n_dao = new NoticeDao();
+		ProductDao p_dao = new ProductDao();
 		
-		if(gubun.equals("index")) {
-			
-			viewPage="index.jsp";
-		}else if(gubun.equals("productView")) {
-			
-		}
+		ArrayList<NoticeDto> n_arr = n_dao.noticeListPage("n.no", "", 1, 7);
+		ArrayList<ProductDto> p_arr = p_dao.getProductList("no", "", 1, 6);
+
+		request.setAttribute("n_arr", n_arr);
+		request.setAttribute("p_arr", p_arr);
 		
-		RequestDispatcher rd= request.getRequestDispatcher(viewPage);
+		RequestDispatcher rd= request.getRequestDispatcher("index.jsp");
 		rd.forward(request, response);
 	}
 

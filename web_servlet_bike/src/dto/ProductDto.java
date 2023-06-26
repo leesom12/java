@@ -4,6 +4,14 @@ public class ProductDto {
 	private String no, p_name, detail, attach, p_size, p_level, reg_id, reg_name, reg_date, update_date, delete_date, strPrice;
 	private int hit, price;
 	
+	//인덱스 목록
+	public ProductDto(String no, String p_name, String attach, String strPrice) {
+		super();
+		this.no = no;
+		this.p_name = p_name;
+		this.attach = attach;
+		this.strPrice = strPrice;
+	}
 	
 	//수정
 	public ProductDto(String no, String p_name, String detail, String p_size, String p_level, String attach,

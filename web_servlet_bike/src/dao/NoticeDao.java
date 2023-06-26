@@ -14,6 +14,35 @@ public class NoticeDao {
 	PreparedStatement ps= null;
 	ResultSet rs= null;
 	
+//	//인덱스 리스트에 뜨는 목록
+//	public ArrayList<NoticeDto> getIndexNoticeList(){
+//		ArrayList<NoticeDto> arr = new ArrayList<NoticeDto>();
+//		String query="select * from\r\n" + 
+//					 "(select rownum as rnum, tbl.* from\r\n" + 
+//					 "(select no, title, to_char(reg_date, 'yyyy-MM-dd') as reg_date from home_이소민_notice\r\n" + 
+//					 "order by reg_date desc)\r\n" + 
+//					 "tbl)\r\n" + 
+//					 "where rnum>=1 and rnum<=7";
+//		try {
+//			con = DBConnection.getConnection();
+//			ps= con.prepareStatement(query);
+//			rs= ps.executeQuery();
+//			while(rs.next()) {
+//				String no = rs.getString("no");
+//				String title = rs.getString("title");
+//				String reg_date = rs.getString("reg_date");
+//				NoticeDto dto = new NoticeDto(no, title, reg_date);
+//				arr.add(dto);
+//			}
+//		}catch(Exception e) {
+//			System.out.println("getIndexNoticeList() 오류: "+query);
+//			e.printStackTrace();
+//		}finally {
+//			DBConnection.closeDB(con, ps, rs);
+//		}
+//		return arr;
+//	}
+	
 	// 페이징+리스트
 	public ArrayList<NoticeDto> noticeListPage(String select, String search, int start, int end){
 		ArrayList<NoticeDto> arr= new ArrayList<NoticeDto>();
