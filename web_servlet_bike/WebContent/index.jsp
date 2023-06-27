@@ -176,7 +176,7 @@
 						<li>menu5 sub5</li>
 					</ul>
 				</div>
-				<div class="menu1"><a href=""><span class="maintitle">Tires & Tubes</span></a>
+				<div class="menu1"><a href="Product"><span class="maintitle">Product</span></a>
 					<ul>
 						<li>menu6 sub1</li>
 						<li>menu6 sub2</li>
@@ -213,7 +213,7 @@
 				<li><a href="">Clothing</a></li>
 				<li><a href="">Maintenance</a></li>
 				<li><a href="">Parts</a></li>
-				<li><a href="">Tires & Tubes</a></li>
+				<li><a href="Product">Product</a></li>
 				<li><a href="Notice">Notice & News</a></li>
 			</ul>
 		</div>
@@ -253,6 +253,28 @@
 			</div>
 	
 <style>
+	.b_center_middle .aa{
+		position: relative;
+		display: inline-block;
+		width: 105px;
+		height: 75px;
+		padding-top: 30px;
+		text-align: center;
+		border-radius: 10px;
+	}
+	
+	.b_center_middle .aa .aaa{
+		position: absolute;
+		left: 0;
+		top:0;
+		width: 105px;
+		height: 65px;
+		padding-top: 40px;
+		text-align: center;
+		border: 1px solid #E6E6E6;
+		border-radius: 10px;
+	}
+	
 	.b_center_middle img{
 		width: 105px;
 		height: 105px;
@@ -280,6 +302,7 @@
 		transition: 0.5s;
 		color: black;
 		font-weight: 600;
+		border-radius: 10px;
 	}
 	
 	.b_center_middle a:hover .over{
@@ -299,17 +322,28 @@
 		
 		</div>
 		<div id="b_center">
-			<p class="b_center_top"><img src="images/center_top.jpg"></p>
+			<p class="b_center_top"><a href="Product"><img src="images/center_top.jpg"></a></p>
 			<div class="b_center_middle">
+					
 				<c:forEach items="${p_arr}" var="arr">
-				<a href="javascript:goProductView('${arr.getNo()}')">
-					<img src="attach/product/${arr.getAttach()}">
-					<div class="over">
-						<p class="p_name">${arr.getP_name()}</p>
-						<p class="price">${arr.getStrPrice()}</p>
-					</div>
-				</a>
-				</c:forEach>
+					<c:choose>
+						<c:when test="${arr ne null}">
+							<a href="javascript:goProductView('${arr.getNo()}')">
+								<img src="attach/product/${arr.getAttach()}">
+								<div class="over">
+									<p class="p_name">${arr.getP_name()}</p>
+									<p class="price">${arr.getStrPrice()}</p>
+								</div>
+							</a>
+						</c:when>
+						<c:otherwise>
+							<div class="aa">
+								<a class="aaa">상품 준비중</a>
+							</div>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>		
+				
 			</div>
 
 		</div>

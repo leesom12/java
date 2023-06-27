@@ -40,7 +40,7 @@ public class Index extends HttpServlet {
 		ProductDao p_dao = new ProductDao();
 		
 		ArrayList<NoticeDto> n_arr = n_dao.noticeListPage("n.no", "", 1, 7);
-		ArrayList<ProductDto> p_arr = p_dao.getProductList("no", "", 1, 6);
+		ArrayList<ProductDto> p_arr = p_dao.getIndexProductList(1,4);
 
 		request.setAttribute("n_arr", n_arr);
 		request.setAttribute("p_arr", p_arr);

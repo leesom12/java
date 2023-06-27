@@ -1,18 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../common_header.jsp" %>
-	<div id="b_left">
-		<P>Admin</P>
-		<ul>
-			<li><a href="Admin">
-				MEMBER
-			</a></li>
-			<li><a href="Product">
-				<span class="fnt"><i class="fas fa-apple-alt"></i></span>
-				PRODUCT
-			</a></li>
-		</ul>
-	</div>
+<c:choose>
+	<c:when test="${sessionLevel eq 'admin'}">
+		<div id="b_left">
+			<P>Admin</P>
+			<ul>
+				<li><a href="Admin">
+					MEMBER
+				</a></li>
+				<li><a href="Product">
+					<span class="fnt"><i class="fas fa-apple-alt"></i></span>
+					PRODUCT
+				</a></li>
+			</ul>
+		</div>
+	</c:when>
+	<c:otherwise>
+			<div id="b_left">
+			<P>Product</P>
+			<ul>
+				<li><a href="Product">
+					<span class="fnt"><i class="fas fa-apple-alt"></i></span>
+					PRODUCT
+				</a></li>
+			</ul>
+		</div>
+	</c:otherwise>
+</c:choose>
+
 
 <script type="text/javascript">
 	function goWriteForm(){
@@ -108,9 +124,9 @@
 			
 			<div class="paging">
 				${t_paging}
-			
+			<c:if test="${sessionLevel eq 'admin'}">
 				<a href="javascript:goWriteForm()" class="write">제품등록</a>
-			
+			</c:if>
 
 			</div>
 		</div>	

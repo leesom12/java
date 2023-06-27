@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../common_header.jsp" %>
+
+<c:if test="${sessionLevel ne 'admin'}">
+	<script type="text/javascript">
+		alert("관리자 전용 페이지입니다!");
+		location.href="Index";
+	</script>	
+</c:if>	
+
 	<div id="b_left">
 		<P>Admin</P>
 		<ul>
