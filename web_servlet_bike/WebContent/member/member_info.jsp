@@ -42,6 +42,7 @@
 				<li><a href="javascript:goWork('memberLogin')">LOGIN</a></li>
 				<li><a href="javascript:goWork('memberPasswordFind')">ID / PASSWORD</a></li>
 				<li><a><span class="fnt"><i class="fas fa-apple-alt"></i></span> MEMBER</a></li>
+				<li><a href="javascript:goWork('orderDetails')">ORDER</a></li>
 			</ul>
 		</div>
 		

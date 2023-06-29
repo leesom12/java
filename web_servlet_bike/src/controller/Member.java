@@ -15,6 +15,7 @@ import command.member.MemberInfo;
 import command.member.MemberJoin;
 import command.member.MemberLogin;
 import command.member.MemberLogout;
+import command.member.MemberOrderList;
 import command.member.MemberPasswordChange;
 import command.member.MemberPasswordSend;
 import command.member.MemberUpdate;
@@ -127,6 +128,12 @@ public class Member extends HttpServlet {
 			CommonExecute ce = new MemberPasswordChange();
 			ce.execute(request);
 			viewPage="common_alert.jsp";
+		}
+		//주문내역
+		else if(gubun.equals("orderDetails")) {
+			CommonExecute ce = new MemberOrderList();
+			ce.execute(request);
+			viewPage="member/member_orderList.jsp";
 		}
 		
 		

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import command.product.ProductDelete;
 import command.product.ProductLIst;
+import command.product.ProductSale;
 import command.product.ProductSave;
 import command.product.ProductUpdate;
 import command.product.ProductView;
@@ -69,6 +70,14 @@ public class Product extends HttpServlet {
 			CommonExecute ce = new ProductDelete();
 			ce.execute(request);
 			viewPage = "common_alert.jsp";
+		}else if(gubun.equals("saleForm")) {
+			CommonExecute ce = new ProductView();
+			ce.execute(request);
+			viewPage = "product/product_sale.jsp";
+		}else if(gubun.equals("sale")) {
+			CommonExecute ce = new ProductSale();
+			ce.execute(request);
+			viewPage="common_alert.jsp";
 		}
 		
 		RequestDispatcher rd= request.getRequestDispatcher(viewPage);

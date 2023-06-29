@@ -66,7 +66,14 @@
 			view.action= "Product";
 			view.submit();
 		}
-
+	}
+	
+	function goSale(no){
+		view.t_gubun.value="saleForm";
+		view.t_no.value= no;
+		view.method= "post";
+		view.action= "Product";
+		view.submit(); 
 	}
 </script>
 
@@ -141,6 +148,8 @@
 						</p>
 					</a>
 				</c:if>
+				
+				
 				<c:if test="${not empty t_nextdto}">
 					<a href="javascript:goView('${t_nextdto.getNo()}')">
 						<p class="next"><span>다음글 <i class="fa-solid fa-circle-right"></i></span>
@@ -159,6 +168,9 @@
 				<c:if test="${sessionLevel eq 'admin'}">
 					<a href="javascript:goDelete('${t_dto.getNo()}')" class="butt">Delete</a>
 					<a href="javascript:goUpdateForm('${t_dto.getNo()}')" class="butt">Update</a>
+				</c:if>
+				<c:if test="${sessionLevel ne 'admin'}">
+					<a href="javascript:goSale('${t_dto.getNo()}')" class="butt" style="background-color:#E0BDBD;">주문하기</a>
 				</c:if>
 				<a href="Product" class="butt">List</a>
 			</div>	

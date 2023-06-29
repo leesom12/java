@@ -6,13 +6,82 @@ import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import common.CommonUtil;
 import common.DBConnection;
 import dto.ProductDto;
+import dto.ProductSaleDto;
 
 public class ProductDao {
 	Connection con = null;
 	PreparedStatement ps = null;
 	ResultSet rs= null;
+	
+	//고객용 주문 리스트
+	public ArrayList<ProductSaleDto> getCustomerSale(String id){
+		ArrayList<ProductSaleDto> arr = new ArrayList<ProductSaleDto>();
+		String query="";
+		try {
+			
+		}catch(Exception e) {
+			
+		}finally {
+			
+		}
+		return arr;
+	}
+	
+	//주문 등록
+	public int saveProductSale(ProductSaleDto dto) {
+		int result = 0;
+		String query= "insert into bike_이소민_product_sale\r\n" + 
+					  "(no, product_no, member_id, address, payment, process_state, purchase_date, product_price)\r\n" + 
+					  "values\r\n" + 
+					  "('"+dto.getNo()+"', '"+dto.getProduct_no()+"', '"+dto.getMem_id()+"', '"+dto.getAddress()+"', "
+					  	+ "'"+dto.getPayment()+"', '"+dto.getProcess_state()+"', to_date('"+dto.getPurchase_date()+"', 'yyyy-MM-dd hh24:mi:ss'), "
+					  	+ ""+dto.getProduct_price()+")";
+		try {
+			con = DBConnection.getConnection();
+			ps= con.prepareStatement(query);
+			result= ps.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("saveProductSale() 오류: "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return result;
+	}
+	
+	//주문 번호 생성
+	public String getProductSaleNo() {
+		String no ="";
+		String todayDate = CommonUtil.getToday();
+		todayDate = todayDate.replaceAll("-", "");
+		todayDate = todayDate.substring(2);
+		String query="select nvl(max(no), '0000') as no\r\n" + 
+					 "from bike_이소민_product_sale\r\n" + 
+					 "where no like '%"+todayDate+"%'";
+		try {
+			con= DBConnection.getConnection();
+			ps= con.prepareStatement(query);
+			rs= ps.executeQuery();
+			if(rs.next()) {
+				String preNo = rs.getString("no");
+				if(preNo.length() > 5) preNo = preNo.substring(6);
+				int pre = Integer.parseInt(preNo);
+				pre = pre+1;
+				DecimalFormat df= new DecimalFormat("0000");
+				no = todayDate+df.format(pre);
+			}
+		}catch(Exception e) {
+			System.out.println("getProductSaleNo() 오류 :"+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return no;
+	}
+	
 	
 	//인덱스 페이지에 뜨는 목록 조회
 	public ArrayList<ProductDto> getIndexProductList(int start, int end){
