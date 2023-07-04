@@ -9,29 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import command.product.ProductDelete;
-import command.product.ProductLIst;
+import command.member.MemberOrderList;
 import command.product.ProductProcessUpdate;
-import command.product.ProductSale;
 import command.product.ProductSaleList;
 import command.product.ProductSaleView;
-import command.product.ProductSave;
-import command.product.ProductUpdate;
-import command.product.ProductView;
 import common.CommonExecute;
-import common.CommonToday;
 
 /**
- * Servlet implementation class Product
+ * Servlet implementation class ProductSale
  */
-@WebServlet("/Product")
-public class Product extends HttpServlet {
+@WebServlet("/ProductSale")
+public class ProductSale extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Product() {
+    public ProductSale() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,44 +36,37 @@ public class Product extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String gubun = request.getParameter("t_gubun");
-		if(gubun == null) gubun="list";
+		if(gubun == null) gubun="saleList";
 		String viewPage= "";
 		
-		if(gubun.equals("list")) {
-			CommonExecute ce = new ProductLIst();
-			ce.execute(request);
-			viewPage="product/product_list.jsp";
-		}else if(gubun.equals("writeForm")) {
-			CommonExecute ce = new CommonToday();
-			ce.execute(request);
-			viewPage="product/product_write.jsp";
-		}else if(gubun.equals("save")) {
-			CommonExecute ce= new ProductSave();
+		//주문하기
+		if(gubun.equals("sale")) {
+			CommonExecute ce = new command.product.ProductSale();
 			ce.execute(request);
 			viewPage="common_alert.jsp";
-		}else if(gubun.equals("view")) {
-			CommonExecute ce = new ProductView();
+		//판매리스트
+		}else if(gubun.equals("saleList")) {
+			CommonExecute ce = new ProductSaleList();
 			ce.execute(request);
-			viewPage  ="product/product_view.jsp";
-		}else if(gubun.equals("updateForm")) {
-			CommonExecute ce = new ProductView();
+			viewPage="product/product_sale_list.jsp";
+		//판매내역 뷰
+		}else if(gubun.equals("saleView")) {
+			CommonExecute ce = new ProductSaleView();
 			ce.execute(request);
-			viewPage = "product/product_update.jsp";
-		}else if(gubun.equals("update")) {
-			CommonExecute ce = new ProductUpdate();
+			viewPage = "product/product_sale_view.jsp";
+		//판매상태 변경
+		}else if(gubun.equals("saleProcessUpdate")) {
+			CommonExecute ce = new ProductProcessUpdate();
 			ce.execute(request);
-			viewPage = "common_alert.jsp";
-		}else if(gubun.equals("delete")) {
-			CommonExecute ce = new ProductDelete();
-			ce.execute(request);
-			viewPage = "common_alert.jsp";
-		}else if(gubun.equals("saleForm")) {
-			CommonExecute ce = new ProductView();
-			ce.execute(request);
-			viewPage = "product/product_sale.jsp";
+			viewPage="common_alert.jsp";
 		}
-		
-		
+		//회원구매내역 상세보기
+		else if(gubun.equals("orderView")) {
+			CommonExecute ce = new ProductSaleView();
+			ce.execute(request);
+			viewPage="member/order_view.jsp";
+		}
+
 		
 		RequestDispatcher rd= request.getRequestDispatcher(viewPage);
 		rd.forward(request, response);

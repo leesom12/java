@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../common_header.jsp" %>
+
+
 <c:choose>
 	<c:when test="${sessionLevel eq 'admin'}">
 		<div id="b_left">
@@ -12,6 +14,9 @@
 				<li><a href="Product">
 					<span class="fnt"><i class="fas fa-apple-alt"></i></span>
 					PRODUCT
+				</a></li>
+				<li><a href="ProductSale">
+					판매리스트
 				</a></li>
 			</ul>
 		</div>

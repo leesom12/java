@@ -9,6 +9,9 @@
 	</script>	
 </c:if>	
 
+<form name="sale">
+	<input type="hidden" name="t_gubun">
+</form>
 	<div id="b_left">
 		<P>Admin</P>
 		<ul>
@@ -18,6 +21,9 @@
 			<li><a href="Product">
 				<span class="fnt"><i class="fas fa-apple-alt"></i></span>
 				PRODUCT
+			</a></li>
+			<li><a href="ProductSale">
+				판매리스트
 			</a></li>
 		</ul>
 	</div>

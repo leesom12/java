@@ -129,13 +129,20 @@ public class Member extends HttpServlet {
 			ce.execute(request);
 			viewPage="common_alert.jsp";
 		}
-		//주문내역
+		//회원 주문내역
 		else if(gubun.equals("orderDetails")) {
 			CommonExecute ce = new MemberOrderList();
 			ce.execute(request);
-			viewPage="member/member_orderList.jsp";
+			
+			String session = (String)request.getAttribute("t_session");
+			
+			if(session.equals("null")) {
+				viewPage= "common_alert.jsp";
+			}else {
+				viewPage="member/member_orderList.jsp";
+			}
+			
 		}
-		
 		
 		
 		

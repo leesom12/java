@@ -2,13 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@include file="../common_header.jsp" %>
 
-<c:if test="${sessionLevel ne 'member'}">
-	<script type="text/javascript">
-		alert("로그인 후 이용해 주세요");
-		location.href="Member";
-	</script>	
-</c:if>	
-
 <div id="b_left">
 	<P>Product</P>
 		<ul>
@@ -36,7 +29,7 @@
 		
 		product.t_gubun.value="sale";
 		product.method="post";
-		product.action="Product";
+		product.action="ProductSale";
 		product.submit();
 	}
 

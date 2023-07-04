@@ -10,6 +10,10 @@
     	background-color: #0101DF;
 	}
 </style>
+
+<form name="product">
+	<input type="hidden" name="t_gubun">
+</form>
 	<div id="b_left">
 		<P>Admin</P>
 		<ul>
@@ -17,12 +21,15 @@
 				<span class="fnt"><i class="fas fa-apple-alt"></i></span>
 				MEMBER
 			</a></li>
-			<li><a href="">
+			<li><a href="Product">
 				PRODUCT
+			</a></li>
+			<li><a href="ProductSale">
+				판매리스트
 			</a></li>
 		</ul>
 	</div>
-		
+
 		<div id="b_right">
 			<p class="n_title">
 				MEMBER INFORMATION

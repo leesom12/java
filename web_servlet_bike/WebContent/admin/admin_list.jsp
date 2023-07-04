@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../common_header.jsp" %>
+
 	<div id="b_left">
 		<P>Admin</P>
 		<ul>
@@ -10,6 +11,9 @@
 			</a></li>
 			<li><a href="Product">
 				PRODUCT
+			</a></li>
+			<li><a href="ProductSale">
+				판매리스트
 			</a></li>
 		</ul>
 	</div>

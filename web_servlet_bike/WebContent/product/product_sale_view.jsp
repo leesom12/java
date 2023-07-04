@@ -12,10 +12,10 @@
 					MEMBER
 				</a></li>
 				<li><a href="Product">
-					<span class="fnt"><i class="fas fa-apple-alt"></i></span>
 					PRODUCT
 				</a></li>
 				<li><a href="ProductSale">
+					<span class="fnt"><i class="fas fa-apple-alt"></i></span>
 					판매리스트
 				</a></li>
 			</ul>
@@ -37,106 +37,95 @@
 
 <style>
 	.viewImg{
-		width:400px;
-		height:400px;
+		width:200px;
+		height:200px;
 		margin: 0 0 10px 50px;
 	}
 </style>
 
 <script type="text/javascript">
-	function goView(no){
-		view.t_gubun.value="view";
-		view.t_no.value=no;
-		view.method="post";
-		view.action="Product";
-		view.submit();
-	}
 	
-	function goUpdateForm(no){
-		view.t_gubun.value="updateForm";
-		view.t_no.value=no;
-		view.method="post";
-		view.action="Product";
-		view.submit();
-	}
-	
-	function goDelete(no){
-		var yn = confirm("정말 삭제하시겠습니까?");
-		if(yn){
-			view.t_gubun.value="delete";
-			view.t_no.value= no;
-			view.method= "post";
-			view.action= "Product";
-			view.submit();
-		}
-	}
-	
-	function goSale(no){
-		view.t_gubun.value="saleForm";
-		view.t_no.value= no;
-		view.method= "post";
-		view.action= "Product";
-		view.submit(); 
+	function goUpdate(no){
+		pro.t_gubun.value="saleProcessUpdate";
+		pro.t_no.value= no;
+		pro.method="post";
+		pro.action="ProductSale";
+		pro.submit();
 	}
 </script>
 
-<form name="view">
-	<input type="hidden" name="t_gubun">
-	<input type="hidden" name="t_no">
-	<input type="hidden" name="t_attach" value="${t_dto.getAttach()}">
-</form>
+
 
 		<div id="b_right">
 			<p class="n_title">
 				PRODUCT
 			</p>
+		
 			
+<form name="pro">
+	<input type="hidden" name="t_gubun">
+	<input type="hidden" name="t_no">			
 			<table class="boardForm">
 				<colgroup>
 					<col width="15%">
-					<col width="55%">
-					<col width="10%">
-					<col width="20%">
+					<col width="35%">
+					<col width="15%">
+					<col width="35%">
 				</colgroup>
 				<tbody>
 					<tr>
-						<th>Title</th>
-						<td colspan="2">${t_dto.getP_name()}</td>
-						<td> <i class="far fa-eye"></i>${t_dto.getHit()}</td>
-					</tr>	
+						<th>주문번호</th>
+						<td colspan="3">${t_dto.getNo()}</td>
+					</tr>
 					<tr>
-						<th>Content</th>
+						<th>상품번호</th>
+						<td colspan="3">${t_dto.getProduct_no()}</td>
+					</tr>
+					<tr>
+						<th>상품</th>
 						<td colspan="3">
 							<c:if test="${not empty t_dto.getAttach()}">
 								<img src="attach/product/${t_dto.getAttach()}" class="viewImg">
 								<br><br>
 							</c:if>
-							<textarea class="textArea_H250_noBorder" readonly>${t_dto.getDetail()}</textarea>
 						</td>
-					</tr>	
-					<tr>
-						<th>Attach</th>
-						<td colspan="3"><a href="FileDown?t_fileDir=product&t_fileName=${t_dto.getAttach()}">${t_dto.getAttach()}</a></td>
 					</tr>
 					<tr>
-						<th>Size</th>
-						<td>${t_dto.getP_size()}</td>
-						<th>Price</th>
+						<th>구매자ID</th>
+						<td>${t_dto.getMem_id()}</td>
+						<th>구매자 성함</th>
+						<td>${t_dto.getMem_name()}</td>
+					</tr>
+					<tr>
+						<th>배송주소</th>
+						<td colspan="3">${t_dto.getAddress()}</td>
+					</tr>
+					<tr>
+						<th>연락처</th>
+						<td colspan="3">${t_dto.getMobile()}</td>
+					</tr>
+					<tr>
+						<th>구매가격</th>
 						<td>${t_dto.getStrPrice()}</td>
-					</tr>	
-					<tr>
-						<th>Writer</th>
-						<td colspan="3">${t_dto.getReg_name()}</td>
-					</tr>		
-					<tr>
-						<th>RegDate</th>
-						<td>${t_dto.getReg_date()}</td>
-						<th>UpdateDate</th>
-						<td>${t_dto.getUpdate_date()}</td>
+						<th>구매일자</th>
+						<td>${t_dto.getPurchase_date()}</td>
 					</tr>
+					<tr>
+						<th>지불방법</th>
+						<td>${t_dto.getPayment()}</td>
+						<th>배송상태</th>
+						<td>
+							<select name="t_process_state">
+								<option value="입금확인중" <c:if test="${t_dto.getProcess_state() eq '입금확인중'}">selected</c:if> >입금확인중</option>
+								<option value="배송중" <c:if test="${t_dto.getProcess_state() eq '배송중'}">selected</c:if> >배송중</option>
+								<option value="배송완료" <c:if test="${t_dto.getProcess_state() eq '배송완료'}">selected</c:if>>배송완료</option>
+							</select>
+						</td>
+					</tr>			
 
 				</tbody>
 			</table>
+</form>
 			<div class="preNext">
 				<c:if test="${not empty t_predto}">
 					<a href="javascript:goView('${t_predto.getNo()}')">
@@ -168,12 +157,8 @@
 				</c:if>
 			</div>			
 			<div class="buttonGroup">
-				<c:if test="${sessionLevel eq 'admin'}">
-					<a href="javascript:goDelete('${t_dto.getNo()}')" class="butt">Delete</a>
-					<a href="javascript:goUpdateForm('${t_dto.getNo()}')" class="butt">Update</a>
-				</c:if>
-				<a href="javascript:goSale('${t_dto.getNo()}')" class="butt" style="background-color:#E0BDBD;">주문하기</a>
-				<a href="Product" class="butt">List</a>
+				<a href="javascript:goUpdate('${t_dto.getNo()}')" class="butt">Update</a>
+				<a href="ProductSale" class="butt">List</a>
 			</div>	
 		</div>	
 
