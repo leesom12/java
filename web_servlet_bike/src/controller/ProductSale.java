@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import command.member.MemberOrderList;
+import command.product.ProductOrderDelete;
 import command.product.ProductProcessUpdate;
 import command.product.ProductSaleList;
 import command.product.ProductSaleView;
@@ -65,6 +65,13 @@ public class ProductSale extends HttpServlet {
 			CommonExecute ce = new ProductSaleView();
 			ce.execute(request);
 			viewPage="member/order_view.jsp";
+		}
+		//회원 주문 취소
+		else if(gubun.equals("orderDelete")) {
+			CommonExecute ce = new ProductOrderDelete();
+			ce.execute(request);
+			
+			viewPage="common_alert.jsp";
 		}
 
 		

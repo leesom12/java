@@ -17,41 +17,32 @@ public class ProductDao {
 	ResultSet rs= null;
 	
 
-//	//회원 주문목록 상세보기
-//	public ProductSaleDto memberOrderView(String no) {
-//		ProductSaleDto dto = null;
-//		String query="select s.no, s.product_no, p.p_name, s.member_id, m.name as member_name, s.address, m.mobile_1, m.mobile_2, m.mobile_3, s.payment, s.product_price,\r\n" + 
-//				"to_char(s.product_price, '999,999,999') as strprice,  p.attach, to_char(s.purchase_date, 'yyyy-MM-dd') as purchase_date,\r\n" + 
-//				"s.process_state\r\n" + 
-//				"from bike_이소민_product_sale s,\r\n" + 
-//				"bike_이소민_member m,\r\n" + 
-//				"bike_이소민_product p\r\n" + 
-//				"where s.product_no = p.no\r\n" + 
-//				"and s.member_id = m.id\r\n" + 
-//				"and s.no='2306290001'";
-//		try {
-//			con= DBConnection.getConnection();
-//			ps= con.prepareStatement(query);
-//			rs= ps.executeQuery();
-//			if(rs.next()) {
-//				
-//			}
-//		}catch(Exception e) {
-//			System.out.println("memberOrderView() 오류: "+query);
-//			e.printStackTrace();
-//		}finally {
-//			DBConnection.closeDB(con, ps, rs);
-//		}
-//		return dto;
-//	}
-	
+	//주문 취소
+	public int orderDelete(String no) {
+		int result =0;
+		String query="update BIKE_이소민_PRODUCT_SALE\r\n" + 
+					 "set process_state = '주문취소'\r\n" + 
+					 "where no = '"+no+"'";
+		try {
+			con = DBConnection.getConnection();
+			ps= con.prepareStatement(query);
+			result = ps.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("orderDelete() 오류: "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return result;
+	}
 	
 	
 	//배송상태 업데이트
-	public int processUpdate(String no, String state) {
+	public int processUpdate(String no, String state, String delivery_date) {
 		int result =0;
 		String query="update BIKE_이소민_PRODUCT_SALE\r\n" + 
-					 "set process_state = '"+state+"'\r\n" + 
+					 "set process_state = '"+state+"',\r\n" + 
+					 "delivery_date =to_date('"+delivery_date+"','yyyy-MM-dd hh24:mi:ss')\r\n"+
 					 "where no = '"+no+"'";
 		try {
 			con= DBConnection.getConnection();
@@ -71,8 +62,8 @@ public class ProductDao {
 	public ProductSaleDto viewSaleList(String no) {
 		ProductSaleDto dto = null;
 		String query="select s.no, s.product_no, p.p_name, s.member_id, m.name as member_name, s.address, m.mobile_1, m.mobile_2, m.mobile_3, s.payment, s.product_price,\r\n" + 
-					 "to_char(s.product_price, '999,999,999') as strprice, p.attach, to_char(s.purchase_date, 'yyyy-MM-dd') as purchase_date,\r\n" + 
-					 "s.process_state\r\n" + 
+					 "to_char(s.product_price, '999,999,999') as strprice, p.attach, to_char(s.purchase_date, 'yyyy-MM-dd hh24:mi:ss') as purchase_date,\r\n" + 
+					 "to_char(s.delivery_date, 'yyyy-MM-dd hh24:mi:ss') as delivery_date, s.process_state\r\n" + 
 					 "from bike_이소민_product_sale s,\r\n" + 
 					 "bike_이소민_member m,\r\n" + 
 					 "bike_이소민_product p\r\n" + 
@@ -99,9 +90,10 @@ public class ProductDao {
 				String attach = rs.getNString("attach");
 				String purchase_date = rs.getNString("purchase_date");
 				String process_state = rs.getNString("process_state");
+				String delivery_date = rs.getNString("delivery_date");
 				
 				dto = new ProductSaleDto(no, product_no, product_name, mem_id, mem_name, address, mobile, payment, process_state, 
-						purchase_date, strPrice, attach, product_price);
+						purchase_date, strPrice, attach, delivery_date, product_price);
 			
 			}
 		}catch(Exception e) {
@@ -115,11 +107,12 @@ public class ProductDao {
 	
 	
 	//주문 개수 불러오기
-	public int getSaleTotalCount(String select, String search) {
+	public int getSaleTotalCount(String select, String search, String state) {
 		int count=0;
 		String query=" select count(*) as count \r\n" + 
 					 " from bike_이소민_product_sale s \r\n" + 
-					 " where "+select+" like '%"+search+"%'";
+					 " where "+select+" like '%"+search+"%'\r\n"
+					 +"and s.process_state like '%"+state+"%'";
 		try {
 			con= DBConnection.getConnection();
 			ps= con.prepareStatement(query);

@@ -26,11 +26,21 @@
 			<p class="n_title">
 				PRODUCT
 			</p>
-		
+	
+	<script type="text/javascript">
+		function orderDelete(no){
+			pro.t_gubun.value="orderDelete";
+			pro.t_no.value= no;
+			pro.method="post";
+			pro.action="ProductSale";
+			pro.submit();
+		}
+	</script>	
 			
 <form name="pro">
 	<input type="hidden" name="t_gubun">
-	<input type="hidden" name="t_no">			
+	<input type="hidden" name="t_no">
+</form>			
 			<table class="boardForm">
 				<colgroup>
 					<col width="15%">
@@ -74,17 +84,26 @@
 						<td>${t_dto.getPayment()}</td>
 						<th>배송상태</th>
 						<td>${t_dto.getProcess_state()}</td>
-					</tr>			
+					</tr>
+					<c:if test="${t_dto.getProcess_state() eq '배송완료'}">
+						<tr>
+							<th>배송완료일</th>
+							<td colspan="3">${t_dto.getDelivery_date()}</td>
+						</tr>
+					</c:if>				
 
 				</tbody>
 			</table>
-</form>
+
 			<div class="preNext">
 			</div>	
 			
 					
 			<div class="buttonGroup">
 				<a href="javascript:goWork('orderDetails')" class="butt">List</a>
+				<c:if test="${t_dto.getProcess_state() eq '입금확인중'}">
+					<a href="javascript:orderDelete('${t_dto.getNo()}')" class="butt">주문취소</a>
+				</c:if>
 			</div>	
 		</div>	
 

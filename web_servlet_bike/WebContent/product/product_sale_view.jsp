@@ -79,7 +79,9 @@
 					</tr>
 					<tr>
 						<th>상품번호</th>
-						<td colspan="3">${t_dto.getProduct_no()}</td>
+						<td>${t_dto.getProduct_no()}</td>
+						<th>상품명</th>
+						<td>${t_dto.getProduct_name()}</td>
 					</tr>
 					<tr>
 						<th>상품</th>
@@ -119,43 +121,21 @@
 								<option value="입금확인중" <c:if test="${t_dto.getProcess_state() eq '입금확인중'}">selected</c:if> >입금확인중</option>
 								<option value="배송중" <c:if test="${t_dto.getProcess_state() eq '배송중'}">selected</c:if> >배송중</option>
 								<option value="배송완료" <c:if test="${t_dto.getProcess_state() eq '배송완료'}">selected</c:if>>배송완료</option>
+								<option value="주문취소" <c:if test="${t_dto.getProcess_state() eq '주문취소'}">selected</c:if>>주문취소</option>
 							</select>
 						</td>
-					</tr>			
+					</tr>
+					<c:if test="${t_dto.getProcess_state() eq '배송완료'}">
+						<tr>
+							<th>배송완료일</th>
+							<td colspan="3">${t_dto.getDelivery_date()}</td>
+						</tr>
+					</c:if>			
 
 				</tbody>
 			</table>
 </form>
-			<div class="preNext">
-				<c:if test="${not empty t_predto}">
-					<a href="javascript:goView('${t_predto.getNo()}')">
-						<p class="pre"><span><i class="fa-solid fa-circle-arrow-left"></i> 이전글</span> 
-						<c:set var="title" value="${t_predto.getP_name()}"></c:set>
-						<c:if test="${fn:length(t_predto.getP_name()) > 10}"> 
-							<c:set var="title" value="${fn:substring(t_predto.getP_name(),0,10)}..."></c:set>
-						</c:if>
-							<span class="preNextTitle">
-									${title}
-							</span>
-						</p>
-					</a>
-				</c:if>
-				
-				
-				<c:if test="${not empty t_nextdto}">
-					<a href="javascript:goView('${t_nextdto.getNo()}')">
-						<p class="next"><span>다음글 <i class="fa-solid fa-circle-right"></i></span>
-						<c:set var="title" value="${t_nextdto.getP_name()}"></c:set>
-						<c:if test="${fn:length(t_nextdto.getP_name()) > 10}"> 
-							<c:set var="title" value="${fn:substring(t_nextdto.getP_name(),0,10)}..."></c:set>
-						</c:if>
-							<span class="preNextTitle">
-									${title}
-							</span>
-						</p>
-					</a>
-				</c:if>
-			</div>			
+			
 			<div class="buttonGroup">
 				<a href="javascript:goUpdate('${t_dto.getNo()}')" class="butt">Update</a>
 				<a href="ProductSale" class="butt">List</a>

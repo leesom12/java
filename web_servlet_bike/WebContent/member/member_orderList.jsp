@@ -11,6 +11,21 @@
 		pro.action="ProductSale";
 		pro.submit();
 	}
+	
+	function goSearch(){
+		searchForm.t_gubun.value="orderDetails";
+		searchForm.method="post";
+		searchForm.action="Member";
+		searchForm.submit();
+	}
+	
+	function goPage(pageNum){
+		searchForm.t_nowPage.value= pageNum;
+		searchForm.t_gubun.value="orderDetails";
+		searchForm.method="post";
+		searchForm.action="Member";
+		searchForm.submit();
+	}
 </script>
 <form name="pro">
 	<input type="hidden" name="t_gubun">
@@ -50,6 +65,7 @@
 					<option value="입금확인중" <c:if test="${t_process eq '입금확인중'}">selected</c:if> >입금확인중</option>
 					<option value="배송중" <c:if test="${t_process eq '배송중'}">selected</c:if>>배송중</option>
 					<option value="배송완료" <c:if test="${t_process eq '배송완료'}">selected</c:if> >배송완료</option>
+					<option value="주문취소" <c:if test="${t_process eq '주문취소'}">selected</c:if> >주문취소</option>
 				</select>
 				<button type="button" onclick="goSearch()"  class="sel_button"><i class="fa fa-search"></i> SEARCH</button>
 			</p>

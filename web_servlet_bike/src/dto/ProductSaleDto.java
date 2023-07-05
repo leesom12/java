@@ -1,14 +1,15 @@
 package dto;
 
 public class ProductSaleDto {
-	private String no, product_no, product_name, mem_id, mem_name, address, mobile, payment, process_state, purchase_date, strPrice, attach;
+	private String no, product_no, product_name, mem_id, mem_name, address, mobile, payment, process_state, purchase_date, strPrice, attach,
+			delivery_date;
 	private int product_price;
 	
 	
 	//상세보기
 	public ProductSaleDto(String no, String product_no, String product_name, String mem_id, String mem_name,
-			String address, String mobile, String payment, String process_state, String purchase_date, String strPrice, String attach,
-			int product_price) {
+			String address, String mobile, String payment, String process_state, String purchase_date, String strPrice, String attach, 
+			String delivery_date, int product_price) {
 		super();
 		this.no = no;
 		this.product_no = product_no;
@@ -22,6 +23,7 @@ public class ProductSaleDto {
 		this.purchase_date = purchase_date;
 		this.strPrice = strPrice;
 		this.attach = attach;
+		this.delivery_date = delivery_date;
 		this.product_price = product_price;
 	}
 	
@@ -60,6 +62,9 @@ public class ProductSaleDto {
 	
 	
 	
+	public String getDelivery_date() {
+		return delivery_date;
+	}
 	public String getAttach() {
 		return attach;
 	}

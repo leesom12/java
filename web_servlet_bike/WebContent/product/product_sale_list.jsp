@@ -58,7 +58,7 @@
 				판매리스트
 			</p>
 			<div class="record_group record_group_left">
-				<p><i class="fa-solid fa-bell"></i> 총게시글<span> ${t_totalCount} </span>건</p>
+				<p><i class="fa-solid fa-bell"></i> 총판매수<span> ${t_totalCount} </span>건</p>
 			</div>			
 			
 			<form name="searchForm">
@@ -75,6 +75,7 @@
 					<option value="입금확인중" <c:if test="${t_process eq '입금확인중'}">selected</c:if> >입금확인중</option>
 					<option value="배송중" <c:if test="${t_process eq '배송중'}">selected</c:if>>배송중</option>
 					<option value="배송완료" <c:if test="${t_process eq '배송완료'}">selected</c:if> >배송완료</option>
+					<option value="주문취소" <c:if test="${t_process eq '주문취소'}">selected</c:if> >주문취소</option>
 				</select>
 				
 				<select name="t_select" class="sel_box">
@@ -89,18 +90,20 @@
 			
 			<table class="boardList">
 				<colgroup>
+					<col width="7%">
+					<col width="18%">
 					<col width="10%">
-					<col width="30%">
+					<col width="27%">
+					<col width="10%">
 					<col width="15%">
-					<col width="15%">
-					<col width="15%">
-					<col width="15%">
+					<col width="13%">
 				</colgroup>
 				<thead>
 					<tr>
 						<th>No</th>
 						<th>주문번호</th>
 						<th>제품번호</th>
+						<th>제품명</th>
 						<th>구매자</th>
 						<th>구매일</th>
 						<th>진행상태</th>
@@ -113,6 +116,7 @@
 							<td>${num}<c:set var="num" value="${num-1}"></c:set></td>
 							<td><a href="javascript:goSaleView('${arr.getNo()}')">${arr.getNo()}</a></td>
 							<td>${arr.getProduct_no()}</td>
+							<td>${arr.getProduct_name()}</td>
 							<td>${arr.getMem_id()}</td>
 							<td>${arr.getPurchase_date()}</td>
 							<td>${arr.getProcess_state()}</td>

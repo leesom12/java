@@ -30,7 +30,7 @@ public class ProductSaleList implements CommonExecute {
 		if(process == null) process="";
 		
 		/* paging 설정 start*/
-		int totalCount = dao.getSaleTotalCount(select,search);
+		int totalCount = dao.getSaleTotalCount(select,search, process);
 		int list_setup_count = pageList_count;  //한페이지당 출력 행수 
 		int pageNumber_count = 3;  //한페이지당 출력 페이지 갯수
 		
