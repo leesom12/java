@@ -18,6 +18,9 @@
 				<li><a href="ProductSale">
 					판매리스트
 				</a></li>
+				<li><a href="javascript:goSaleTrend()">
+					판매현황
+				</a></li>
 			</ul>
 		</div>
 	</c:when>
@@ -44,6 +47,13 @@
 </style>
 
 <script type="text/javascript">
+	function goSaleTrend(){
+		view.t_gubun.value="saleTrend";
+		view.method="post";
+		view.action="ProductSale";
+		view.submit();
+	}
+	
 	function goView(no){
 		view.t_gubun.value="view";
 		view.t_no.value=no;

@@ -25,6 +25,13 @@
 		product.action="ProductSale";
 		product.submit();
 	}
+	
+	function goSaleTrend(){
+		product.t_gubun.value="saleTrend";
+		product.method="post";
+		product.action="ProductSale";
+		product.submit();
+	}
 </script>
 
 <c:choose>
@@ -41,6 +48,9 @@
 				<li><a href="ProductSale">
 					<span class="fnt"><i class="fas fa-apple-alt"></i></span>
 					판매리스트
+				</a></li>
+				<li><a href="javascript:goSaleTrend()">
+					판매현황
 				</a></li>
 			</ul>
 		</div>

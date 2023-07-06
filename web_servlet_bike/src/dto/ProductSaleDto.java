@@ -2,8 +2,18 @@ package dto;
 
 public class ProductSaleDto {
 	private String no, product_no, product_name, mem_id, mem_name, address, mobile, payment, process_state, purchase_date, strPrice, attach,
-			delivery_date;
-	private int product_price;
+			delivery_date, saleTrend_date, price_sum;
+	private int product_price, sale_count;
+	
+	
+	//판매현황
+	public ProductSaleDto(String saleTrend_date, String price_sum, int sale_count) {
+		super();
+		this.saleTrend_date = saleTrend_date;
+		this.price_sum = price_sum;
+		this.sale_count = sale_count;
+	}
+
 	
 	
 	//상세보기
@@ -28,6 +38,7 @@ public class ProductSaleDto {
 	}
 	
 	
+
 	//조회
 	public ProductSaleDto(String no, String product_no, String product_name, String mem_id, String mem_name, String address,
 			String payment, String process_state, String purchase_date, String strPrice, int product_price) {
@@ -62,6 +73,15 @@ public class ProductSaleDto {
 	
 	
 	
+	public int getSale_count() {
+		return sale_count;
+	}
+	public String getSaleTrend_date() {
+		return saleTrend_date;
+	}
+	public String getPrice_sum() {
+		return price_sum;
+	}
 	public String getDelivery_date() {
 		return delivery_date;
 	}

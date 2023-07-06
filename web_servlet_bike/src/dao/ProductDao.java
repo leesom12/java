@@ -17,6 +17,39 @@ public class ProductDao {
 	ResultSet rs= null;
 	
 
+	//판매현황
+	public ArrayList<ProductSaleDto> getProductSaleTrend(String select, String search){
+		ArrayList<ProductSaleDto> arr = new ArrayList<ProductSaleDto>();
+		String query="select purchase_date, to_char(sum(product_price), '999,999,999') as sum, count(*) as count from\r\n" + 
+					 "(select to_char(s.purchase_date, 'yy-MM') as purchase_date, s.product_price\r\n" + 
+					 "from bike_이소민_product_sale s,\r\n" + 
+					 "bike_이소민_product p\r\n" + 
+					 "where s.product_no = p.no\r\n" + 
+					 "and s.process_state != '주문취소' \r\n" + 
+					 "and "+select+" like '%"+search+"%')\r\n" + 
+					 "group by purchase_date\r\n" + 
+					 "order by purchase_date desc";
+		try {
+			con= DBConnection.getConnection();
+			ps= con.prepareStatement(query);
+			rs= ps.executeQuery();
+			while(rs.next()) {
+				String saleTrend_date = rs.getNString("purchase_date");
+				String price_sum = rs.getNString("sum");
+				int count = rs.getInt("count");
+				ProductSaleDto dto = new ProductSaleDto(saleTrend_date, price_sum, count);
+				arr.add(dto);
+			}
+		}catch(Exception e) {
+			System.out.println("getProductSaleTrend() 오류: "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return arr;
+	}
+	
+	
 	//주문 취소
 	public int orderDelete(String no) {
 		int result =0;

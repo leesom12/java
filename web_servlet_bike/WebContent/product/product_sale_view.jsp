@@ -18,6 +18,9 @@
 					<span class="fnt"><i class="fas fa-apple-alt"></i></span>
 					판매리스트
 				</a></li>
+				<li><a href="javascript:goSaleTrend()">
+					판매현황
+				</a></li>
 			</ul>
 		</div>
 	</c:when>
@@ -48,6 +51,13 @@
 	function goUpdate(no){
 		pro.t_gubun.value="saleProcessUpdate";
 		pro.t_no.value= no;
+		pro.method="post";
+		pro.action="ProductSale";
+		pro.submit();
+	}
+	
+	function goSaleTrend(){
+		pro.t_gubun.value="saleTrend";
 		pro.method="post";
 		pro.action="ProductSale";
 		pro.submit();

@@ -25,6 +25,9 @@
 			<li><a href="ProductSale">
 				판매리스트
 			</a></li>
+			<li><a href="javascript:goSaleTrend()">
+				판매현황
+			</a></li>
 		</ul>
 	</div>
 
@@ -36,6 +39,18 @@
 		margin: 0 0 10px 50px;
 	}
 </style>
+<script type="text/javascript">
+	function goSaleTrend(){
+		pro.t_gubun.value="saleTrend";
+		pro.method="post";
+		pro.action="ProductSale";
+		pro.submit();
+	}
+</script>
+
+<form name="pro">
+	<input type="hidden" name="t_gubun">
+</form>
 
 <script type="text/javascript"> //이미지 미리보기
 $(function(){					

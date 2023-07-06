@@ -13,6 +13,7 @@ import command.product.ProductOrderDelete;
 import command.product.ProductProcessUpdate;
 import command.product.ProductSaleList;
 import command.product.ProductSaleView;
+import command.product.SaleTrendList;
 import common.CommonExecute;
 
 /**
@@ -72,6 +73,12 @@ public class ProductSale extends HttpServlet {
 			ce.execute(request);
 			
 			viewPage="common_alert.jsp";
+		}
+		//판매동향 페이지
+		else if(gubun.equals("saleTrend")) {
+			CommonExecute ce = new SaleTrendList();
+			ce.execute(request);
+			viewPage="product/product_saleTrend.jsp";
 		}
 
 		
