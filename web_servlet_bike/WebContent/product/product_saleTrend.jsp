@@ -52,7 +52,7 @@
 		<p class="select_box select_box_right" style="width:525px;">
 		
 		<select name="t_select" class="sel_box" style="width:90px;">
-			<option value="s.product_no">제품코드</option>
+			<option value="s.product_no" <c:if test="${t_search eq 's.product_no'}">selected</c:if>>제품코드</option>
 			<option value="p.p_name" <c:if test="${t_search eq 'p.p_name'}">selected</c:if>>제품명</option>
 		</select>
 		
