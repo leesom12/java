@@ -9,7 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.qna.QnaDelete;
 import command.qna.QnaList;
+import command.qna.QnaReply;
+import command.qna.QnaReplyDelete;
+import command.qna.QnaUpdate;
+import command.qna.QnaView;
 import command.qna.QnaWrite;
 import common.CommonExecute;
 import common.CommonToday;
@@ -40,26 +45,70 @@ public class Qna extends HttpServlet {
 		
 		request.setAttribute("nowPage", "qna");
 		
+		//목록
 		if(gubun.equals("list")) {
 			CommonExecute ce = new QnaList();
 			ce.execute(request);
 			viewPage = "qna/qna_list.jsp";
+		//상세보기
 		}else if(gubun.equals("view")) {
-			
+			CommonExecute ce = new QnaView();
+			ce.execute(request);
+			viewPage="qna/qna_view.jsp";
+		//질문 폼 이동
 		}else if(gubun.equals("writeForm")) {
 			CommonExecute ce = new CommonToday();
 			ce.execute(request);
 			viewPage = "qna/qna_write.jsp";
+		//질문등록
 		}else if(gubun.equals("write")) {
 			CommonExecute ce = new QnaWrite();
 			ce.execute(request);
 			viewPage = "common_alert.jsp";
+		//업데이트 폼 이동
 		}else if(gubun.equals("updateForm")) {
-			
+			CommonExecute ce = new QnaView();
+			ce.execute(request);
+			CommonExecute de = new CommonToday();
+			de.execute(request);
+			viewPage="qna/qna_update.jsp";
+		//질문업데이트	
 		}else if(gubun.equals("update")) {
-			
+			CommonExecute ce = new QnaUpdate();
+			ce.execute(request);
+			viewPage = "common_alert.jsp";
+		//질문삭제	
 		}else if(gubun.equals("delete")) {
-			
+			CommonExecute ce = new QnaDelete();
+			ce.execute(request);
+			viewPage = "common_alert.jsp";
+		//답변 폼 이동	
+		}else if(gubun.equals("replyForm")) {
+			CommonExecute ce = new QnaView();
+			ce.execute(request);
+			CommonExecute de = new CommonToday();
+			de.execute(request);
+			viewPage="qna/qna_reply.jsp";
+		//답변 등록
+		}else if(gubun.equals("replySave")) {
+			CommonExecute ce = new QnaReply();
+			ce.execute(request);
+			viewPage = "common_alert.jsp";
+		//답변수정 폼 이동
+		}else if(gubun.equals("replyUpdateForm")) {
+			CommonExecute ce = new QnaView();
+			ce.execute(request);
+			viewPage="qna/qna_replyUpdate.jsp";
+		//답변 수정	
+		}else if(gubun.equals("replyUpdate")) {
+			CommonExecute ce = new QnaReply();
+			ce.execute(request);
+			viewPage = "common_alert.jsp";
+		//답변 삭제	
+		}else if(gubun.equals("replyDelete")) {
+			CommonExecute ce = new QnaReplyDelete();
+			ce.execute(request);
+			viewPage = "common_alert.jsp";
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
