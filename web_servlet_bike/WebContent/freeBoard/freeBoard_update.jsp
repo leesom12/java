@@ -16,38 +16,50 @@
 		width: 400px;
 		height: 400px;
 		margin: 0 0 10px 50px;
-		display: none;
+		display:none;
 	}
 </style>
 
-<script type="text/javascript"> //이미지 미리보기
-$(function(){					
-	function readImage(input) {
-	    // 인풋 태그에 파일이 있는 경우
-	    if(input.files && input.files[0]) {
-	        // 이미지 파일인지 검사 (생략)
-	        // FileReader 인스턴스 생성
-	        const reader = new FileReader()
-	        // 이미지가 로드가 된 경우
-	        reader.onload = e => {
-	            const previewImage = document.getElementById("preview-image")
-	            previewImage.src = e.target.result;
-	        }
-	        // reader가 이미지 읽도록 하기
-	        reader.readAsDataURL(input.files[0])
-	    } else {
-	    	// 이미지 안올렸으면
-			$("#preview-image").attr('src','');
-			$("#preview-image").css("display","none");
-	    }
-	}
-		// input file에 change 이벤트 부여
-		const inputImage = document.getElementById("input-image");
-		inputImage.addEventListener("change", e => {
-			$("#preview-image").css("display","block");
-		    readImage(e.target)
-		})	
-	});	
+<script type="text/javascript">
+   $(function(){      
+      function readImage(input) {
+          // 인풋 태그에 파일이 있는 경우
+          if(input.files && input.files[0]) {
+              // 이미지 파일인지 검사 (생략)
+              // FileReader 인스턴스 생성
+              const reader = new FileReader()
+              // 이미지가 로드가 된 경우
+              reader.onload = e => {
+                  const previewImage = document.getElementById("preview-image")
+                  previewImage.src = e.target.result;
+              }
+              // reader가 이미지 읽도록 하기
+              reader.readAsDataURL(input.files[0])
+          } else {
+             // 이미지 안올렸으면
+            $("#preview-image").attr('src','');
+            $("#preview-image").css("display","none");
+          }
+          
+      }
+
+      // input file에 change 이벤트 부여
+      const inputImage = document.getElementById("input-image");
+      inputImage.addEventListener("change", e => {
+         
+         var fileName = freeboard.t_attach.value;
+         var pathFileName = fileName.lastIndexOf(".")+1;    //확장자 제외한 경로+파일명
+         var extension = (fileName.substr(pathFileName)).toLowerCase();   //확장자명         
+         
+         if(extension == "jpg" || extension == "gif" || extension == "png"){
+            $("#preview-image").css("display","block");
+             readImage(e.target)
+         } else {
+            $("#preview-image").css("display","none");
+         }
+      })   
+
+   });   
 </script>
 
 
@@ -110,6 +122,7 @@ $(function(){
 		<form name="freeboard" enctype="multipart/form-data">
 			<input type="hidden" name="t_gubun" value="update">
 			<input type="hidden" name="t_no" value="${t_dto.getNo()}">
+			<input type="hidden" name="t_downloadHit" value="${t_dto.getDownload_hit()}">
 			<table class="boardForm">
 				<colgroup>
 					<col width="15%">

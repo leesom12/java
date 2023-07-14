@@ -5,13 +5,14 @@ public class FreeBoardDto {
 	private int hit, download_hit;
 	
 	//업데이트
-	public FreeBoardDto(String no, String title, String content, String attach, String update_date) {
+	public FreeBoardDto(String no, String title, String content, String attach, String update_date, int download_hit) {
 		super();
 		this.no = no;
 		this.title = title;
 		this.content = content;
 		this.attach = attach;
 		this.update_date = update_date;
+		this.download_hit = download_hit;
 	}
 	
 	//상세보기
@@ -40,10 +41,11 @@ public class FreeBoardDto {
 
 
 	//전체 조회
-	public FreeBoardDto(String no, String title, String attach, String reg_name, String reg_date, int hit) {
+	public FreeBoardDto(String no, String title, String content, String attach, String reg_name, String reg_date, int hit) {
 		super();
 		this.no = no;
 		this.title = title;
+		this.content = content;
 		this.attach = attach;
 		this.reg_name = reg_name;
 		this.reg_date = reg_date;

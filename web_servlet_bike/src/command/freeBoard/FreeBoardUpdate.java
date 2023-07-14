@@ -36,6 +36,8 @@ public class FreeBoardUpdate implements CommonExecute {
 		String content= mpr.getParameter("t_content");
 		content = content.replaceAll("\'", "\''");
 		String update_date = CommonUtil.getTodayTime();
+		String download = mpr.getParameter("t_downloadHit");
+		int download_hit = Integer.parseInt(download);
 		
 		String saveAttach = "";
 		String attach = mpr.getFilesystemName("t_attach");
@@ -57,11 +59,15 @@ public class FreeBoardUpdate implements CommonExecute {
 				File file = new File(freeBoard_dir, oriAttach);
 				boolean tf = file.delete();
 				if(!tf) System.out.print("freeboard update2 첨부파일 삭제 실패: "+tf);
+				
+				if(attach != oriAttach) {
+					download_hit = 0;
+				}
 			}
 			saveAttach = attach;
 		}
 		
-		FreeBoardDto dto = new FreeBoardDto(no, title, content, saveAttach, update_date);
+		FreeBoardDto dto = new FreeBoardDto(no, title, content, saveAttach, update_date, download_hit);
 		int result = dao.updateFreeBoard(dto);
 		String msg = "";
 		if(result == 1) msg="수정 완료";

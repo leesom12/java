@@ -39,11 +39,27 @@
 		freeboard.action="FreeBoard";
 		freeboard.submit();
 	}
+	
+	function goFileDown(){
+		var download_count = down.t_DownCount.value;
+		download_count = Number(download_count)+1;
+		down.t_DownCount.value = download_count;
+		
+		fileDown.method="post";
+		fileDown.action="FileDown";
+		fileDown.submit();
+	}
+	
 </script>
 <form name="freeboard">
 	<input type="hidden" name="t_gubun">
 	<input type="hidden" name="t_no">
 	<input type="hidden" name="t_attach" value="${t_dto.getAttach()}">
+</form>
+<form name="fileDown">
+	<input type="hidden" name="t_no" value="${t_dto.getNo()}">
+	<input type="hidden" name="t_fileDir" value="freeboard">
+	<input type="hidden" name="t_fileName" value="${t_dto.getAttach()}">
 </form>
 		<div id="b_right">
 			<p class="n_title">
@@ -61,7 +77,13 @@
 					<tr>
 						<th>제목</th>
 						<td colspan="2">${t_dto.getTitle()}</td>
-						<td> <i class="far fa-eye"></i> ${t_dto.getHit()}</td>
+						<td style="text-align: right;padding-right:15px;"> 
+							<i class="far fa-eye"></i> ${t_dto.getHit()}&nbsp;				
+							<i class="fa-solid fa-circle-down" style="color: #020203;"></i> 
+							<form name="down" style="display:inline-block;">
+								<input type="text" name="t_DownCount" readonly style="border:none;width:50px;" value="${t_dto.getDownload_hit()}">
+							</form>
+						</td>	
 					</tr>	
 					<tr>
 						<th>Content</th>
@@ -74,10 +96,12 @@
 							<textarea class="textArea_H250_noBorder" readonly>${t_dto.getContent()}</textarea>
 						</td>
 					</tr>		
-					<tr>
-						<th>첨부</th>
-						<td colspan="3"><a href="FileDown?t_fileDir=freeboard&t_fileName=${t_dto.getAttach()}">${t_dto.getAttach()}</a></td>
-					</tr>	
+					<c:if test="${not empty t_dto.getAttach()}">
+						<tr>
+							<th>첨부</th>
+							<td colspan="3"><a href="javascript:goFileDown()">${t_dto.getAttach()}</a></td>	
+						</tr>	
+					</c:if>
 					
 					<c:if test="${not empty t_dto.getUpdate_date()}">
 					<tr>

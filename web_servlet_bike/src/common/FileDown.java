@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.FreeBoardDao;
+
 /**
  * Servlet implementation class FileDown
  */
@@ -40,7 +42,12 @@ public class FileDown extends HttpServlet {
 	 	if(savePath.equals("notice")) savePath = CommonUtil.getFile_dir_notice(); 
 	 	else if(savePath.equals("news")) savePath = CommonUtil.getFile_dir_news();
 	 	else if(savePath.equals("product")) savePath= CommonUtil.getFile_dir_product();
-	 	else if(savePath.equals("freeboard")) savePath = CommonUtil.getFile_dir_freeBoard();
+	 	else if(savePath.equals("freeboard")) {
+	 		savePath = CommonUtil.getFile_dir_freeBoard();
+	 		FreeBoardDao dao = new FreeBoardDao();
+        	String no = request.getParameter("t_no");
+        	dao.downloadHit_update(no);
+	 	}
 
 	 	
 	    String orgfilename = fileName ;
@@ -56,6 +63,8 @@ public class FileDown extends HttpServlet {
 	        try{
 	            file = new File(savePath, fileName);
 	            in = new FileInputStream(file);
+
+	            
 	        }catch(FileNotFoundException fe){
 	            skip = true;
 	        }
@@ -66,6 +75,7 @@ public class FileDown extends HttpServlet {
 	        response.setHeader("Content-Description", "JSP Generated Data");
 	 
 	        if(!skip){
+	        	
 	 
 	            // IE
 	            if(client.indexOf("MSIE") != -1){
@@ -87,6 +97,7 @@ public class FileDown extends HttpServlet {
 	            while( (leng = in.read(b)) > 0 ){
 	                os.write(b,0,leng);
 	            }
+	            
 	 
 	        }else{
 	            response.setContentType("text/html;charset=UTF-8");

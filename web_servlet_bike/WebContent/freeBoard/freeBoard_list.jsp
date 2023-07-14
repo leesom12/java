@@ -49,7 +49,7 @@
 			<p class="select_box select_box_right">
 				<select name="t_select" class="sel_box">
 					<option value="f.title">제목</option>
-					<option value="f.content">내용</option>
+					<option value="f.content" <c:if test="${t_select eq 'f.content'}">selected</c:if> >내용</option>
 				</select>
 				<input type="text" name="t_search" class="sel_text" value="${t_search}">
 

@@ -16,9 +16,9 @@ public class FreeBoardDao {
 	
 	//첨부파일 다운로드 수
 	public void downloadHit_update(String no) {
-		String query=" update bike_이소민_freeboard\r\n" + 
-					 " set download_hit= download_hit+1\r\n" + 
-					 " where no='"+no+"'";
+		String query="update bike_이소민_freeboard\r\n" + 
+					 "set download_hit = download_hit +1\r\n" + 
+					 "where no = '"+no+"'";
 		try {
 			con= DBConnection.getConnection();
 			ps= con.prepareStatement(query);
@@ -57,7 +57,8 @@ public class FreeBoardDao {
 		int result =0;
 		String query="update bike_이소민_freeboard\r\n" + 
 					 "set title='"+dto.getTitle()+"', content='"+dto.getContent()+"', attach='"+dto.getAttach()+"', "
-					 		+ "update_date=to_date('"+dto.getUpdate_date()+"', 'yyyy-MM-dd hh24:mi:ss')\r\n" + 
+					 		+ "update_date=to_date('"+dto.getUpdate_date()+"', 'yyyy-MM-dd hh24:mi:ss'),\r\n" +
+					 "download_hit='"+dto.getDownload_hit()+"'\r\n"+
 					 "where no ='"+dto.getNo()+"'";
 		try {
 			con = DBConnection.getConnection();
@@ -186,7 +187,7 @@ public class FreeBoardDao {
 		ArrayList<FreeBoardDto> arr = new ArrayList<FreeBoardDto>();
 		String query="select * from\r\n" + 
 					 "(select rownum as rnum, tbl.* from\r\n" + 
-					 "(select f.no, f.title, f.attach, m.name as reg_name, to_char(f.reg_date, 'yyyy-MM-dd') as reg_date, f.hit\r\n" + 
+					 "(select f.no, f.title, f.content, f.attach, m.name as reg_name, to_char(f.reg_date, 'yyyy-MM-dd') as reg_date, f.hit\r\n" + 
 					 "from bike_이소민_freeboard f,\r\n" + 
 					 "bike_이소민_member m\r\n" + 
 					 "where f.reg_id = m.id\r\n" + 
@@ -200,11 +201,12 @@ public class FreeBoardDao {
 			while(rs.next()) {
 				String no = rs.getNString("no");
 				String title = rs.getNString("title");
+				String content = rs.getNString("content");
 				String attach = rs.getNString("attach");
 				String reg_name = rs.getNString("reg_name");
 				String reg_date = rs.getNString("reg_date");
 				int hit = rs.getInt("hit");
-				FreeBoardDto dto = new FreeBoardDto(no, title, attach, reg_name, reg_date, hit);
+				FreeBoardDto dto = new FreeBoardDto(no, title, content, attach, reg_name, reg_date, hit);
 				arr.add(dto);
 			}
 		}catch(Exception e) {
