@@ -9,6 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.etc.EtcList;
+import command.etc.EtcView;
+import command.etc.EtcWrite;
+import common.CommonExecute;
+import common.CommonToday;
+
 /**
  * Servlet implementation class Etc
  */
@@ -36,15 +42,23 @@ public class Etc extends HttpServlet {
 		
 		//리스트
 		if(gubun.equals("list")) {
+			CommonExecute ce = new EtcList();
+			ce.execute(request);
 			viewPage="etc/etc_list.jsp";
 		//원글 작성 폼
 		}else if(gubun.equals("writeForm")) {
+			CommonExecute ce = new CommonToday();
+			ce.execute(request);
 			viewPage="etc/etc_write.jsp";
 		//원글 작성	
 		}else if(gubun.equals("write")) {
-		
+			CommonExecute ce = new EtcWrite();
+			ce.execute(request);
+			viewPage="common_alert.jsp";
 		//뷰	
 		}else if(gubun.equals("view")) {
+			CommonExecute ce = new EtcView();
+			ce.execute(request);
 			viewPage="etc/etc_view.jsp";
 		//댓글 작성	
 		}else if(gubun.equals("commentWrite")) {

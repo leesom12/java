@@ -6,7 +6,19 @@
 
 
 <script type="text/javascript">
-
+	function goView(no){
+		etc.t_gubun.value="view";
+		etc.t_no.value=no;
+		etc.method="post";
+		etc.action="Etc";
+		etc.submit();
+	}
+	
+	function saveComment(no){
+		if(checkValue(comm.t_comment,"댓글을 작성하세요"))return;
+		comm.t_gubun.value="commentWrite";
+		comm.t_no.value=no;
+	}
 </script>
 
 <form name="etc">
@@ -26,10 +38,15 @@
 					<col width="15%">
 					<col width="35%">
 				</colgroup>
+				
 				<tbody>
 					<tr>
 						<th>제목</th>
-						<td colspan="3"><textarea style="width:98%; height:200px; padding:5px;" readonly>ㅇㅇ</textarea></td>
+						<td colspan="3">${t_dto.getTitle()}</td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td colspan="3"><textarea style="width:98%; height:300px; padding:5px;" readonly>${t_dto.getContent()}</textarea></td>
 					</tr>		
 					<tr>
 						<th>Writer</th>
@@ -38,6 +55,7 @@
 						<td>${t_dto.getReg_date()}</td>
 					</tr>
 				</tbody>
+				
 			</table>
 			
 			<table class="boardForm">
@@ -48,19 +66,39 @@
 					<col width="25%">
 				</colgroup>
 				<tbody>
+					
 					<tr>
 						<th>댓글</th>
-						<td colspan="2"><input type="text" name="t_comment" ></td>
-						<td><input type="button" onclick="saveComment()" style="" value="작성"> </td>
-					</tr>		
+						<td colspan="3">
+							<form name="comm">
+								<input type="hidden" name="t_gubun">
+								<input type="hidden" name="t_no">
+								<textarea style="width:85%; height:50px; padding:5px;" name="t_comment"></textarea>
+							</form>	
+							<div style="width:10%; float:right; text-align:center; height:50px; line-height:60px;">
+								<input type="button" onclick="saveComment('${t_dto.getNo()}')" style="display:inline-block;" value="작성">
+							</div>
+						</td>
+					</tr>	
 	
-					<tr>
-						<td colspan="3" rowspan="2" style="padding:5px 5px 5px 20px;">댓글댓글</td>
-						<td style="font-size:11px;">등록자</td>
-					</tr>
-					<tr>
-						<td style="font-size:11px;">등록일</td>
-					</tr>
+					<c:forEach items="${t_arr2}" var="arr2">
+						<tr>
+							<td style="border-bottom:none;"></td>
+							<td colspan="3" style="border-bottom:none;">
+								<c:if test="${arr2.getDepth() > 1}"> 
+									<c:forEach begin="0" end="${arr2.getDepth()}">&nbsp;&nbsp;&nbsp;</c:forEach>
+									<i class="fa-solid fa-arrow-right-long" style="color: #030303;"></i>
+								</c:if>
+								${arr2.getTitle()}
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td colspan="3" style="font-size:11px;padding-top:5px;color:grey;text-align:right;">
+								등록자: ${arr2.getReg_name()} 등록일: ${arr2.getReg_date()}
+							</td>
+						</tr>
+					</c:forEach>
 					
 				</tbody>
 			</table>

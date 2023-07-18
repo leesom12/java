@@ -12,7 +12,13 @@
 
 
 <script type="text/javascript">
-
+	function goSave(){
+		if(checkValue(etc.t_title,"제목을 입력하세요"))return;
+		if(checkValue(etc.t_content,"내용을 입력하세요"))return;
+		etc.method="post";
+		etc.action="Etc";
+		etc.submit();
+	}
 </script>
 
 		
@@ -20,7 +26,8 @@
 			<p class="n_title">
 				Etc
 			</p>
-			<form name="freeboard">
+			<form name="etc">
+			<input type="hidden" name="t_gubun" value="write">
 			<table class="boardForm">
 				<colgroup>
 					<col width="15%">
@@ -30,9 +37,13 @@
 				</colgroup>
 				<tbody>
 					<tr>
-						<th>작성</th>
-						<td colspan="3"><textarea style="width:98%; height:200px; padding:5px;">ㅇㅇ</textarea></td>
-					</tr>		
+						<th>제목</th>
+						<td colspan="3"><input type="text" name="t_title" class="input600"></td>
+					</tr>	
+					<tr>
+						<th>내용</th>
+						<td colspan="3"><textarea name="t_content" class="textArea_H250"></textarea></td>
+					</tr>			
 					<tr>
 						<th>작성자</th>
 						<td>${sessionName}</td>

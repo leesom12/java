@@ -11,6 +11,27 @@
 		etc.action="Etc";
 		etc.submit();
 	}
+	
+	function goSearch(){
+		searchForm.method="post";
+		searchForm.action="Etc";
+		searchForm.submit();
+	}
+	
+	function goPage(pageNum){
+		searchForm.t_nowPage.value= pageNum;
+		searchForm.method="post";
+		searchForm.action="Etc";
+		searchForm.submit();
+	}
+	
+	function goView(no){
+		etc.t_gubun.value="view";
+		etc.t_no.value=no;
+		etc.method="post";
+		etc.action="Etc";
+		etc.submit();
+	}
 </script>
 
 <form name="etc">
@@ -30,8 +51,8 @@
 			<input type="hidden" name="t_nowPage">
 			<p class="select_box select_box_right">
 				<select name="t_select" class="sel_box">
-					<option value="">제목</option>
-					<option value="">ID</option>
+					<option value="e.title">제목</option>
+					<option value="e.reg_id">ID</option>
 				</select>
 				<input type="text" name="t_search" class="sel_text" value="${t_search}">
 
@@ -62,7 +83,7 @@
 								${num}
 								<c:set var="num" value="${num-1}"></c:set>
 							</td>
-							<td class="t_left"><a href="javascript:goView()">${arr.getTitle() }</a></td>
+							<td class="t_left"><a href="javascript:goView('${arr.getNo()}')">${arr.getTitle() }</a></td>
 							<td>${arr.getReg_name() }</td>
 							<td>${arr.getReg_date() }</td>
 						</tr>
