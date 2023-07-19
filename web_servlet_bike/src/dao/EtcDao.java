@@ -15,6 +15,41 @@ public class EtcDao {
 	PreparedStatement ps = null;
 	ResultSet rs = null;
 	
+	//삭제
+	public int deleteEtc(String no) {
+		int result = 0;
+		String query="delete from bike_이소민_etc where no='"+no+"'";
+		try {
+			con = DBConnection.getConnection();
+			ps = con.prepareStatement(query);
+			result = ps.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("deleteEtc() 오류: "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return result;
+	}
+	
+	//수정
+	public int updateEtc(EtcDto dto) {
+		int result = 0;
+		String query="update bike_이소민_etc\r\n" + 
+					 "set title='"+dto.getTitle()+"', content='"+dto.getContent()+"', update_date=to_date('"+dto.getUpdate_date()+"','yyyy-MM-dd hh24:mi:ss')\r\n" + 
+					 "where no='"+dto.getNo()+"'";
+		try {
+			con = DBConnection.getConnection();
+			ps = con.prepareStatement(query);
+			result = ps.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("updateEtc() 오류: "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return result;
+	}
 	
 	
 	//이전글
@@ -74,7 +109,7 @@ public class EtcDao {
 	public EtcDto viewEtc(String no) {
 		EtcDto dto = null;
 		String query="select e.no, e.group_no, e.reg_id, m.name as reg_name, to_char(e.reg_date, 'yyyy-MM-dd hh24:mi:ss') as reg_date,\r\n" + 
-					 "e.depth, e.title, e.content\r\n" + 
+					 "to_char(e.update_date, 'yyyy-MM-dd hh24:mi:ss') as update_date, e.depth, e.title, e.content\r\n" + 
 					 "from bike_이소민_etc e,\r\n" + 
 					 "bike_이소민_member m\r\n" + 
 					 "where e.reg_id = m.id\r\n" + 
@@ -91,8 +126,9 @@ public class EtcDao {
 				int depth = rs.getInt("depth");
 				String title= rs.getNString("title");
 				String content = rs.getNString("content");
+				String update_date = rs.getNString("update_date");
 				
-				dto = new EtcDto(no, group_no, title, content, reg_id, reg_name, reg_date, depth);
+				dto = new EtcDto(no, group_no, title, content, reg_id, reg_name, reg_date, update_date, depth);
 			}
 		}catch(Exception e) {
 			System.out.println("viewEtc() 오류: "+query);
@@ -172,7 +208,9 @@ public class EtcDao {
 					  "bike_이소민_member m\r\n" + 
 					  "where e.reg_id = m.id\r\n" + 
 					  "and e.depth = 0\r\n" + 
-					  "and "+select+" like '%"+search+"%')tbl) where rnum >="+start+" and rnum <= "+end+"";
+					  "and "+select+" like '%"+search+"%'"
+					  +"order by e.reg_date desc"		
+					  + ")tbl) where rnum >="+start+" and rnum <= "+end+"";
 		try {
 			con = DBConnection.getConnection();
 			ps = con.prepareStatement(query);

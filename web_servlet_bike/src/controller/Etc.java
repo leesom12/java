@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.etc.EtcCommentWrite;
+import command.etc.EtcDelete;
 import command.etc.EtcList;
+import command.etc.EtcRecomment;
+import command.etc.EtcUpdate;
 import command.etc.EtcView;
 import command.etc.EtcWrite;
 import common.CommonExecute;
@@ -36,6 +40,8 @@ public class Etc extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String gubun = request.getParameter("t_gubun");
+		String gubun2 = request.getParameter("t_gubun2");
+		if(gubun2 != null) gubun= gubun2;
 		if(gubun == null) gubun = "list";
 		String viewPage="";
 		request.setAttribute("nowPage", "etc");
@@ -62,16 +68,31 @@ public class Etc extends HttpServlet {
 			viewPage="etc/etc_view.jsp";
 		//댓글 작성	
 		}else if(gubun.equals("commentWrite")) {
-			
+			CommonExecute ce = new EtcCommentWrite();
+			ce.execute(request);
+			viewPage="common_alert.jsp";
 		//수정 폼	
 		}else if(gubun.equals("updateForm")) {
+			CommonExecute ce = new EtcView();
+			ce.execute(request);
+			CommonExecute today = new CommonToday();
+			today.execute(request);
 			viewPage="etc/etc_update.jsp";
 		//수정
 		}else if(gubun.equals("update")) {
-			
+			CommonExecute ce = new EtcUpdate();
+			ce.execute(request);
+			viewPage="common_alert.jsp";
 		//삭제
 		}else if(gubun.equals("delete")) {
-			
+			CommonExecute ce = new EtcDelete();
+			ce.execute(request);
+			viewPage="common_alert.jsp";
+		//대댓글
+		}else if(gubun.equals("RecommentWrite")) {
+			CommonExecute ce = new EtcRecomment();
+			ce.execute(request);
+			viewPage="common_alert.jsp";
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
