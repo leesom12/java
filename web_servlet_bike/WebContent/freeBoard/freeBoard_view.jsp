@@ -79,9 +79,11 @@
 						<td colspan="2">${t_dto.getTitle()}</td>
 						<td style="text-align: right;padding-right:15px;"> 
 							<i class="far fa-eye"></i> ${t_dto.getHit()}&nbsp;				
-							<i class="fa-solid fa-circle-down" style="color: #020203;"></i> 
 							<form name="down" style="display:inline-block;">
+								<c:if test="${not empty t_dto.getAttach()}">
+								<i class="fa-solid fa-circle-down" style="color: #020203;"></i> 
 								<input type="text" name="t_DownCount" readonly style="border:none;width:50px;" value="${t_dto.getDownload_hit()}">
+								</c:if>
 							</form>
 						</td>	
 					</tr>	
