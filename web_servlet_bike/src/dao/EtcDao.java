@@ -140,14 +140,14 @@ public class EtcDao {
 	}
 	
 	//댓글 뷰
-	public ArrayList<EtcDto> viewEtcComments(String no){
+	public ArrayList<EtcDto> viewEtcComments(String no, String gubun){
 		ArrayList<EtcDto> arr= new ArrayList<EtcDto>();
 		String query="select e.no, e.group_no, e.reg_id, m.name as reg_name, to_char(e.reg_date, 'yyyy-MM-dd hh24:mi:ss') as reg_date,\r\n" + 
 					 "e.depth, lpad(' ', 4*(e.depth)) || e.title as title, e.content\r\n" + 
 					 "from bike_이소민_etc e,\r\n" + 
 					 "bike_이소민_member m\r\n" + 
 					 "where e.reg_id = m.id\r\n" + 
-					 "and level > 1\r\n" + 
+					 "and level > 1 and depth "+gubun+" 1\r\n" + 
 					 "start with e.no = '"+no+"'\r\n" + 
 					 "connect by nocycle prior no = group_no\r\n" + 
 					 "order siblings by e.reg_date desc";
@@ -156,6 +156,7 @@ public class EtcDao {
 			ps = con.prepareStatement(query);
 			rs = ps.executeQuery();
 			while(rs.next()) {
+				String comm_no = rs.getNString("no");
 				String group_no = rs.getNString("group_no");
 				String reg_id = rs.getNString("reg_id");
 				String reg_name = rs.getNString("reg_name");
@@ -164,7 +165,7 @@ public class EtcDao {
 				String title= rs.getNString("title");
 				String content = rs.getNString("content");
 				
-				EtcDto dto = new EtcDto(no, group_no, title, content, reg_id, reg_name, reg_date, depth);
+				EtcDto dto = new EtcDto(comm_no, group_no, title, content, reg_id, reg_name, reg_date, depth);
 				arr.add(dto);
 			}
 		}catch(Exception e) {

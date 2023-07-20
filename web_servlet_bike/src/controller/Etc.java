@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import command.etc.EtcCommentWrite;
 import command.etc.EtcDelete;
 import command.etc.EtcList;
-import command.etc.EtcRecomment;
 import command.etc.EtcUpdate;
 import command.etc.EtcView;
 import command.etc.EtcWrite;
@@ -86,11 +85,6 @@ public class Etc extends HttpServlet {
 		//삭제
 		}else if(gubun.equals("delete")) {
 			CommonExecute ce = new EtcDelete();
-			ce.execute(request);
-			viewPage="common_alert.jsp";
-		//대댓글
-		}else if(gubun.equals("RecommentWrite")) {
-			CommonExecute ce = new EtcRecomment();
 			ce.execute(request);
 			viewPage="common_alert.jsp";
 		}

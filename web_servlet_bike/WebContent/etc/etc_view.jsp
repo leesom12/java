@@ -18,24 +18,89 @@
 		etc.submit();
 	}
 	
-	function saveComment(no, depth){
+	function saveComment(){
 		if(checkValue(comm.t_comment,"댓글을 작성하세요"))return;
-		comm.t_gubun.value="commentWrite";
-		comm.t_no.value=no;
-		comm.t_depth.value=depth;
-		comm.method="post";
-		comm.action="Etc";
-		comm.submit();
+		
+		$.ajax({
+			type : "POST",
+			url : "EtcComment",
+			data: "t_no="+comm.t_no.value+"&t_depth="+comm.t_depth.value+"&t_comment="+comm.t_comment.value,
+			dataType : "text",
+			error : function(){
+				alert('통신실패!!!!!');
+			},
+			success : function(data){
+				commentsList();
+				comm.t_comment.value="";
+			}
+		});	
+		
 	}
 	
-	function reComment(no, depth){
-		if(checkValue(comm2.t_recomment,"댓글을 작성하세요"))return;
-		comm2.t_gubun2.value="RecommentWrite";
-		comm2.t_no2.value=no;
-		comm2.t_depth2.value=depth;
-		comm2.method="post";
-		comm2.action="Etc";
-		comm2.submit();
+	
+	
+	// &#39; 작은 따옴표
+	
+	//페이지 실행할 때 바로 실행
+	$(document).ready(function(){
+		commentsList();
+	});
+	function commentsList(){
+		
+		$.ajax({
+			type : "POST",
+			url : "CommentsList",
+			data: "t_no="+comm.t_no.value,
+			dataType : "text",
+			error : function(){
+				alert('통신실패!!!!!');
+			},
+			success : function(data){
+				data = JSON.parse(data);
+				console.log(data);
+				
+				var tb = "<div class='faq-group'>";
+				tb+="<script>$(function() {$('.accordion').on('click',function() {$('.panel').not($(this).next().slideToggle()).slideUp();";
+				tb+="$('.accordion').not($(this)).removeClass('active');$(this).toggleClass('active');});});<\/script>";
+				for (var i=0; i<data.t_arr.length; i++){
+					var jsob = JSON.parse(JSON.stringify(data.t_arr[i]));
+					var group_no = jsob.group_no;
+					var comm_no = jsob.comm_no;
+					var title = jsob.title;
+					var content = jsob.content;
+					var depth = jsob.depth;
+					var reg_id = jsob.reg_id;
+					var reg_name = jsob.reg_name;
+					var reg_date = jsob.reg_date;
+					
+					tb+="<div class='accordion'>";
+					tb+="<div style='font-size:13px;'>";
+					tb+="<div style='display:flex;justify-content: space-between; margin: 5px 0 5px 0;'>";
+					tb+="<div style='font-size:12px;padding-top:5px;font-weight:600;'>";
+					tb+=reg_name;
+					tb+="</div>";
+					tb+="<div style='font-size:11px;padding-top:5px;color:grey;text-align:right;'>";
+					tb+=reg_date;
+					tb+="</div>";
+					tb+="</div>";
+					tb+=title;
+					tb+="</div>";
+					tb+="<div style='font-size:13px;padding-top:5px;color:grey;text-align:left;margin: 10px 0 10px 0;'>";
+					tb+="답글달기";
+					tb+="</div>";
+					tb+="<div class='panel'>";
+					tb+="<textarea style='width:85%;height:40px;' name='t_recomment'></textarea>";
+					tb+="<div style='width:50px; height:30px; line-height: 45px; padding-right:10px; float:right;'>";
+					tb+="<input style='width:50px;height:30px;' type='button' onclick='reComment()'  value='등록'>";
+					tb+="</div>";
+					tb+="</div>";
+					
+				}tb+="</div>";
+				$(".faq-group").html(tb);
+				console.log(tb);
+				
+			}
+		});	
 	}
 	
 	function goUpdateForm(no){
@@ -61,9 +126,7 @@
 </script>
 <style>
 	.faq-group .accordion {text-align:left;border:0 none; background:transparent; border-bottom:1px solid #ddd; cursor:pointer;}
-	.faq-group .accordion:after {content:"\f0fe";font-family:FontAwesome; float:right;}
-	.faq-group .panel {padding:20px 18px; border-bottom:1px solid #ddd; line-height:1.8; display:none;}
-	.faq-group .active:after {content:"\f068";font-family:FontAwesome; float:right;}
+	.faq-group .panel {padding:20px 18px; border-bottom:1px solid #ddd; line-height:1.8; display:none; }
 </style>
 <script>
 	$(function() {
@@ -146,53 +209,41 @@
 								<div style="width:85%">
 									<form name="comm">
 										<input type="hidden" name="t_gubun">
-										<input type="hidden" name="t_no">
-										<input type="hidden" name="t_depth">
-										<textarea style="width:100%; height:50px; padding:5px;" name="t_comment"></textarea>
+										<input type="hidden" name="t_no" value="${t_dto.getNo()}">
+										<input type="hidden" name="t_depth" value="${t_dto.getDepth()}">
+										<c:choose>
+											<c:when test="${not empty sessionId}">
+												<textarea style="width:100%; height:50px; padding:5px;" name="t_comment"></textarea>
+											</c:when>
+											<c:otherwise>
+												<textarea  readonly style="width:100%; height:50px;padding:5px 0 5px 5px;color:grey;">로그인 후 이용해 주세요.</textarea>
+											</c:otherwise>
+										</c:choose>
 									</form>	
 								</div>
 								<div style="width:50px; height: 50px; line-height: 60px; padding-right:10px;">
-									<input style="width: 50px; height:30px;" type="button" onclick="saveComment('${t_dto.getNo()}', '${t_dto.getDepth()}')"  value="등록">
+									<c:if test="${not empty sessionId}">
+										<input style="width: 50px; height:30px;" type="button" onclick="saveComment()"  value="등록">
+									</c:if>
 								</div>
 							</div>
 						</td>
 					</tr>	
 	
-					<c:forEach items="${t_arr2}" var="arr2">
+					
 						<tr>
 							<td style="border-bottom:none;"></td>
 							<td colspan="3" style="border-bottom:none;">
+								
 								<div class="faq-group">
-									<div class="accordion">
-										<div>
-											<c:if test="${arr2.getDepth() > 1}"> 
-												<c:forEach begin="0" end="${arr2.getDepth()}">&nbsp;&nbsp;&nbsp;</c:forEach>
-												<i class="fa-solid fa-arrow-right-long" style="color: #030303;"></i>
-											</c:if>
-											${arr2.getTitle()}
-										</div>
-										<div style="font-size:11px;padding-top:5px;color:grey;text-align:right;">
-											등록자: ${arr2.getReg_name()} 등록일: ${arr2.getReg_date()}
-										</div>
-									</div>
-									<div class="panel">
-										
-										<form name="comm2">
-											<input type="hidden" name="t_gubun2">
-											<input type="hidden" name="t_no2">
-											<input type="hidden" name="t_depth2">
-											<textarea style="width:100%;height:50px;" name="t_recomment"></textarea>
-										</form>
-										
-										<div style="width:50px; height:30px; line-height: 60px; padding-right:10px;">
-											<input style="width: 50px; height:30px;" type="button" onclick="reComment('${arr2.getNo()}','${arr2.getDepth()}')"  value="등록">
-										</div>
-									</div>
+									
+								
 								</div>
+							
 							</td>
 						</tr>
 
-					</c:forEach>
+					
 					
 				</tbody>
 			</table>
