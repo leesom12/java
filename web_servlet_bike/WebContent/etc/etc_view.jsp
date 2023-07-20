@@ -38,7 +38,6 @@
 	}
 	
 	
-	
 	// &#39; 작은 따옴표
 	
 	//페이지 실행할 때 바로 실행
@@ -121,28 +120,19 @@
 			etc.submit();
 		}
 	}
-	
-	
 </script>
-<style>
-	.faq-group .accordion {text-align:left;border:0 none; background:transparent; border-bottom:1px solid #ddd; cursor:pointer;}
-	.faq-group .panel {padding:20px 18px; border-bottom:1px solid #ddd; line-height:1.8; display:none; }
-</style>
-<script>
-	$(function() {
-		$(".accordion").on("click",function() {
-			$(".panel").not($(this).next().slideToggle()).slideUp();
-			$(".accordion").not($(this)).removeClass("active");
-			$(this).toggleClass("active");
-		});
 
-	});
-</script>
 
 <form name="etc">
 	<input type="hidden" name="t_gubun">
 	<input type="hidden" name="t_no">
 </form>
+
+<style>
+	.faq-group .accordion {text-align:left;border:0 none; background:transparent; border-bottom:1px solid #ddd; cursor:pointer;}
+	.faq-group .panel {padding:20px 18px; border-bottom:1px solid #ddd; line-height:1.8; display:none; }
+</style>
+
 
 		<div id="b_right">
 			<p class="n_title">
@@ -223,7 +213,7 @@
 								</div>
 								<div style="width:50px; height: 50px; line-height: 60px; padding-right:10px;">
 									<c:if test="${not empty sessionId}">
-										<input style="width: 50px; height:30px;" type="button" onclick="saveComment()"  value="등록">
+										<input style="width: 50px; height:30px; border:none;" type="button" onclick="saveComment()"  value="등록">
 									</c:if>
 								</div>
 							</div>

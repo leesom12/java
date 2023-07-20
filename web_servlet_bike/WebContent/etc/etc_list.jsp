@@ -78,12 +78,16 @@
 				<tbody>
 					<c:set var="num" value="${t_order}"></c:set>
 					<c:forEach items="${t_arr}" var="arr">
+						<c:set var="title" value="${arr.getTitle()}"></c:set>
+						<c:if test="${fn:length(title) > 40}">
+							<c:set var="title" value="${fn:substring(title,0,40)}..."></c:set>
+						</c:if>
 						<tr>
 							<td>
 								${num}
 								<c:set var="num" value="${num-1}"></c:set>
 							</td>
-							<td class="t_left"><a href="javascript:goView('${arr.getNo()}')">${arr.getTitle() }</a></td>
+							<td class="t_left"><a href="javascript:goView('${arr.getNo()}')">${title}</a></td>
 							<td>${arr.getReg_name() }</td>
 							<td>${arr.getReg_date() }</td>
 						</tr>
