@@ -16,7 +16,9 @@ public class EtcWrite implements CommonExecute {
 		
 		String no = dao.getMaxNo();
 		String title = request.getParameter("t_title");
+		title = title.replaceAll("\'", "\''");
 		String content = request.getParameter("t_content");
+		content = content.replaceAll("\'", "\''");
 		HttpSession session = request.getSession();
 		String reg_id = (String) session.getAttribute("sessionId");
 		String reg_date = CommonUtil.getTodayTime();

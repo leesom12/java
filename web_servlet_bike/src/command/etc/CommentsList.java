@@ -57,7 +57,7 @@ public class CommentsList extends HttpServlet {
 		for(int i=0; i<arr.size(); i++) {
 			hM = new HashMap<String, Object>();
 			String comm_no = arr.get(i).getNo();
-			hM.put("no", comm_no);
+			hM.put("comm_no", comm_no);
 			String group_no = arr.get(i).getGroup_no();
 			hM.put("group_no", group_no);
 			int depth = arr.get(i).getDepth();

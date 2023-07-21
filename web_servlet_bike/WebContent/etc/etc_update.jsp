@@ -49,7 +49,7 @@
 					</tr>			
 					<tr>
 						<th rowspan="2">작성자</th>
-						<td rowspan="2">${sessionName}</td>
+						<td rowspan="2">${t_dto.getReg_name()}</td>
 						<th>작성일</th>
 						<td>${t_dto.getReg_date()}</td>
 					</tr>	

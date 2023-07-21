@@ -5,6 +5,23 @@
 
 
 
+<style>
+	.faq-group .accordion {text-align:left;border:0 none; background:transparent; border-bottom:1px solid #ddd; cursor:pointer;}
+	.faq-group .panel {padding:20px 18px; border-bottom:1px solid #ddd; line-height:1.8; display:none; }
+</style>
+<script>
+/*
+	$(function() {
+			$(".accordion").on("click",function() {
+				$(".panel").not($(this).next().slideToggle()).slideUp();
+				$(".accordion").not($(this)).removeClass("active");
+				$(this).toggleClass("active");
+			});
+	
+		});
+*/
+</script>
+
 <script type="text/javascript">
 	/*
 	var id = "#"+id;
@@ -87,11 +104,14 @@
 					tb+="<div style='font-size:13px;padding-top:5px;color:grey;text-align:left;margin: 10px 0 10px 0;'>";
 					tb+="답글달기";
 					tb+="</div>";
-					tb+="<div class='panel'>";
-					tb+="<textarea style='width:85%;height:40px;' name='t_recomment'></textarea>";
-					tb+="<div style='width:50px; height:30px; line-height: 45px; padding-right:10px; float:right;'>";
-					tb+="<input style='width:50px;height:30px;' type='button' onclick='reComment()'  value='등록'>";
 					tb+="</div>";
+					tb+="<div class='panel'>";
+					tb+="<form name='recomment'>"
+					tb+="<textarea style='width:85%;height:40px;' name='"+comm_no+"'></textarea>";
+					tb+="<div style='width:50px; height:30px; line-height: 45px; padding-right:10px; float:right;'>";
+					tb+="<input style='width:50px;height:30px;' type='button' onclick='reComment(&#39;"+comm_no+"&#39;,&#39;"+depth+"&#39;)'  value='등록'>";
+					tb+="</div>";
+					tb+="</form>";
 					tb+="</div>";
 					
 				}tb+="</div>";
@@ -100,6 +120,26 @@
 				
 			}
 		});	
+	}
+	
+	function reComment(no, depth){
+		alert(no);
+	
+		/*
+		$.ajax({
+			type : "POST",
+			url : "EtcComment",
+			data: "t_no="+no+"&t_depth="+depth+"&t_comment="+recomment.no.value,
+			dataType : "text",
+			error : function(){
+				alert('통신실패!!!!!');
+			},
+			success : function(data){
+				commentsList();
+				recomment.no.value="";
+			}
+		});	
+		*/
 	}
 	
 	function goUpdateForm(no){
@@ -127,11 +167,6 @@
 	<input type="hidden" name="t_gubun">
 	<input type="hidden" name="t_no">
 </form>
-
-<style>
-	.faq-group .accordion {text-align:left;border:0 none; background:transparent; border-bottom:1px solid #ddd; cursor:pointer;}
-	.faq-group .panel {padding:20px 18px; border-bottom:1px solid #ddd; line-height:1.8; display:none; }
-</style>
 
 
 		<div id="b_right">
@@ -213,25 +248,22 @@
 								</div>
 								<div style="width:50px; height: 50px; line-height: 60px; padding-right:10px;">
 									<c:if test="${not empty sessionId}">
-										<input style="width: 50px; height:30px; border:none;" type="button" onclick="saveComment()"  value="등록">
+										<input style="width: 50px; height:30px; border:1px solid #BDBDBD;" type="button" onclick="saveComment()"  value="등록">
 									</c:if>
 								</div>
 							</div>
 						</td>
 					</tr>	
 	
-					
-						<tr>
-							<td style="border-bottom:none;"></td>
-							<td colspan="3" style="border-bottom:none;">
+				
+					<tr>
+						<td style="border-bottom:none;"></td>
+						<td colspan="3" style="border-bottom:none;">
+							<div class="faq-group">
 								
-								<div class="faq-group">
-									
-								
-								</div>
-							
-							</td>
-						</tr>
+							</div>
+						</td>
+					</tr>
 
 					
 					

@@ -14,7 +14,9 @@ public class EtcUpdate implements CommonExecute {
 		EtcDao dao = new EtcDao();
 		String no = request.getParameter("t_no");
 		String title = request.getParameter("t_title");
+		title = title.replaceAll("\'", "\''");
 		String content = request.getParameter("t_content");
+		content = content.replaceAll("\'", "\''");
 		String update_date = CommonUtil.getTodayTime();
 		
 		EtcDto dto = new EtcDto(no, title, content, update_date);

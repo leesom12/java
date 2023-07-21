@@ -41,6 +41,7 @@ public class EtcComment extends HttpServlet {
 		String no = dao.getMaxNo();
 		String group_no = request.getParameter("t_no");
 		String title = request.getParameter("t_comment");
+		title = title.replaceAll("\'", "\''");
 		String content= "";
 		HttpSession session = request.getSession();
 		String reg_id = (String)session.getAttribute("sessionId");
