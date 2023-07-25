@@ -45,12 +45,13 @@ public class CommentsList extends HttpServlet {
 		
 		EtcDao dao = new EtcDao();
 		String no = request.getParameter("t_no");
-		EtcDto dto = dao.viewEtc(no);	//원글 조회
+		
 		ArrayList<EtcDto> arr = dao.viewEtcComments(no, "=");	//댓글 조회
 
 		JSONObject fobj = new JSONObject();
 		
 		JSONArray jarr = new JSONArray();
+		//
 		JSONObject jsub = new JSONObject();
 		HashMap<String, Object> hM = new HashMap<String, Object>();
 		
@@ -77,7 +78,11 @@ public class CommentsList extends HttpServlet {
 			jarr.add(jsub);
 		}
 		
+		//
+		
+		
 		fobj.put("t_arr", jarr);
+		//
 		out.print(fobj);
 		
 	}

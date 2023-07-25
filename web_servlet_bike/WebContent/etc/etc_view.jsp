@@ -106,8 +106,9 @@
 					tb+="</div>";
 					tb+="</div>";
 					tb+="<div class='panel'>";
-					tb+="<form name='recomment'>"
-					tb+="<textarea style='width:85%;height:40px;' name='"+comm_no+"'></textarea>";
+					//
+					tb+="<form name='"+comm_no+"'>"
+					tb+="<textarea style='width:85%;height:40px;' name='t_comment' id='t_comment'></textarea>";
 					tb+="<div style='width:50px; height:30px; line-height: 45px; padding-right:10px; float:right;'>";
 					tb+="<input style='width:50px;height:30px;' type='button' onclick='reComment(&#39;"+comm_no+"&#39;,&#39;"+depth+"&#39;)'  value='등록'>";
 					tb+="</div>";
@@ -123,23 +124,20 @@
 	}
 	
 	function reComment(no, depth){
-		alert(no);
-	
-		/*
+		alert($(this).val())
+		document.getElementById(no).
 		$.ajax({
 			type : "POST",
 			url : "EtcComment",
-			data: "t_no="+no+"&t_depth="+depth+"&t_comment="+recomment.no.value,
+			data: {"t_no":no,"t_depth":depth,"t_comment":no.t_comment.value},
 			dataType : "text",
 			error : function(){
 				alert('통신실패!!!!!');
 			},
 			success : function(data){
-				commentsList();
-				recomment.no.value="";
+				no.t_comment.value="";
 			}
-		});	
-		*/
+		});		
 	}
 	
 	function goUpdateForm(no){
@@ -170,6 +168,7 @@
 
 
 		<div id="b_right">
+		
 			<p class="n_title">
 				Free Board
 			</p>
