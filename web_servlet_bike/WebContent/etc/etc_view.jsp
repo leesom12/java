@@ -107,8 +107,8 @@
 					tb+="</div>";
 					tb+="<div class='panel'>";
 					//
-					tb+="<form name='"+comm_no+"'>"
-					tb+="<textarea style='width:85%;height:40px;' name='t_comment' id='t_comment'></textarea>";
+					tb+="<form name='my'>"
+					tb+="<textarea style='width:85%;height:40px;' name='t_comment' id='"+comm_no+"'></textarea>";
 					tb+="<div style='width:50px; height:30px; line-height: 45px; padding-right:10px; float:right;'>";
 					tb+="<input style='width:50px;height:30px;' type='button' onclick='reComment(&#39;"+comm_no+"&#39;,&#39;"+depth+"&#39;)'  value='등록'>";
 					tb+="</div>";
@@ -124,12 +124,12 @@
 	}
 	
 	function reComment(no, depth){
-		alert($(this).val())
+
 		document.getElementById(no).
 		$.ajax({
 			type : "POST",
 			url : "EtcComment",
-			data: {"t_no":no,"t_depth":depth,"t_comment":no.t_comment.value},
+			data: {"t_no":no,"t_depth":depth,"t_comment":$('#'+no).val()},
 			dataType : "text",
 			error : function(){
 				alert('통신실패!!!!!');

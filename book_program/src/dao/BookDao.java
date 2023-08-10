@@ -29,7 +29,7 @@ public class BookDao {
 				no= Integer.parseInt(no1);
 				no= no+1;
 				DecimalFormat df= new DecimalFormat("0000");
-				no1="2023"+df.format(no);
+				no1="2020"+df.format(no);
 				no= Integer.parseInt(no1);
 			}
 		}catch(Exception e) {
@@ -83,27 +83,27 @@ public class BookDao {
 		return count;
 	}
 	
-		//도서 번호 유무검사
-		public int checkBCode(String b_code) {
-			int count=0;
-			String query="select count(*) as count\r\n" + 
-						 "from e_이소민_book\r\n" + 
-						 "where b_code='"+b_code+"'";
-			try {
-				con= DBConnection.getConnection();
-				ps= con.prepareStatement(query);
-				rs= ps.executeQuery();
-				if(rs.next()) {
-					count= rs.getInt("count");
-				}
-			}catch(Exception e) {
-				System.out.println("checkBCode() 오류: "+query);
-				e.printStackTrace();
-			}finally {
-				DBConnection.closeDB(con, ps, rs);
+	//도서 번호 유무검사
+	public int checkBCode(String b_code) {
+		int count=0;
+		String query="select count(*) as count\r\n" + 
+					 "from e_이소민_book\r\n" + 
+					 "where b_code='"+b_code+"'";
+		try {
+			con= DBConnection.getConnection();
+			ps= con.prepareStatement(query);
+			rs= ps.executeQuery();
+			if(rs.next()) {
+				count= rs.getInt("count");
 			}
-			return count;
+		}catch(Exception e) {
+			System.out.println("checkBCode() 오류: "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
 		}
+		return count;
+	}
 		
 	//대여 이력 조회
 	public ArrayList<BookDto> rentList(){
