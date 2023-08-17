@@ -6,11 +6,12 @@ public class BookDto {
 	
 	
 	//도서별 대여 건수
-	public BookDto(String b_code, String b_name, String b_publisher) {
+	public BookDto(String b_code, String b_name, String b_publisher, int b_rent_count) {
 		super();
 		this.b_code = b_code;
 		this.b_name = b_name;
 		this.b_publisher = b_publisher;
+		this.b_rent_count = b_rent_count;
 	}
 
 

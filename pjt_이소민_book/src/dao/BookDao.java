@@ -18,9 +18,12 @@ public class BookDao {
 	public ArrayList<BookDto> memberList(){
 		ArrayList<BookDto> arr = new ArrayList<BookDto>();
 		String query= "select \r\n" + 
-					  "p_no, p_name, p_birth, p_gender, p_tel1, p_tel2, p_tel3, p_reg_date\r\n" + 
-					  "from e_07_이소민_client\r\n"+
-					  "order by p_no";
+					 "p_no, p_name, \r\n" + 
+					 "to_char(to_date(p_birth),'yyyy\"년\"MM\"월\"dd\"일\"') as p_birth, \r\n" + 
+					 "decode(p_gender, 'M', '남자', 'F', '여자')as p_gender, \r\n" + 
+					 "p_tel1, p_tel2, p_tel3, \r\n" + 
+					 "to_char(to_date(p_reg_date),'yyyy-MM-dd') as p_reg_date\r\n" + 
+					 "from e_07_이소민_client";
 		try {
 			con = DBConnection.getConnection();
 			ps= con.prepareStatement(query);
@@ -30,17 +33,11 @@ public class BookDao {
 				String p_name = rs.getNString("p_name");
 				String p_birth = rs.getNString("p_birth");
 				String p_gender = rs.getNString("p_gender");
-				if(p_gender.equals("M")) {
-					p_gender="남자";
-				}else if(p_gender.equals("F")) {
-					p_gender="여자";
-				}
 				String p_tel1 = rs.getNString("p_tel1");
 				String p_tel2 = rs.getNString("p_tel2");
 				String p_tel3 = rs.getNString("p_tel3");
 				String p_tel = p_tel1+"-"+p_tel2+"-"+p_tel3;
-				String p_reg_daten = rs.getNString("p_reg_date");
-				String p_reg_date = p_reg_daten.substring(0, 4)+"-" +p_reg_daten.substring(4, 6)+"-" +p_reg_daten.substring(6);
+				String p_reg_date = rs.getNString("p_reg_date");
 				
 				BookDto dto = new BookDto(p_no, p_name, p_birth, p_gender, p_tel, p_reg_date);
 				arr.add(dto);
@@ -140,9 +137,12 @@ public class BookDao {
 	//책 조회
 	public ArrayList<BookDto> bookList(){
 		ArrayList<BookDto> arr= new ArrayList<BookDto>();
-		String query="select b_code, b_name, b_publisher\r\n" + 
-					 "from e_07_이소민_book\r\n" + 
-					 "order by b_code";
+		String query="select b.b_code, b.b_name, b.b_publisher, count(b.b_code) as count\r\n" + 
+					 "from e_07_이소민_book b,\r\n" + 
+					 "e_07_이소민_bookrent r\r\n" + 
+					 "where b.b_code = r.b_code\r\n" + 
+					 "group by b.b_code, b.b_name, b.b_publisher\r\n" + 
+					 "order by b.b_code";
 		try {
 			con= DBConnection.getConnection();
 			ps= con.prepareStatement(query);
@@ -151,8 +151,9 @@ public class BookDao {
 				String b_code= rs.getString("b_code");
 				String b_name= rs.getString("b_name");
 				String publisher= rs.getString("b_publisher");
+				int count = rs.getInt("count");
 				
-				BookDto dto = new BookDto(b_code, b_name, publisher);
+				BookDto dto = new BookDto(b_code, b_name, publisher, count);
 				arr.add(dto);
 			}
 		}catch(Exception e) {
@@ -164,27 +165,6 @@ public class BookDao {
 		return arr;
 	}
 	
-	//건수 조회
-	public int getRentNum(String b_code) {
-		int count=0;
-		String query="select count(*) as count\r\n" + 
-					 "from e_07_이소민_bookrent\r\n" + 
-					 "where b_code='"+b_code+"'";
-		try {
-			con= DBConnection.getConnection();
-			ps= con.prepareStatement(query);
-			rs= ps.executeQuery();
-			if(rs.next()) {
-				count= rs.getInt("count");
-			}
-		}catch(Exception e) {
-			System.out.println("getRentNo() 오류: "+query);
-			e.printStackTrace();
-		}finally {
-			DBConnection.closeDB(con, ps, rs);
-		}
-		return count;
-	}
 }
 
 

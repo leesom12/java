@@ -47,7 +47,7 @@
 					<td><%=arr.get(i).getB_code() %></td>
 					<td><%=arr.get(i).getB_name() %></td>
 					<td><%=arr.get(i).getB_publisher() %></td>
-					<td><%=dao.getRentNum(arr.get(i).getB_code()) %></td>
+					<td><%=arr.get(i).getB_rent_count() %></td>
 				</tr>
 			<%} %>
 		</table>
