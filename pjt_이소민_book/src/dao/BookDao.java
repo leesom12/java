@@ -137,12 +137,12 @@ public class BookDao {
 	//책 조회
 	public ArrayList<BookDto> bookList(){
 		ArrayList<BookDto> arr= new ArrayList<BookDto>();
-		String query="select b.b_code, b.b_name, b.b_publisher, count(b.b_code) as count\r\n" + 
-					 "from e_07_이소민_book b,\r\n" + 
-					 "e_07_이소민_bookrent r\r\n" + 
-					 "where b.b_code = r.b_code\r\n" + 
-					 "group by b.b_code, b.b_name, b.b_publisher\r\n" + 
-					 "order by b.b_code";
+		String query="select b.b_code, b.b_name, b.b_publisher, count(r.b_code) as count\r\n" + 
+				 	 "from e_07_이소민_book b,\r\n" + 
+				 	 "e_07_이소민_bookrent r\r\n" + 
+				 	 "where b.b_code = r.b_code(+)\r\n" + 
+				 	 "group by b.b_code, b.b_name, b.b_publisher\r\n" + 
+				 	 "order by b.b_code";
 		try {
 			con= DBConnection.getConnection();
 			ps= con.prepareStatement(query);
