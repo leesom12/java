@@ -134,7 +134,8 @@ public class Dao {
 	//출고매출이익통계
 	public ArrayList<Dto> getSalesProfit(){
 		ArrayList<Dto> arr = new ArrayList<Dto>();
-		String query="select i.p_code, p.p_name, sum(i.t_cnt) as t_cnt, to_char(sum(i.t_cnt*(p.p_outcost-p.p_incost)), 'l999,999,999') as t_profit\r\n" + 
+		String query="select i.p_code, p.p_name, sum(i.t_cnt) as t_cnt, "
+				     + "to_char(sum(i.t_cnt*(p.p_outcost-p.p_incost)), 'l999,999,999') as t_profit\r\n" + 
 					 "from e_01_이소민_inout i,\r\n" + 
 					 "e_01_이소민_product p\r\n" + 
 					 "where i.p_code = p.p_code\r\n" + 
