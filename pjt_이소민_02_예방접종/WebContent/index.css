@@ -1,0 +1,111 @@
+@charset "UTF-8";
+*{padding:0; margin:0}
+a{text-decoration: none;}
+ul{list-style: none;}
+
+header{
+	width: 100%;
+	height: 130px;
+	line-height: 130px;
+	text-align: center;
+	background-color: #0000a0;
+	color: white;
+}
+
+nav{
+	width: 100%;
+	height: 80px;
+	line-height: 80px;
+	background-color: #5687d1;
+}
+
+ul{
+	width: 80%;
+	display: flex;
+	justify-content: space-between;
+	margin: 0 auto;
+}
+
+li a{
+	color: white;
+	font-weight: 600;
+}
+
+li .click{
+	color: #0000a0;
+	font-weight: 600;
+}
+
+section{
+	width: 100%;
+	height: 620px;
+}
+
+section h2{
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+}
+
+section p{
+	margin: 30px 0 20px 20px;
+}
+
+footer{
+	width: 100%;
+	height: 120px;
+	line-height: 120px;
+	text-align: center;
+	background-color: #5687d1;
+	color: white;
+}
+
+section table{
+	width: 80%;
+	margin: 0 auto;
+	border: 1px solid black;
+}
+
+section table th{
+	border: 1px solid black;
+	color: #000080;
+	padding: 3px 0;
+}
+section table td{
+	border: 1px solid black;
+	text-align: center;
+	padding: 3px 0;
+}
+section table .input{
+	border: 1px solid black;
+	text-align: left;
+	padding: 3px 7px;
+}
+section table .input input{
+	width: 50%;
+	padding: 3px;
+	height: 15px;
+}
+section table button{
+	width: 100px;
+	padding: 5px;
+	height: 30px;
+	margin-right: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
