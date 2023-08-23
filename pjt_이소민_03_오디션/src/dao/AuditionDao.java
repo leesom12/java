@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import common.DBConnection;
 import dto.AuditionDto;
+import dto.MetoDto;
 import dto.Sub4;
 
 public class AuditionDao {
@@ -14,6 +15,44 @@ public class AuditionDao {
 	Connection con = null;
 	PreparedStatement ps = null;
 	ResultSet rs = null;
+	
+	//점수 등록
+	public int saveMentoPoint(MetoDto dto) {
+		int result =0;
+		String query="insert into e_03_이소민_point values ('"+dto.getSerial_no()+"','"+dto.getArtist_id()+"', '"+dto.getMento_id()+"', '"+dto.getPoint()+"')";
+		try {
+			con = DBConnection.getConnection();
+			ps = con.prepareStatement(query);
+			result = ps.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("saveMentoPoint 오류: "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return result;
+	}
+	
+	//점수등록 씨리얼넘버 자동생성
+	public int getMaxNo() {
+		int serial_no =0;
+		String query="select nvl(max(serial_no),'2019000') serial_no from e_03_이소민_point";
+		try {
+			con = DBConnection.getConnection();
+			ps = con.prepareStatement(query);
+			rs= ps.executeQuery();
+			if(rs.next()) {
+				serial_no = rs.getInt("serial_no");
+				serial_no= serial_no+1;
+			}
+		}catch(Exception e) {
+			System.out.println("getMaxNo 오류: "+query);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return serial_no;
+	}
 	
 	//멘토점수조회
 	public ArrayList<Sub4> getGradeList(){

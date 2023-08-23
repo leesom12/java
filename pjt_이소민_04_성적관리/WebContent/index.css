@@ -8,7 +8,7 @@ header{
 	height: 110px;
 	line-height: 110px;
 	text-align: center;
-	background-color: #ff8080;
+	background-color: #98dd95;
 	color: white;
 }
 
@@ -20,10 +20,10 @@ nav{
 }
 
 ul{
-	width: 80%;
+	width: 60%;
 	display: flex;
 	justify-content: space-between;
-	margin: 0 auto;
+	margin-left: 40px;
 }
 
 li a{
@@ -32,7 +32,7 @@ li a{
 }
 
 li .click{
-	color: #0000a0;
+	color: #004040;
 	font-weight: 600;
 }
 
@@ -57,8 +57,8 @@ footer{
 	height: 100px;
 	line-height: 100px;
 	text-align: center;
-	background-color: #ff8080;
-	color: white;
+	background-color: #98dd95;
+	
 }
 
 section table{
@@ -73,7 +73,6 @@ section .border{
 
 section table th{
 	border: 1px solid black;
-	color: #004000;
 	padding: 3px 0;
 }
 section table td{
@@ -95,13 +94,13 @@ section table .input .radio{
 	width: 30px;
 	padding: 3px;
 }
-section table .birth{
+section table .tel{
 	border: 1px solid black;
 	text-align: left;
 	padding: 3px 7px;
 }
-section table .birth input{
-	width: 100px;
+section table .tel input{
+	width: 80px;
 	padding: 3px;
 	height: 15px;
 }
