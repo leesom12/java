@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="pjt_이소민_08_올림픽체조경기">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="context-root" value="pjt_이소민_08_올림픽체조경기"/>
+        <property name="java-output-path" value="/pjt_이소민_08_올림픽체조경기/build/classes"/>
+    </wb-module>
+</project-modules>
