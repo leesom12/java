@@ -20,8 +20,18 @@
 			tbl.score1.focus();
 			return;
 		}
+		if(tbl.score1.value>100 || tbl.score1.value<0){
+			alert("0~100 사이의 점수로 입력하세요!");
+			tbl.score1.focus();
+			return;
+		}
 		if(tbl.score2.value==""){
 			alert("심사위원 점수가 입력되지 않았습니다!");
+			tbl.score2.focus();
+			return;
+		}
+		if(tbl.score2.value>100 || tbl.score2.value<0){
+			alert("0~100 사이의 점수로 입력하세요!");
 			tbl.score2.focus();
 			return;
 		}
@@ -30,13 +40,28 @@
 			tbl.score3.focus();
 			return;
 		}
+		if(tbl.score3.value>100 || tbl.score3.value<0){
+			alert("0~100 사이의 점수로 입력하세요!");
+			tbl.score3.focus();
+			return;
+		}
 		if(tbl.score4.value==""){
 			alert("심사위원 점수가 입력되지 않았습니다!");
 			tbl.score4.focus();
 			return;
 		}
+		if(tbl.score4.value>100 || tbl.score4.value<0){
+			alert("0~100 사이의 점수로 입력하세요!");
+			tbl.score4.focus();
+			return;
+		}
 		if(tbl.score5.value==""){
 			alert("심사위원 점수가 입력되지 않았습니다!");
+			tbl.score5.focus();
+			return;
+		}
+		if(tbl.score5.value>100 || tbl.score5.value<0){
+			alert("0~100 사이의 점수로 입력하세요!");
 			tbl.score5.focus();
 			return;
 		}
