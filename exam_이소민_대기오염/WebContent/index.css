@@ -1,0 +1,90 @@
+@charset "UTF-8";
+*{margin:0;padding:0;}
+ul{list-style: none;}
+header{
+	width: 100%;
+	height: 110px;
+	line-height: 110px;
+	text-align: center;
+	background-color: pink;
+}
+nav{
+	width: 100%;
+	height: 65px;
+	line-height: 65px;
+	background-color: grey;
+}
+nav ul{
+	width: 70%;
+	display: flex;
+	justify-content: space-between;
+	margin-left: 30px;
+}
+nav ul a{
+	color: white;
+	font-size: 17px;
+	font-weight: 600;
+}
+section{
+	height: 650px;
+}
+footer{
+	width: 100%;
+	height: 110px;
+	line-height: 110px;
+	text-align: center;
+	background-color: pink;
+}
+section h2{
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+}
+section p{
+	height: 60px;
+	line-height: 60px;
+	margin-left: 30px;
+	font-size: 17px;
+}
+section table{
+	margin: 0 auto;
+	width: 70%;
+}
+section table th{
+	border: 1px solid black;
+	padding:3px;
+}
+section table td{
+	border: 1px solid black;
+	padding:3px;
+	text-align: center;
+}
+section .save{
+	margin: 0 auto;
+	width: 60%;
+}
+section .save th{
+	border: 1px solid black;
+	padding:3px;
+}
+section .save td{
+	border: 1px solid black;
+	padding:3px;
+	text-align: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
