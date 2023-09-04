@@ -70,20 +70,14 @@ public class Dao {
 		String query="select s.saleno, to_char(to_date(s.oildate),'yyyy\"년\"MM\"월\"dd\"일\"') as oildate, \r\n" + 
 					 "o.oilname, s.amount, \r\n" + 
 					 "decode(s.paytype,'1','현금','2','카드') as paytype, \r\n" + 
-					 "case when c.custname is null then '비회원'\r\n" + 
-					 "     else c.custname\r\n" + 
-					 "end as custname,\r\n" + 
-					 "case when c.custno is null then '비회원'\r\n" + 
-					"     else c.custno\r\n" + 
-					"end as custno,\r\n" + 
-					"(case when c.custtel1 is null then '0000' else c.custtel1 end)||'-'||\r\n" + 
-					"(case when c.custtel2 is null then '0000' else c.custtel2 end)||'-'||\r\n" + 
-					"(case when c.custtel3 is null then '0000' else c.custtel3 end) as custtel,\r\n" + 
-					"s.creditcart, \r\n" + 
-					"to_char(s.oilcost,'l999,999,999') as oilcost\r\n" + 
-					"from tbl_saleinfo_202010 s, tbl_oilinfo_202010 o, tbl_custinfo_202010 c\r\n" + 
-					"where s.oiltype=o.oiltype and s.custno=c.custno(+)\r\n" + 
-					"order by s.saleno";
+					 "nvl(c.custname,'비회원') custname,\r\n" + 
+					 "nvl(c.custno,'비회원') custno,\r\n" + 
+					 "nvl(c.custtel1,'000')||'-'|| nvl(c.custtel2,'0000')||'-'|| nvl(c.custtel3,'0000') as custtel,\r\n" + 
+					 "s.creditcart, \r\n" + 
+					 "to_char(s.oilcost,'l999,999,999') as oilcost\r\n" + 
+					 "from tbl_saleinfo_202010 s, tbl_oilinfo_202010 o, tbl_custinfo_202010 c\r\n" + 
+					 "where s.oiltype=o.oiltype and s.custno=c.custno(+)\r\n" + 
+					 "order by s.saleno";
 		try {
 			con = DBConnection.getConnection();
 			ps = con.prepareStatement(query);

@@ -31,8 +31,28 @@
 			return;
 		}
 		if(oil.paytype.value==""){
-			alert("결제방법이 입력되지 않았습니다!");
+			alert("결제방법이 선택되지 않았습니다!");
 			oil.paytype.focus();
+			return;
+		}
+		if(oil.paytype.value=="2"&&oil.credit1.value==""){
+			alert("카드번호가 입력되지 않았습니다!");
+			oil.credit1.focus();
+			return;
+		}
+		if(oil.paytype.value=="2"&&oil.credit2.value==""){
+			alert("카드번호가 입력되지 않았습니다!");
+			oil.credit2.focus();
+			return;
+		}
+		if(oil.paytype.value=="2"&&oil.credit3.value==""){
+			alert("카드번호가 입력되지 않았습니다!");
+			oil.credit3.focus();
+			return;
+		}
+		if(oil.paytype.value=="2"&&oil.credit4.value==""){
+			alert("카드번호가 입력되지 않았습니다!");
+			oil.credit4.focus();
 			return;
 		}
 		if(oil.oilcost.value==""){
@@ -51,6 +71,29 @@
 		alert("정보를 지우고 처음부터 다시 입력 합니다.");
 		oil.reset();
 		oil.saleno.focus();
+	}
+	
+	function changeVal(){
+		var val = oil.oiltype.value;
+		var result = "";
+		
+		if(val=="1") result = "휘발유";
+		else if(val=="2") result="고급휘발유";
+		else if(val=="3") result="경유";
+		else if(val=="4") result="등유";
+		
+		oil.t_oil.value=result;
+	}
+	
+	function changeCard(){
+		var val = oil.paytype.value;
+		
+		if(val=="1"){
+			oil.credit1.value="";
+			oil.credit2.value="";
+			oil.credit3.value="";
+			oil.credit4.value="";
+		}
 	}
 </script>
 
@@ -86,13 +129,14 @@
 				<tr>
 					<th>유종</th>
 					<td>
-						<select name="oiltype">
+						<select name="oiltype" onchange="changeVal()">
 							<option value="">유종선택</option>
 							<option value="1">[1]휘발유</option>
 							<option value="2">[2]고급휘발유</option>
 							<option value="3">[3]경유</option>
 							<option value="4">[4]등유</option>
 						</select>
+						<input name="t_oil" value="" readonly>
 					</td>
 				</tr>
 				<tr>
@@ -101,7 +145,13 @@
 				</tr>
 				<tr>
 					<th>결제방법</th>
-					<td><input name="paytype" value=""> &nbsp; (1:현금/2:카드)</td>
+					<td>
+						<select name="paytype" onchange="changeCard()">
+							<option value="">결제방법 선택</option>
+							<option value="1">현금</option>
+							<option value="2">카드</option>
+						</select>
+					</td>
 				</tr>
 				<tr>
 					<th>고객번호</th>
